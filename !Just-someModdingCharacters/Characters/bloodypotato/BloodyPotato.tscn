@@ -1,0 +1,378 @@
+[gd_scene load_steps=27 format=2]
+
+[ext_resource path="res://characters/BaseChar.tscn" type="PackedScene" id=1]
+[ext_resource path="res://!Just-someModdingCharacters/Characters/bloodypotato/bloodypotato.tres" type="SpriteFrames" id=2]
+[ext_resource path="res://!Just-someModdingCharacters/Characters/bloodypotato/sprites/!bloodypotato_wait.png" type="Texture" id=3]
+[ext_resource path="res://characters/BaseChar.gdshader" type="Shader" id=4]
+[ext_resource path="res://!Just-someModdingCharacters/Characters/bloodypotato/states/vampireState.gd" type="Script" id=5]
+[ext_resource path="res://!Just-someModdingCharacters/Characters/bloodypotato/sprites/action_buttons/transversplitting.png" type="Texture" id=6]
+[ext_resource path="res://mechanics/Hitbox.gd" type="Script" id=7]
+[ext_resource path="res://sound/common/slash4.wav" type="AudioStream" id=8]
+[ext_resource path="res://characters/swordandgun/sounds/swing1.wav" type="AudioStream" id=9]
+[ext_resource path="res://!Just-someModdingCharacters/Characters/bloodypotato/states/FlightCharging.gd" type="Script" id=10]
+[ext_resource path="res://!Just-someModdingCharacters/Characters/bloodypotato/sprites/action_buttons/flightcharging.png" type="Texture" id=11]
+[ext_resource path="res://!Just-someModdingCharacters/Characters/bloodypotato/particles/FlightChargingEffect.tscn" type="PackedScene" id=12]
+[ext_resource path="res://!Just-someModdingCharacters/Characters/bloodypotato/states/BloodSpatter.gd" type="Script" id=13]
+[ext_resource path="res://!Just-someModdingCharacters/Characters/bloodypotato/sprites/action_buttons/bloodspatter.png" type="Texture" id=14]
+[ext_resource path="res://!Just-someModdingCharacters/Characters/bloodypotato/states/Bite.gd" type="Script" id=15]
+[ext_resource path="res://!Just-someModdingCharacters/Characters/bloodypotato/sprites/action_buttons/bite.png" type="Texture" id=16]
+[ext_resource path="res://theme.tres" type="Theme" id=17]
+[ext_resource path="res://!Just-someModdingCharacters/Characters/bloodypotato/states/RotaryChopping.gd" type="Script" id=18]
+[ext_resource path="res://!Just-someModdingCharacters/Characters/bloodypotato/sprites/action_buttons/rotarychopping.png" type="Texture" id=19]
+[ext_resource path="res://HurtboxState.gd" type="Script" id=20]
+[ext_resource path="res://ui/ActionSelector/StateIcons/parry_high.png" type="Texture" id=21]
+[ext_resource path="res://ui/ActionSelector/StateIcons/parry_low.png" type="Texture" id=22]
+[ext_resource path="res://!Just-someModdingCharacters/Characters/bloodypotato/states/UpwardPicking.gd" type="Script" id=23]
+[ext_resource path="res://!Just-someModdingCharacters/Characters/bloodypotato/sprites/action_buttons/upwardpicking.png" type="Texture" id=24]
+[ext_resource path="res://!Just-someModdingCharacters/Characters/bloodypotato/sprites/bloodypotato_attack_transversplitting2.png" type="Texture" id=25]
+
+[sub_resource type="ShaderMaterial" id=1]
+resource_local_to_scene = true
+shader = ExtResource( 4 )
+shader_param/use_extra_color_1 = false
+shader_param/use_extra_color_2 = false
+shader_param/extra_replace_color_1 = Color( 1, 0, 1, 1 )
+shader_param/extra_replace_color_2 = Color( 1, 0, 1, 1 )
+shader_param/color = Color( 1, 1, 1, 1 )
+shader_param/extra_color_1 = Color( 1, 1, 1, 1 )
+shader_param/extra_color_2 = Color( 1, 1, 1, 1 )
+shader_param/max_color_distance = 0.01
+shader_param/super_dim = false
+shader_param/use_outline = false
+shader_param/outline_color = Color( 0, 0, 0, 1 )
+
+[node name="BloodyPotato" instance=ExtResource( 1 )]
+character_portrait = ExtResource( 3 )
+character_portrait2 = ExtResource( 25 )
+use_extra_color_1 = true
+extra_color_1 = Color( 0.447059, 0, 0.105882, 1 )
+use_extra_color_2 = true
+extra_color_2 = Color( 0.447059, 0, 0.619608, 1 )
+
+[node name="Sprite" parent="Flip" index="0"]
+material = SubResource( 1 )
+frames = ExtResource( 2 )
+animation = "Attack_UpwardPicking"
+frame = 12
+
+[node name="Hurtbox" parent="." index="3"]
+x = -1
+y = -22
+width = 9
+height = 22
+
+[node name="Start" parent="StateMachine" index="0"]
+title = ""
+show_in_menu = true
+
+[node name="ParryHigh" parent="StateMachine" index="2"]
+title = "Block"
+type = 4
+button_texture = ExtResource( 21 )
+
+[node name="ParryAuto" parent="StateMachine" index="3"]
+type = 4
+
+[node name="ParryLow" parent="StateMachine" index="4"]
+title = "Block"
+type = 4
+button_texture = ExtResource( 22 )
+
+[node name="DashForward" parent="StateMachine" index="24"]
+anim_length = 10
+ticks_per_frame = 2
+loop_animation = true
+
+[node name="ChargeDashForward" parent="StateMachine" index="25"]
+anim_length = 10
+ticks_per_frame = 2
+loop_animation = true
+
+[node name="DashBackward" parent="StateMachine" index="26"]
+anim_length = 10
+ticks_per_frame = 2
+loop_animation = true
+
+[node name="DashBackwardHold" parent="StateMachine" index="27"]
+anim_length = 10
+ticks_per_frame = 2
+loop_animation = true
+
+[node name="Jump" parent="StateMachine" index="29"]
+loop_animation = false
+
+[node name="ForwardThrow" parent="StateMachine" index="46"]
+anim_length = 17
+iasa_at = 15
+
+[node name="Taunt" parent="StateMachine" index="52"]
+air_type = 2
+
+[node name="TransverSplitting" type="Node2D" parent="StateMachine" index="54"]
+script = ExtResource( 5 )
+apply_forces = true
+apply_fric = true
+apply_grav = true
+sprite_animation = "Attack_TransverSplitting"
+anim_length = 17
+enter_force_dir_x = "1.0"
+enter_force_speed = "8.0"
+title = "Transver Splitting"
+type = 1
+button_texture = ExtResource( 6 )
+air_type = 2
+interrupt_from_string = "Grounded
+GroundedMovement
+GroundedAttack"
+interrupt_into_string = "Grounded
+GroundedMovement"
+hit_cancel_into_string = "Grounded
+GroundedMovement
+GroundedAttack"
+
+[node name="Hitbox" type="Node2D" parent="StateMachine/TransverSplitting" index="0"]
+z_index = 1000
+script = ExtResource( 7 )
+x = 24
+y = -22
+width = 39
+height = 13
+damage = 100
+hitstun_ticks = 13
+victim_hitlag = 4
+damage_proration = 2
+hit_height = 0
+whiff_sound = ExtResource( 9 )
+hit_sound = ExtResource( 8 )
+start_tick = 7
+active_ticks = 2
+
+[node name="FlightCharging" type="Node2D" parent="StateMachine" index="55"]
+script = ExtResource( 10 )
+apply_forces = true
+apply_fric = true
+apply_grav = true
+reset_y_momentum = true
+sprite_animation = "Special_FlightCharging"
+anim_length = 17
+force_dir_y = "-4"
+force_speed = "2"
+force_tick = 5
+particle_scene = ExtResource( 12 )
+spawn_particle_on_enter = true
+title = "Flight Charging"
+type = 2
+button_texture = ExtResource( 11 )
+air_type = 1
+iasa_at = 12
+interrupt_from_string = "Aerial"
+interrupt_into_string = "Aerial"
+interrupt_exceptions_string = "FlightCharging"
+
+[node name="BloodSpatter" type="Node2D" parent="StateMachine" index="56"]
+script = ExtResource( 13 )
+apply_forces = true
+apply_fric = true
+apply_grav = true
+sprite_animation = "Special_BloodSpatter"
+anim_length = 23
+projectile_match_facing = true
+title = "Blood Spatter"
+type = 2
+button_texture = ExtResource( 14 )
+interrupt_from_string = "Grounded
+GroundedMovement
+GroundedAttack"
+interrupt_into_string = "Grounded
+GroundedMovement"
+hit_cancel_into_string = "Grounded
+GroundedMovement
+GroundedAttack"
+
+[node name="Hitbox" type="Node2D" parent="StateMachine/BloodSpatter" index="0"]
+z_index = 1000
+script = ExtResource( 7 )
+x = 9
+y = -25
+width = 31
+height = 14
+damage = 100
+hitstun_ticks = 13
+victim_hitlag = 4
+damage_proration = 2
+hit_height = 0
+whiff_sound = ExtResource( 9 )
+hit_sound = ExtResource( 8 )
+start_tick = 15
+active_ticks = 2
+
+[node name="CritLabel" type="Label" parent="StateMachine/BloodSpatter" index="1"]
+visible = false
+margin_left = -20.0
+margin_top = -41.0
+margin_right = 20.0
+margin_bottom = -36.0
+theme = ExtResource( 17 )
+custom_colors/font_color = Color( 1, 0, 0, 1 )
+text = "CRIT!!!"
+align = 1
+
+[node name="Bite" type="Node2D" parent="StateMachine" index="57"]
+script = ExtResource( 15 )
+apply_forces = true
+apply_fric = true
+apply_grav = true
+sprite_animation = "Attack_Bite"
+anim_length = 9
+enter_force_dir_x = "2.0"
+enter_force_speed = "3.0"
+title = "Bite"
+type = 1
+button_texture = ExtResource( 16 )
+air_type = 2
+interrupt_from_string = "Grounded
+GroundedMovement
+GroundedAttack"
+interrupt_into_string = "Grounded
+GroundedMovement"
+hit_cancel_into_string = "Grounded
+GroundedMovement
+GroundedAttack"
+
+[node name="Hitbox" type="Node2D" parent="StateMachine/Bite" index="0"]
+z_index = 1000
+script = ExtResource( 7 )
+x = 21
+y = -29
+width = 14
+height = 12
+damage = 100
+hitstun_ticks = 13
+victim_hitlag = 4
+damage_proration = 2
+hit_height = 0
+whiff_sound = ExtResource( 9 )
+hit_sound = ExtResource( 8 )
+start_tick = 4
+active_ticks = 2
+
+[node name="RotaryChopping" type="Node2D" parent="StateMachine" index="58"]
+script = ExtResource( 18 )
+apply_forces = true
+apply_fric = true
+apply_grav = true
+sprite_animation = "Attack_RotaryChopping"
+anim_length = 24
+force_dir_x = "3"
+force_dir_y = "-2"
+force_speed = "4.0"
+force_tick = 4
+title = "Rotary Chopping"
+type = 1
+button_texture = ExtResource( 19 )
+flip_with_facing = true
+air_type = 2
+interrupt_from_string = "Grounded
+GroundedMovement
+GroundedAttack"
+interrupt_into_string = "Aerial
+AerialMovement"
+hit_cancel_into_string = "Aerial
+AerialMovement
+AerialAttack"
+
+[node name="Hitbox" type="Node2D" parent="StateMachine/RotaryChopping" index="0"]
+z_index = 1000
+script = ExtResource( 7 )
+x = 1
+y = -12
+width = 29
+height = 32
+damage = 100
+hitstun_ticks = 13
+victim_hitlag = 4
+damage_proration = 2
+hit_height = 0
+whiff_sound = ExtResource( 9 )
+hit_sound = ExtResource( 8 )
+start_tick = 12
+active_ticks = 3
+
+[node name="HurtboxState" type="Node2D" parent="StateMachine/RotaryChopping" index="1"]
+z_index = 1000
+script = ExtResource( 20 )
+y = -17
+width = 19
+height = 5
+start_tick = 5
+active_ticks = 7
+
+[node name="UpwardPicking" type="Node2D" parent="StateMachine" index="59"]
+script = ExtResource( 23 )
+apply_forces = true
+apply_fric = true
+apply_grav = true
+sprite_animation = "Attack_UpwardPicking"
+anim_length = 24
+force_dir_y = "-2.0"
+force_speed = "4.0"
+force_tick = 13
+enter_force_dir_x = "5.0"
+enter_force_speed = "2.0"
+title = "Upward Picking"
+type = 1
+button_texture = ExtResource( 24 )
+flip_with_facing = true
+air_type = 2
+interrupt_from_string = "Grounded
+GroundedMovement
+GroundedAttack"
+interrupt_into_string = "Grounded
+GroundedMovement"
+hit_cancel_into_string = "Grounded
+GroundedMovement
+GroundedAttack"
+
+[node name="Hitbox" type="Node2D" parent="StateMachine/UpwardPicking" index="0"]
+z_index = 1000
+script = ExtResource( 7 )
+x = 23
+y = -28
+height = 4
+damage = 100
+hitstun_ticks = 13
+victim_hitlag = 4
+damage_proration = 2
+cancellable = false
+hit_height = 0
+whiff_sound = ExtResource( 9 )
+hit_sound = ExtResource( 8 )
+dir_x = "0.0"
+dir_y = "0.0"
+knockback = "0.0"
+start_tick = 8
+active_ticks = 3
+
+[node name="Hitbox2" type="Node2D" parent="StateMachine/UpwardPicking" index="1"]
+z_index = 1000
+script = ExtResource( 7 )
+y = -45
+width = 36
+height = 21
+damage = 100
+hitstun_ticks = 13
+victim_hitlag = 4
+damage_proration = 2
+cancellable = false
+hit_height = 0
+group = 1
+whiff_sound = ExtResource( 9 )
+hit_sound = ExtResource( 8 )
+dir_x = "-1.0"
+dir_y = "2.0"
+grounded_hit_state = "HurtAerial"
+start_tick = 14
+active_ticks = 3
+
+[node name="Node2D" parent="." index="7"]
+visible = false

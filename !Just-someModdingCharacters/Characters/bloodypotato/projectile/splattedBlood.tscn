@@ -1,0 +1,63 @@
+[gd_scene load_steps=8 format=2]
+
+[ext_resource path="res://mechanics/Hitbox.gd" type="Script" id=1]
+[ext_resource path="res://projectile/BaseProjectile.tscn" type="PackedScene" id=2]
+[ext_resource path="res://projectile/DirProjectileDefault.gd" type="Script" id=3]
+[ext_resource path="res://sound/common/slash4.wav" type="AudioStream" id=4]
+[ext_resource path="res://characters/swordandgun/sounds/swing1.wav" type="AudioStream" id=5]
+[ext_resource path="res://!Just-someModdingCharacters/Characters/bloodypotato/projectile/sprites/splattedblood.png" type="Texture" id=6]
+
+[sub_resource type="SpriteFrames" id=1]
+animations = [ {
+"frames": [ ExtResource( 6 ) ],
+"loop": true,
+"name": "default",
+"speed": 5.0
+} ]
+
+[node name="splattedBlood" instance=ExtResource( 2 )]
+max_fall_speed = "15"
+
+[node name="Sprite" parent="Flip" index="0"]
+frames = SubResource( 1 )
+
+[node name="CollisionBox" parent="." index="2"]
+width = 16
+height = 5
+
+[node name="Hurtbox" parent="." index="3"]
+width = 16
+height = 5
+
+[node name="Default" parent="StateMachine" index="0"]
+script = ExtResource( 3 )
+enter_force_dir_x = "1.0"
+enter_force_dir_y = "-1.0"
+move_speed = "15.0"
+_c_Homing_Options = 0
+homing = true
+homing_turn_speed = "1.0"
+homing_accel = "1.0"
+max_homing_speed = "10"
+start_homing = false
+lifetime = 99999
+relative_data_dir = false
+bounce_on_ground = false
+num_bounces = 2
+
+[node name="Hitbox" type="Node2D" parent="StateMachine/Default" index="0"]
+z_index = 1000
+script = ExtResource( 1 )
+x = 5
+width = 5
+height = 5
+damage = 100
+hitstun_ticks = 13
+victim_hitlag = 4
+damage_proration = 2
+hit_height = 0
+whiff_sound = ExtResource( 5 )
+hit_sound = ExtResource( 4 )
+start_tick = 1
+active_ticks = 1
+always_on = true
