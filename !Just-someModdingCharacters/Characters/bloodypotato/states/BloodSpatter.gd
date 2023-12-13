@@ -34,13 +34,13 @@ func _frame_5():
 	
 func _frame_14():
 	host.apply_force(5, 0)
-	host.spawn_object(BLOOD_SCENE, 0, -23)
+	var blood1 = host.spawn_object(BLOOD_SCENE, 0, -23)
 
 func _frame_15():
-	host.spawn_object(BLOOD_SCENE, 0, -26)
+	var blood2 = host.spawn_object(BLOOD_SCENE, 0, -26)
 	
 func _frame_16():
-	host.spawn_object(BLOOD_SCENE, 0, -20)
+	var blood3 = host.spawn_object(BLOOD_SCENE, 0, -20)
 	
 func _frame_22():
 	is_crit = false

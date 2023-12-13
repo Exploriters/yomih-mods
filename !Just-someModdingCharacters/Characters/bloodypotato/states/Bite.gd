@@ -5,5 +5,6 @@ var pos = particle_position
 
 func _on_hit_something(obj, hitbox):
 	._on_hit_something(obj, hitbox)
-	pos.x *= host.get_facing_int()
-	spawn_particle_relative(BLOOD_PARTICLE_SCENE, pos)
+	if host.combo_count > 0:
+		pos.x *= host.get_facing_int()
+		spawn_particle_relative(BLOOD_PARTICLE_SCENE, pos)
