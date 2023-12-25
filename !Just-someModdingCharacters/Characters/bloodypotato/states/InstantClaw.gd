@@ -34,7 +34,7 @@ func _frame_9():
 
 func _frame_10():
 	var angleL = atan2(vec_x , vec_y)
-	if angleL > 0:
+	if st_pos_y > tp_pos_y:
 		angleL = -angleL
 	host.set_pos(int(host.get_pos().x - st_pos_y * tan(angleL)) ,0)
 	host.set_vel(0, 0)

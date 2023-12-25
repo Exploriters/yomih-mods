@@ -136,7 +136,7 @@ const PENALTY_TICKS = 120
 export  var num_air_movements = 2
 
 export (Texture) var character_portrait
-export (Texture) var character_portrait2
+export (Texture) var character_portrait2    
 
 onready var you_label = $YouLabel
 onready var actionable_label = $ActionableLabel

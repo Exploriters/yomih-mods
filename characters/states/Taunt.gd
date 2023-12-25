@@ -16,3 +16,4 @@ func _tick():
 	if can_apply_sadness and host.combo_count <= 0 and current_tick % 4 == 0 and host.is_grounded():
 		if not (host.opponent.current_state().state_name == "Taunt" and Utils.int_abs(current_tick - host.opponent.current_state().current_tick) < 2):
 			host.opponent.add_penalty(1)
+	  

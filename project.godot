@@ -368,6 +368,16 @@ _global_script_classes=[ {
 "class": "YomiColorPicker",
 "language": "GDScript",
 "path": "res://ui/ColorPicker/CustomColorPicker.gd"
+}, {
+"base": "CharacterState",
+"class": "baseDndAttack",
+"language": "GDScript",
+"path": "res://!Just-someModdingCharacters/Characters/skin_the_artillerist/states/BaseDndAttack.gd"
+}, {
+"base": "Fighter",
+"class": "dndSkin",
+"language": "GDScript",
+"path": "res://!Just-someModdingCharacters/Characters/skin_the_artillerist/skin.gd"
 } ]
 _global_script_class_icons={
 "ActionButton": "",
@@ -441,7 +451,9 @@ _global_script_class_icons={
 "Window": "",
 "WizardState": "",
 "XYPlot": "",
-"YomiColorPicker": ""
+"YomiColorPicker": "",
+"baseDndAttack": "",
+"dndSkin": ""
 }
 
 [application]

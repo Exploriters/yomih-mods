@@ -60,8 +60,7 @@ extra_color_2 = Color( 0.447059, 0, 0.619608, 1 )
 [node name="Sprite" parent="Flip" index="0"]
 material = SubResource( 1 )
 frames = ExtResource( 2 )
-animation = "Super_InstantClaw"
-frame = 9
+animation = "Wait"
 
 [node name="Hurtbox" parent="." index="3"]
 x = -1
@@ -267,7 +266,6 @@ active_ticks = 2
 [node name="RotaryChopping" type="Node2D" parent="StateMachine" index="58"]
 script = ExtResource( 18 )
 apply_forces = true
-apply_fric = true
 apply_grav = true
 sprite_animation = "Attack_RotaryChopping"
 anim_length = 24
@@ -318,7 +316,6 @@ active_ticks = 7
 [node name="UpwardPicking" type="Node2D" parent="StateMachine" index="59"]
 script = ExtResource( 23 )
 apply_forces = true
-apply_fric = true
 apply_grav = true
 sprite_animation = "Attack_UpwardPicking"
 anim_length = 24
@@ -404,7 +401,6 @@ GroundedMovement
 GroundedAttack"
 super_level_ = 1
 supers_used_ = 1
-super_effect_ = true
 
 [node name="Hitbox" type="Node2D" parent="StateMachine/InstantClaw" index="0"]
 z_index = 1000
@@ -450,6 +446,7 @@ WhiffInstantCancel
 Burst"
 super_level_ = 9
 supers_used_ = 9
+super_freeze_ticks_ = 60
 super_effect_ = true
 
 [node name="Hitbox" type="Node2D" parent="StateMachine/Fall4Die" index="0"]
@@ -470,6 +467,17 @@ pushback_x = "0"
 grounded_hit_state = "HurtAerial"
 start_tick = 14
 active_ticks = 1
+
+[node name="DontjumpLabel" type="Label" parent="StateMachine/Fall4Die" index="1"]
+visible = false
+margin_left = -65.0
+margin_right = 71.0
+margin_bottom = 25.0
+theme = ExtResource( 17 )
+custom_colors/font_color = Color( 1, 0, 0, 1 )
+text = "I hope you don't jump down
+	But it's too late :("
+align = 1
 
 [node name="BloodSlash" type="Node2D" parent="StateMachine" index="62"]
 script = ExtResource( 31 )

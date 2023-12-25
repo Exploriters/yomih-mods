@@ -1,12 +1,15 @@
 extends CharacterState
 
 const BLOOD_PARTICLE_SCENE = preload("res://!Just-someModdingCharacters/Characters/bloodypotato/particles/BloodEffect.tscn")
+onready var DontjumpLabel = $DontjumpLabel
+var dontjump = true
 
 func _frame_0():
 	anim_name = "Landing"
 	
 func _frame_3():
 	host.apply_force(0, -50)
+	dontjump = false
 	
 func _frame_5():
 	host.apply_force_relative(0, -2)
@@ -33,3 +36,7 @@ func _frame_14():
 
 func _tick():
 	host.apply_forces()
+	if dontjump == true:
+			DontjumpLabel.show()
+	else:
+		DontjumpLabel.hide()
