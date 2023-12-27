@@ -1,8 +1,11 @@
-[gd_scene load_steps=4 format=2]
+[gd_scene load_steps=7 format=2]
 
 [ext_resource path="res://!Just-someModdingCharacters/Characters/skin_the_artillerist/skin_playerInfo.gd" type="Script" id=1]
 [ext_resource path="res://!Just-someModdingCharacters/Characters/skin_the_artillerist/sprites/info/d20.png" type="Texture" id=2]
 [ext_resource path="res://theme.tres" type="Theme" id=3]
+[ext_resource path="res://characters/wizard/grav_bar3.png" type="Texture" id=4]
+[ext_resource path="res://characters/wizard/grav_bar2.png" type="Texture" id=5]
+[ext_resource path="res://characters/wizard/grav_bar5.png" type="Texture" id=6]
 
 [node name="Control" type="MarginContainer"]
 anchor_right = 1.0
@@ -13,33 +16,62 @@ script = ExtResource( 1 )
 margin_right = 640.0
 margin_bottom = 360.0
 
-[node name="Control" type="Control" parent="HBoxContainer"]
-margin_right = 100.0
-margin_bottom = 360.0
-rect_min_size = Vector2( 100, 0 )
-mouse_filter = 2
-
-[node name="Dice" type="TextureRect" parent="HBoxContainer"]
+[node name="HBoxContainer0" type="HBoxContainer" parent="HBoxContainer"]
 unique_name_in_owner = true
-margin_left = 104.0
-margin_right = 130.0
+margin_right = 113.0
+margin_bottom = 360.0
+
+[node name="VBoxContainer" type="VBoxContainer" parent="HBoxContainer/HBoxContainer0"]
+unique_name_in_owner = true
+margin_right = 83.0
+margin_bottom = 360.0
+
+[node name="ManaBar" type="TextureProgress" parent="HBoxContainer/HBoxContainer0/VBoxContainer"]
+unique_name_in_owner = true
+margin_right = 83.0
+margin_bottom = 13.0
+grow_horizontal = 2
+grow_vertical = 2
+max_value = 1.0
+step = 0.001
+value = 1.0
+texture_under = ExtResource( 6 )
+texture_over = ExtResource( 5 )
+texture_progress = ExtResource( 4 )
+
+[node name="Label" type="Label" parent="HBoxContainer/HBoxContainer0/VBoxContainer/ManaBar"]
+unique_name_in_owner = true
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+margin_left = -41.5
+margin_top = -10.5
+margin_right = 45.5
+margin_bottom = 7.5
+theme = ExtResource( 3 )
+text = "Mana"
+__meta__ = {
+"_edit_use_anchors_": true
+}
+
+[node name="Dice" type="TextureRect" parent="HBoxContainer/HBoxContainer0"]
+unique_name_in_owner = true
+margin_left = 83.0
+margin_right = 109.0
 margin_bottom = 360.0
 texture = ExtResource( 2 )
 stretch_mode = 4
 
-[node name="DicePoint" type="Label" parent="HBoxContainer/Dice"]
+[node name="DicePoint" type="Label" parent="HBoxContainer/HBoxContainer0/Dice"]
 unique_name_in_owner = true
 margin_top = 6.0
 margin_right = 26.0
-margin_bottom = 367.0
+margin_bottom = 17.0
 theme = ExtResource( 3 )
 text = "10"
 align = 1
 valign = 3
-
-[node name="Control2" type="Control" parent="HBoxContainer"]
-margin_left = 134.0
-margin_right = 234.0
-margin_bottom = 360.0
-rect_min_size = Vector2( 100, 0 )
-mouse_filter = 2
+__meta__ = {
+"_edit_use_anchors_": true
+}

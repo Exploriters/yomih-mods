@@ -1,4 +1,4 @@
-[gd_scene load_steps=185 format=2]
+[gd_scene load_steps=191 format=2]
 
 [ext_resource path="res://characters/BaseChar.gd" type="Script" id=1]
 [ext_resource path="res://characters/stickman/sprites/idle.png" type="Texture" id=2]
@@ -98,6 +98,7 @@
 [ext_resource path="res://ui/ActionSelector/StateIcons/offensive_burst.png" type="Texture" id=96]
 [ext_resource path="res://characters/stickman/sprites/phantomdash3.png" type="Texture" id=97]
 [ext_resource path="res://ui/ActionSelector/StateIcons/parry_low.png" type="Texture" id=98]
+[ext_resource path="res://ui/ActionSelector/StateIcons/parry_high.png" type="Texture" id=99]
 [ext_resource path="res://ui/ActionSelector/StateIcons/roll.png" type="Texture" id=100]
 [ext_resource path="res://characters/stickman/sprites/nunchuk_light3.png" type="Texture" id=101]
 [ext_resource path="res://characters/stickman/sprites/nunchuk_light2.png" type="Texture" id=102]
@@ -181,8 +182,13 @@
 [ext_resource path="res://ui/ActionSelector/ActionUIData/GrabActionUIData.tscn" type="PackedScene" id=180]
 [ext_resource path="res://sound/common/super_gain2.wav" type="AudioStream" id=181]
 [ext_resource path="res://characters/states/NewParry.gd" type="Script" id=182]
+[ext_resource path="res://ui/ActionSelector/ActionUIData/ParryActionUIData.tscn" type="PackedScene" id=183]
+[ext_resource path="res://ui/ActionSelector/StateIcons/push_block.png" type="Texture" id=184]
 [ext_resource path="res://sound/common/Block2.wav" type="AudioStream" id=185]
 [ext_resource path="res://sound/common/Block3.wav" type="AudioStream" id=186]
+[ext_resource path="res://characters/VelocityLabel.gd" type="Script" id=187]
+[ext_resource path="res://characters/grounded.png" type="Texture" id=188]
+[ext_resource path="res://characters/Grounded.gd" type="Script" id=189]
 
 [sub_resource type="SpriteFrames" id=3]
 animations = [ {
@@ -554,6 +560,30 @@ script = ExtResource( 182 )
 __meta__ = {
 "_editor_description_": ""
 }
+sprite_animation = "ParryHigh"
+anim_length = 20
+title = "Push Block"
+type = 4
+button_texture = ExtResource( 184 )
+air_type = 2
+dynamic_iasa = false
+reversible = false
+interrupt_from_string = "Grounded
+Aerial
+GroundedSpecial
+AerialSpecial
+GroundedDefense
+AerialDefense
+Parry"
+interrupt_into_string = "Grounded
+Aerial"
+allowed_stances_string = "Normal
+All"
+change_stance_to = "Normal"
+super_level_ = 1
+super_freeze_ticks_ = 2
+super_effect_ = true
+parry_type = 2
 push = true
 
 [node name="ParryHigh" type="Node2D" parent="StateMachine" index="2"]
@@ -561,12 +591,58 @@ script = ExtResource( 182 )
 __meta__ = {
 "_editor_description_": ""
 }
+sprite_animation = "ParryHigh"
+anim_length = 20
+title = "Block"
+type = 4
+data_ui_scene = ExtResource( 183 )
+button_texture = ExtResource( 99 )
+air_type = 2
+dynamic_iasa = false
+reversible = false
+interrupt_from_string = "Grounded
+Aerial
+GroundedSpecial
+AerialSpecial
+GroundedDefense
+AerialDefense
+Parry"
+interrupt_into_string = "Grounded
+Aerial"
+allowed_stances_string = "Normal
+All"
+change_stance_to = "Normal"
+parry_type = 2
 
 [node name="ParryAuto" type="Node2D" parent="StateMachine" index="3"]
 script = ExtResource( 182 )
 __meta__ = {
 "_editor_description_": ""
 }
+sprite_animation = "ParryHigh"
+anim_length = 20
+title = "Block"
+type = 4
+data_ui_scene = ExtResource( 183 )
+button_texture = ExtResource( 99 )
+air_type = 2
+dynamic_iasa = false
+reversible = false
+can_feint_if_possible = false
+selectable = false
+interrupt_from_string = "Grounded
+Aerial
+GroundedSpecial
+AerialSpecial
+GroundedDefense
+AerialDefense
+Parry"
+interrupt_into_string = "Grounded
+Aerial"
+allowed_stances_string = "Normal
+All"
+change_stance_to = "Normal"
+parry_type = 2
 autoguard = true
 
 [node name="ParryLow" type="Node2D" parent="StateMachine" index="4"]
@@ -574,6 +650,30 @@ script = ExtResource( 182 )
 __meta__ = {
 "_editor_description_": ""
 }
+sprite_animation = "ParryLow"
+anim_length = 20
+title = "Block Low"
+type = 4
+data_ui_scene = ExtResource( 183 )
+button_texture = ExtResource( 98 )
+dynamic_iasa = false
+reversible = false
+selectable = false
+interrupt_from_string = "Grounded
+Aerial
+GroundedSpecial
+AerialSpecial
+GroundedDefense
+AerialDefense
+Parry"
+interrupt_into_string = "Grounded
+Aerial"
+allowed_stances_string = "Normal
+All"
+change_stance_to = "Normal"
+initiative_effect = true
+particle_location = Vector2( 13, -11 )
+parry_type = 1
 
 [node name="ParryAir" type="Node2D" parent="StateMachine" index="5"]
 script = ExtResource( 68 )
@@ -928,7 +1028,7 @@ interrupt_exceptions_string = "CounterAttack"
 change_stance_to = "Normal"
 
 [node name="HurtboxState" type="Node2D" parent="StateMachine/Knockdown" index="0"]
-z_index = 1000
+z_index = 999
 script = ExtResource( 152 )
 y = -4
 width = 25
@@ -952,7 +1052,7 @@ change_stance_to = "Normal"
 hard = true
 
 [node name="HurtboxState" type="Node2D" parent="StateMachine/HardKnockdown" index="0"]
-z_index = 1000
+z_index = 999
 script = ExtResource( 152 )
 y = -4
 width = 25
@@ -1768,3 +1868,34 @@ scroll_active = false
 __meta__ = {
 "_edit_lock_": true
 }
+
+[node name="VelocityLabelContainer" type="Node2D" parent="." index="11"]
+z_index = 1024
+
+[node name="VelocityLabel" type="RichTextLabel" parent="VelocityLabelContainer" index="0"]
+margin_left = -49.0
+margin_right = 49.0
+margin_bottom = 81.0
+theme = ExtResource( 47 )
+scroll_active = false
+script = ExtResource( 187 )
+
+[node name="GroundedIndicator" type="Sprite" parent="." index="12"]
+visible = false
+position = Vector2( 0, 8 )
+z_index = 1000
+texture = ExtResource( 188 )
+script = ExtResource( 189 )
+
+[node name="Label" type="Label" parent="GroundedIndicator" index="0"]
+visible = false
+modulate = Color( 0.92549, 1, 0.643137, 1 )
+margin_left = -32.0
+margin_top = -1.0
+margin_right = 31.0
+margin_bottom = 13.0
+theme = ExtResource( 47 )
+text = "Grounded"
+align = 1
+
+[connection signal="mouse_entered" from="VelocityLabelContainer/VelocityLabel" to="VelocityLabelContainer/VelocityLabel" method="_on_VelocityLabel_mouse_entered"]

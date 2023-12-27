@@ -10,11 +10,14 @@ signal undo()
 signal forfeit()
 signal clashed()
 
+signal blocked_melee_attack()
 signal predicted()
 
 
 
 var MAX_HEALTH = 1000
+
+
 
 
 
@@ -51,12 +54,13 @@ const PREDICTION_CORRECT_SUPER_GAIN = 30
 const INCORRECT_PREDICTION_LAG = 7
 
 const PARRY_CHIP_DIVISOR = 3
+const PUSH_BLOCK_CHIP_MODIFIER = "0.33"
 const PARRY_KNOCKBACK_DIVISOR = "3"
 
 const PARRY_COMBO_SCALING = "0.85"
 const PARRY_GROUNDED_KNOCKBACK_DIVISOR = "1.5"
 const PUSH_BLOCK_FORCE = "-10"
-const PUSH_BLOCK_DIST = "80"
+const PUSH_BLOCK_DIST = "110"
 const AIR_BLOCK_PUSHBACK_MODIFIER = "0.35"
 const WAKEUP_THROW_IMMUNITY_TICKS = 3
 
@@ -136,11 +140,13 @@ const PENALTY_TICKS = 120
 export  var num_air_movements = 2
 
 export (Texture) var character_portrait
-export (Texture) var character_portrait2    
+export (Texture) var character_portrait2
 
 onready var you_label = $YouLabel
 onready var actionable_label = $ActionableLabel
 onready var quitter_label = $"%QuitterLabel"
+onready var velocity_label_container = $VelocityLabelContainer
+onready var grounded_indicator = $GroundedIndicator
 
 var input_state = InputState.new()
 
@@ -215,6 +221,9 @@ var action_cancels = {
 var ghost_ready_tick = null
 var ghost_ready_set = false
 var got_parried = false
+var got_blocked = false
+
+var block_used_air_movement = false
 
 var di_enabled = true
 var turbo_mode = false
@@ -293,6 +302,8 @@ var feint_parriable = false
 var grounded_last_frame = true
 
 
+
+var ghost_was_in_air = false
 
 var current_nudge = {
 	"x":"0", 
@@ -511,7 +522,7 @@ func can_unlock_achievements():
 func _ready():
 	sprite.animation = "Wait"
 	state_variables.append_array(
-		["current_di", "current_nudge", "last_parry_tick", "grounded_last_frame", "wakeup_throw_immunity_ticks", "sadness_immunity_ticks", "blockstun_ticks", "guard_broken_this_turn", "counterhit_this_turn", "feint_parriable", "brace_enabled", "turn_frames", "last_turn_block", "parry_chip_divisor", "parry_knockback_divisor", "feinted_last", "hit_out_of_brace", "brace_effect_applied_yet", "braced_attack", "blocked_hitbox_plus_frames", "visible_combo_count", "melee_attack_combo_scaling_applied", "projectile_hit_cancelling", "used_buffer", "max_di_scaling", "min_di_scaling", "last_input", "penalty_buffer", "buffered_input", "use_buffer", "was_my_turn", "combo_supers", "penalty_ticks", "can_nudge", "buffer_moved_backward", "wall_slams", "moved_backward", "moved_forward", "buffer_moved_forward", "used_air_dodge", "refresh_prediction", "clipping_wall", "has_hyper_armor", "hit_during_armor", "colliding_with_opponent", "clashing", "last_pos", "penalty", "hitstun_decay_combo_count", "touching_wall", "feinting", "feints", "lowest_tick", "is_color_active", "blocked_last_hit", "combo_proration", "state_changed", "nudge_amount", "initiative_effect", "reverse_state", "combo_moves_used", "parried_last_state", "initiative", "last_vel", "last_aerial_vel", "trail_hp", "always_perfect_parry", "parried", "got_parried", "parried_this_frame", "grounded_hits_taken", "on_the_ground", "hitlag_applied", "combo_damage", "burst_enabled", "di_enabled", "turbo_mode", "infinite_resources", "one_hit_ko", "dummy_interruptable", "air_movements_left", "super_meter", "supers_available", "parried", "parried_hitboxes", "burst_meter", "bursts_available"]
+		["current_di", "current_nudge", "got_blocked", "block_used_air_movement", "last_parry_tick", "grounded_last_frame", "wakeup_throw_immunity_ticks", "sadness_immunity_ticks", "blockstun_ticks", "guard_broken_this_turn", "counterhit_this_turn", "feint_parriable", "brace_enabled", "turn_frames", "last_turn_block", "parry_chip_divisor", "parry_knockback_divisor", "feinted_last", "hit_out_of_brace", "brace_effect_applied_yet", "braced_attack", "blocked_hitbox_plus_frames", "visible_combo_count", "melee_attack_combo_scaling_applied", "projectile_hit_cancelling", "used_buffer", "max_di_scaling", "min_di_scaling", "last_input", "penalty_buffer", "buffered_input", "use_buffer", "was_my_turn", "combo_supers", "penalty_ticks", "can_nudge", "buffer_moved_backward", "wall_slams", "moved_backward", "moved_forward", "buffer_moved_forward", "used_air_dodge", "refresh_prediction", "clipping_wall", "has_hyper_armor", "hit_during_armor", "colliding_with_opponent", "clashing", "last_pos", "penalty", "hitstun_decay_combo_count", "touching_wall", "feinting", "feints", "lowest_tick", "is_color_active", "blocked_last_hit", "combo_proration", "state_changed", "nudge_amount", "initiative_effect", "reverse_state", "combo_moves_used", "parried_last_state", "initiative", "last_vel", "last_aerial_vel", "trail_hp", "always_perfect_parry", "parried", "got_parried", "parried_this_frame", "grounded_hits_taken", "on_the_ground", "hitlag_applied", "combo_damage", "burst_enabled", "di_enabled", "turbo_mode", "infinite_resources", "one_hit_ko", "dummy_interruptable", "air_movements_left", "super_meter", "supers_available", "parried", "parried_hitboxes", "burst_meter", "bursts_available"]
 	)
 	add_to_group("Fighter")
 	connect("got_hit", self, "on_got_hit")
@@ -556,7 +567,8 @@ func copy_to(f):
 	f.stance = stance
 	f.current_state().interrupt_frames = current_state().interrupt_frames.duplicate(true)
 	f.update_data()
-	f.set_facing(get_facing_int(), true)
+	var facing = get_facing_int()
+	f.set_facing(facing, true)
 
 	f.update_data()
 
@@ -575,6 +587,8 @@ func use_burst():
 
 
 	bursts_available -= 1
+	if bursts_available < 0:
+		bursts_available = 0
 	refresh_air_movements()
 
 func use_burst_meter(amount):
@@ -649,8 +663,8 @@ func gain_super_meter(amount, stale_amount = "1.0"):
 
 func spawn_object(projectile:PackedScene, pos_x:int, pos_y:int, relative = true, data = null, local = true):
 	var obj = .spawn_object(projectile, pos_x, pos_y, relative, data, local)
-	if obj is BaseProjectile:
-		add_penalty( - 2)
+
+
 	return obj
 
 func combo_stale_meter(meter:int):
@@ -832,6 +846,7 @@ func debug_text():
 			"blockstun_ticks":blockstun_ticks, 
 			"hitlag_ticks":hitlag_ticks, 
 			"feinting":feinting, 
+			"proration":combo_proration, 
 			"parry_combo":parry_combo, 
 			"turn_frames":current_state().current_real_tick
 		}
@@ -857,14 +872,17 @@ func increment_opponent_combo(hitbox):
 		if opponent.combo_count <= 1:
 			opponent.combo_proration = hitbox.damage_proration
 
-func launched_by(hitbox):
-	
-
+func apply_hitlag(hitbox):
 	hitlag_ticks = hitbox.victim_hitlag + (COUNTER_HIT_ADDITIONAL_HITLAG_FRAMES if hitbox.counter_hit else 0)
 	if braced_attack:
 		hitlag_ticks = fixed.round(fixed.mul(str(hitlag_ticks), SUCCESSFUL_BRACE_HITSTUN_MODIFIER))
 	hitlag_ticks = fixed.round(fixed.mul(str(hitlag_ticks), global_hitstop_modifier))
 	hitlag_applied = hitlag_ticks
+
+func launched_by(hitbox):
+	
+
+	apply_hitlag(hitbox)
 	
 	if objs_map.has(hitbox.host):
 		var host = objs_map[hitbox.host]
@@ -1150,6 +1168,11 @@ func hit_by(hitbox, force_hit = false):
 				take_damage(hitbox.get_damage(), hitbox.minimum_damage, hitbox.meter_gain_modifier)
 			Hitbox.HitboxType.ThrowHit:
 				emit_signal("got_hit")
+				apply_hitlag(hitbox)
+				opponent.apply_hitlag(hitbox)
+				if hitbox.rumble:
+					rumble(hitbox.screenshake_amount, hitbox.victim_hitlag if hitbox.screenshake_frames < 0 else hitbox.screenshake_frames)
+	
 				take_damage(hitbox.get_damage(), hitbox.minimum_damage, hitbox.meter_gain_modifier)
 				opponent.incr_combo(hitbox.scale_combo, false, false, hitbox.combo_scaling_amount)
 			Hitbox.HitboxType.OffensiveBurst:
@@ -1166,26 +1189,28 @@ func block_hitbox(hitbox, force_parry = false, force_block = false, ignore_guard
 		var projectile = not host.is_in_group("Fighter")
 		var perfect_parry
 		var parry_type = current_state().parry_type
+		var input_timing = current_state().data["Melee Parry Timing"].count + (blocked_hitbox_plus_frames - opponent.blocked_hitbox_plus_frames)
+
 
 		if not projectile:
 			if current_state() is GroundedParryState:
 	
 				var parry_timing = turn_frames + (opponent.hitlag_ticks if not projectile else 0)
 				
-				var in_parry_window = (parry_timing == current_state().data["Melee Parry Timing"].count or current_state().data["Melee Parry Timing"].count == 20 and turn_frames >= 20) or (hitbox.hitbox_type == Hitbox.HitboxType.Burst and combo_count > 0)
-				var perfect_requirement = current_state().matches_hitbox_height(hitbox)
+				var in_parry_window = (parry_timing == input_timing or input_timing >= 20 and turn_frames >= 20) or (hitbox.hitbox_type == Hitbox.HitboxType.Burst and combo_count > 0)
+				var perfect_requirement = can_perfect_parry() and current_state().matches_hitbox_height(hitbox)
 				if projectile:
 					perfect_requirement = perfect_requirement and host.has_projectile_parry_window
 				else :
 					perfect_requirement = perfect_requirement and (opponent.current_state().feinting or opponent.feinting or initiative)
 					
-				perfect_parry = current_state().can_parry and (always_perfect_parry or (in_parry_window) and perfect_requirement and not blocked_last_hit)
+				perfect_parry = current_state().can_parry and ((can_perfect_parry() and always_perfect_parry) or (in_parry_window) and perfect_requirement and not blocked_last_hit)
 				if opponent.feint_parriable:
 					perfect_parry = true
 
 			else :
 				var parry_timing = turn_frames
-				var in_parry_window = (parry_timing == current_state().data["Melee Parry Timing"].count or current_state().data["Melee Parry Timing"].count == 20 and turn_frames >= 20) or (hitbox.hitbox_type == Hitbox.HitboxType.Burst and combo_count > 0)
+				var in_parry_window = (parry_timing == input_timing or input_timing >= 20 and turn_frames >= 20) or (hitbox.hitbox_type == Hitbox.HitboxType.Burst and combo_count > 0)
 	
 				perfect_parry = current_state().can_parry and (always_perfect_parry or opponent.current_state().feinting or opponent.feinting or (initiative and not blocked_last_hit) or parried_last_state)
 		else :
@@ -1222,7 +1247,6 @@ func block_hitbox(hitbox, force_parry = false, force_block = false, ignore_guard
 			if not hitbox.block_punishable:
 				parry_combo = true
 		else :
-			
 			blocked_last_hit = true
 			start_throw_invulnerability()
 			if not projectile and not perfect_parry and not last_turn_block and initiative:
@@ -1237,6 +1261,8 @@ func block_hitbox(hitbox, force_parry = false, force_block = false, ignore_guard
 		if not projectile:
 			if not perfect_parry:
 				opponent.feinting = false
+				opponent.got_blocked = true
+				on_blocked_melee_attack()
 			else :
 				opponent.got_parried = true
 		
@@ -1263,6 +1289,9 @@ func block_hitbox(hitbox, force_parry = false, force_block = false, ignore_guard
 			last_turn_block = true
 
 			var chip = fixed.round(fixed.mul(str(hitbox.damage / parry_chip_divisor), hitbox.chip_damage_modifier))
+			var push_block = current_state().get("push")
+			if push_block:
+				chip = fixed.round(fixed.mul(str(chip), PUSH_BLOCK_CHIP_MODIFIER))
 
 			if not current_state().matches_hitbox_height(hitbox, parry_type):
 				chip += fixed.round(fixed.mul(fixed.mul(str(hitbox.damage / parry_chip_divisor), "0.5"), hitbox.chip_damage_modifier))
@@ -1270,11 +1299,14 @@ func block_hitbox(hitbox, force_parry = false, force_block = false, ignore_guard
 			if not autoblock_armor:
 				take_damage(chip, 0, "0.6", 0, "2.0")
 
+
 			opponent.gain_super_meter(parry_meter / 6)
 			var block_hitlag = hitbox.hitlag_ticks + 1
 
 			if not projectile:
-				use_air_movement()
+				if not block_used_air_movement:
+					use_air_movement()
+					block_used_air_movement = true
 				if autoblock_armor:
 					opponent.hitlag_ticks = 0
 
@@ -1305,8 +1337,8 @@ func block_hitbox(hitbox, force_parry = false, force_block = false, ignore_guard
 				if not is_grounded():
 					pushback_force = fixed.mul(pushback_force, AIR_BLOCK_PUSHBACK_MODIFIER)
 				
-				apply_force(pushback_force, "0")
-				
+				if pushback_force != null:
+					apply_force(pushback_force, "0")
 				opponent.apply_force_relative(fixed.mul(fixed.div(hitbox.knockback, fixed.mul(parry_knockback_divisor, "-2")), hitbox.block_pushback_modifier), "0")
 
 			if not projectile or fixed.le(get_opponent_distance(), PUSH_BLOCK_DIST):
@@ -1318,7 +1350,6 @@ func block_hitbox(hitbox, force_parry = false, force_block = false, ignore_guard
 
 			current_state().interruptible_on_opponent_turn = true
 
-			blockstun_ticks = 0
 			var total_plus_frames = hitbox.plus_frames
 			
 			if not current_state().matches_hitbox_height(hitbox, parry_type):
@@ -1329,12 +1360,10 @@ func block_hitbox(hitbox, force_parry = false, force_block = false, ignore_guard
 				if not is_grounded():
 					total_plus_frames += VS_AERIAL_ADDITIONAL_PLUS_FRAMES
 
-			if total_plus_frames > 0:
-				blocked_hitbox_plus_frames = total_plus_frames
-			elif total_plus_frames < 0:
-				opponent.blocked_hitbox_plus_frames = total_plus_frames * - 1
-			if not projectile:
-				blockstun_ticks += block_hitlag
+			set_block_stun(total_plus_frames, 0 if projectile else block_hitlag)
+
+
+
 
 			spawn_particle_effect(preload("res://fx/FlawedParryEffect.tscn"), get_pos_visual() + particle_location)
 			parried = false
@@ -1352,6 +1381,7 @@ func block_hitbox(hitbox, force_parry = false, force_block = false, ignore_guard
 			if not projectile:
 				gain_super_meter(parry_meter)
 				add_penalty( - 20)
+				
 			else :
 				add_penalty( - 10)
 				gain_super_meter(parry_meter / 3)
@@ -1364,6 +1394,18 @@ func block_hitbox(hitbox, force_parry = false, force_block = false, ignore_guard
 			play_sound("Parry2")
 			play_sound("Parry")
 			emit_signal("parried")
+
+
+func set_block_stun(total_plus_frames, block_hitlag = null):
+
+	if block_hitlag == null:
+		block_hitlag = total_plus_frames
+	if total_plus_frames > 0:
+		blocked_hitbox_plus_frames = total_plus_frames
+	elif total_plus_frames < 0:
+		opponent.blocked_hitbox_plus_frames = total_plus_frames * - 1
+	blockstun_ticks = block_hitlag
+
 
 func parry_effect(location, absolute = false):
 	if not absolute:
@@ -1411,6 +1453,9 @@ func take_damage(damage:int, minimum = 0, meter_gain_modifier = "1.0", combo_sca
 	add_penalty( - 25)
 	if hp < 0:
 		hp = 0
+	if current_state() is GroundedParryState and current_state().push:
+		if hp <= 0:
+			hp = 1
 
 func get_guts():
 	var current_guts = "1"
@@ -1434,6 +1479,9 @@ func guts_stale_damage(damage:int):
 func combo_stale_damage(damage:int, combo_scaling_offset = 0):
 	var staling = get_combo_stale(Utils.int_max(opponent.combo_count - combo_scaling_offset + (opponent.combo_proration if opponent.combo_count > 1 else 0) - 1, 0))
 	return fixed.round(fixed.mul(str(damage), staling))
+
+func can_perfect_parry():
+	return true
 
 func can_parry_hitbox(hitbox):
 	if not current_state() is ParryState:
@@ -1567,10 +1615,22 @@ func clean_parried_hitboxes():
 func get_opponent_dir():
 	return Utils.int_sign(opponent.get_pos().x - get_pos().x)
 
+func get_dir_vec(pos, normalized = true):
+
+	var my_pos = get_pos()
+	
+	if normalized:
+		return fixed.normalized_vec(str(pos.x - my_pos.x), str(pos.y - my_pos.y))
+	return {
+		"x":pos.x - my_pos.x, 
+		"y":pos.y - my_pos.y
+	}
+
+
 func get_opponent_dir_vec(normalized = true):
 	var my_pos = get_pos()
 	var opp_pos = opponent.get_pos()
-
+	
 	if normalized:
 		return fixed.normalized_vec(str(opp_pos.x - my_pos.x), str(opp_pos.y - my_pos.y))
 	return {
@@ -1734,6 +1794,9 @@ func tick_before():
 			if not current_state().interruptible_on_opponent_turn:
 				current_state().on_continue()
 
+		if current_state().interruptible_on_opponent_turn:
+			current_state().opponent_turn_interrupt()
+
 
 
 		if queued_action in state_machine.states_map:
@@ -1792,6 +1855,8 @@ func can_be_thrown():
 	return .can_be_thrown() and blockstun_ticks <= 0
 
 func tick():
+	if is_ghost and not is_grounded():
+		ghost_was_in_air = true
 	if hitlag_ticks > 0:
 		if can_nudge:
 			if fixed.round(fixed.mul(fixed.vec_len(current_nudge.x, current_nudge.y), "100.0")) > 1:
@@ -1846,6 +1911,7 @@ func tick():
 			used_air_dodge = false
 			refresh_air_movements()
 		current_tick += 1
+		game_tick += 1
 		if not (current_state().is_hurt_state) and not (opponent.current_state().is_hurt_state):
 			var x_vel_int = chara.get_x_vel_int()
 			if Utils.int_sign(x_vel_int) == Utils.int_sign(opponent.get_pos().x - get_pos().x):
@@ -1875,6 +1941,8 @@ func tick():
 
 	if sadness_immunity_ticks > 0:
 		sadness_immunity_ticks -= 1
+
+
 
 	gain_burst_meter()
 	update_data()
@@ -1983,7 +2051,13 @@ func add_penalty(amount, ignore_min_distance = false):
 		if not is_grounded() and opponent.is_grounded():
 			modifier = "0.75"
 		amount = fixed.round(fixed.mul(str(amount), modifier))
-		
+	
+	if hp < opponent.hp:
+		var diff = Utils.int_abs(hp - opponent.hp)
+		var ratio = fixed.sub("1", fixed.div(str(diff), "3000"))
+
+		amount = fixed.round(fixed.mul(str(amount), ratio))
+	
 
 	penalty += amount
 	if penalty > MAX_PENALTY:
@@ -2103,6 +2177,10 @@ func start_wakeup_throw_immunity():
 
 func forfeit():
 	will_forfeit = true
+
+func on_blocked_melee_attack():
+	emit_signal("blocked_melee_attack")
+
 
 func _draw():
 

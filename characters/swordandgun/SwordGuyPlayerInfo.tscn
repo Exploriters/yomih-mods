@@ -102,7 +102,7 @@ custom_constants/separation = 0
 [node name="Control" type="Control" parent="HBoxContainer"]
 visible = false
 margin_right = 20.0
-margin_bottom = 34.0
+margin_bottom = 40.0
 rect_min_size = Vector2( 20, 0 )
 mouse_filter = 2
 
@@ -115,8 +115,8 @@ stretch_mode = 4
 
 [node name="Control2" type="Control" parent="HBoxContainer"]
 visible = false
-margin_left = 30.0
-margin_right = 50.0
-margin_bottom = 34.0
+margin_left = 50.0
+margin_right = 70.0
+margin_bottom = 40.0
 rect_min_size = Vector2( 20, 0 )
 mouse_filter = 2

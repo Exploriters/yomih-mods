@@ -68,6 +68,8 @@ onready var global_option_check_buttons = {
 	$"%ProjectileOwnersButton":"show_projectile_owners", 
 	$"%SpeedLinesButton":"speed_lines_enabled", 
 	$"%AutoFCButton":"auto_fc", 
+	$"%ExtraInfoButton":"show_extra_info", 
+
 }
 
 func _ready():
@@ -741,3 +743,7 @@ func _on_RoadmapButton_toggled(button_pressed):
 func _on_WorkshopUploader_pressed():
 	on_workshop_uploader_clicked()
 	pass
+
+
+func _on_VoteButton_pressed():
+	Steam.activateGameOverlayToWebPage("https://store.steampowered.com/news/app/2212330/view/3888359911081386731")

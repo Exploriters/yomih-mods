@@ -20,6 +20,7 @@ const FULL_HOP_LENGTH = "0.7"
 const SUPER_JUMP_SPEED = "17.0"
 const BASE_JUMP_SPEED = "0.5"
 const SUPER_JUMP_FORCES_END_TICK = 25
+const IS_JUMP = true
 
 var queue_backdash_check = false
 
@@ -30,15 +31,35 @@ var squat = false
 var force_x = "0.0"
 var force_y = "0.0"
 
+func _enter():
+	if (data is String and data == "homing") or data == null:
+		var dir = host.get_opponent_dir_vec()
+		if fixed.gt(dir.y, "-0.34"):
+			dir.y = "-0.34"
+			dir.x = fixed.mul(str(host.get_facing_int()), "0.94")
+		dir = fixed.normalized_vec(dir.x, dir.y)
+		data = {
+			"x":fixed.round(fixed.mul(dir.x, "100")), 
+			"y":fixed.round(fixed.mul(dir.y, "100"))
+		}
+	var vec = xy_to_dir(data["x"], data["y"], "1")
+	var length = fixed.vec_len(vec.x, vec.y)
+	var full_hop = fixed.gt(length, FULL_HOP_LENGTH)
+	var back = fixed.sign(str(data["x"])) != host.get_facing_int() or data["x"] == 0
+	squat = super_jump or (air_type == AirType.Grounded and (back) and full_hop)
+	if not squat:
+		host.start_throw_invulnerability()
 
 
 
 
 
 func jump():
+	host.end_throw_invulnerability()
 	var vel = host.get_vel()
 	host.set_grounded(false)
 	host.set_vel(fixed.mul(vel.x, x_speed_preserved), "0")
+
 	var force = xy_to_dir(data["x"], data["y"])
 	var force_power = fixed.vec_mul(force.x, force.y, fixed.powu(fixed.vec_len(force.x, force.y), 2))
 	force = Utils.fixed_vec2_string(fixed.div(fixed.add(force_power.x, force.x), "2"), fixed.div(fixed.add(force_power.y, force.y), "2"))
@@ -70,6 +91,17 @@ func _frame_7():
 		jump()
 
 func _frame_0():
+	if data is String and data == "homing":
+		var dir = host.get_opponent_dir_vec()
+		if fixed.gt(dir.y, "-0.34"):
+			dir.y = "-0.34"
+			dir.x = fixed.mul(str(host.get_facing_int()), "0.94")
+		dir = fixed.normalized_vec(dir.x, dir.y)
+		data = {
+			"x":fixed.round(fixed.mul(dir.x, "100")), 
+			"y":fixed.round(fixed.mul(dir.y, "100"))
+		}
+
 	if not super_jump:
 		interruptible_on_opponent_turn = true
 	next_state_on_hold = false

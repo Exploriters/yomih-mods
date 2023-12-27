@@ -47,6 +47,7 @@ export  var min_land_cancel_frame = - 1
 export  var _c_Interrupt_Data = 0
 export  var iasa_at = - 1
 export  var iasa_on_hit = - 1
+export  var iasa_on_hit_on_block = true
 export  var interrupt_frames = []
 export  var throw_techable = false
 export  var interruptible_on_opponent_turn = false
@@ -270,6 +271,8 @@ func _enter_shared():
 	if force_same_direction_as_previous_state:
 		host.reverse_state = false
 	._enter_shared()
+	if not get("IS_NEW_PARRY"):
+		host.block_used_air_movement = false
 	started_during_combo = false
 	if dynamic_iasa:
 		interruptible_on_opponent_turn = start_interruptible_on_opponent_turn
@@ -474,9 +477,12 @@ func can_feint():
 	return (has_hitboxes or force_feintable) and (host.feints > 0 or host.get_total_super_meter() >= host.MAX_SUPER_METER) and can_feint_if_possible
 
 func can_interrupt():
-	return current_tick == iasa_at or current_tick in interrupt_frames or current_tick == anim_length - 1 or (hit_anything and current_tick == iasa_on_hit) or (was_blocked and current_tick == iasa_on_hit)
+	return current_tick == iasa_at or current_tick in interrupt_frames or current_tick == anim_length - 1 or (hit_anything and current_tick == iasa_on_hit) or (was_blocked and iasa_on_hit_on_block and current_tick == iasa_on_hit)
 
 func on_got_hit():
+	pass
+
+func opponent_turn_interrupt():
 	pass
 
 func _exit_shared():
@@ -495,12 +501,11 @@ func _exit_shared():
 		host.reverse_state = false
 		host.set_facing(host.get_facing_int())
 	terminate_hitboxes()
-	host.end_invulnerability()
-	host.end_projectile_invulnerability()
-	host.end_throw_invulnerability()
+
 	if release_opponent_on_exit:
 		host.release_opponent()
 	host.got_parried = false
+	host.got_blocked = false
 	host.colliding_with_opponent = true
 	host.state_interruptable = false
 	host.projectile_hit_cancelling = false

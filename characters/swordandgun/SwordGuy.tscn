@@ -823,8 +823,8 @@ epic_horse_moment = ExtResource( 308 )
 [node name="Sprite" parent="Flip" index="0"]
 material = SubResource( 3 )
 frames = SubResource( 6 )
-animation = "3Combo"
-frame = 24
+animation = "HSlash"
+frame = 5
 
 [node name="ShootingArm" type="AnimatedSprite" parent="Flip" index="2"]
 unique_name_in_owner = true
@@ -1890,6 +1890,7 @@ damage = 100
 hitstun_ticks = 13
 victim_hitlag = 4
 damage_proration = 1
+block_cancel_allowed = false
 plus_frames = -1
 hit_height = 0
 whiff_sound = ExtResource( 140 )
@@ -1909,6 +1910,7 @@ damage = 100
 hitstun_ticks = 13
 victim_hitlag = 4
 damage_proration = 1
+block_cancel_allowed = false
 plus_frames = -1
 hit_height = 0
 whiff_sound = ExtResource( 140 )
@@ -1928,6 +1930,7 @@ damage = 100
 hitstun_ticks = 13
 victim_hitlag = 4
 damage_proration = 1
+block_cancel_allowed = false
 plus_frames = -1
 hit_height = 0
 whiff_sound = ExtResource( 140 )
@@ -1947,6 +1950,7 @@ damage = 100
 hitstun_ticks = 13
 victim_hitlag = 4
 damage_proration = 1
+block_cancel_allowed = false
 plus_frames = -1
 hit_height = 0
 whiff_sound = ExtResource( 140 )
@@ -2257,7 +2261,7 @@ start_tick = 13
 active_ticks = 4
 
 [node name="HurtboxState" type="Node2D" parent="StateMachine/ImpaleTeleport" index="1"]
-z_index = 1000
+z_index = 999
 script = ExtResource( 182 )
 __meta__ = {
 "_editor_description_": ""
@@ -3116,7 +3120,7 @@ apply_forces = true
 apply_fric = true
 apply_grav = true
 sprite_animation = "Foresight"
-anim_length = 13
+anim_length = 14
 sfx = ExtResource( 304 )
 sfx_tick = 2
 sfx_volume = -12.0
@@ -3196,7 +3200,7 @@ damage = 40
 hitstun_ticks = 12
 victim_hitlag = 4
 damage_proration = 2
-plus_frames = -2
+plus_frames = -1
 hit_height = 0
 dir_x = "0.5"
 dir_y = "1.0"
@@ -3638,62 +3642,6 @@ knockdown_extends_hitstun = false
 wall_slam = true
 start_tick = 8
 active_ticks = 1
-
-[node name="ParryAir" parent="StateMachine" index="65"]
-sprite_animation = ""
-anim_length = 1
-title = ""
-type = 0
-button_texture = null
-air_type = 0
-dynamic_iasa = true
-reversible = true
-selectable = true
-interrupt_from_string = ""
-interrupt_into_string = ""
-allowed_stances_string = "Normal"
-change_stance_to = ""
-initiative_effect = false
-particle_location = Vector2( 14, -31 )
-parry_type = 0
-
-[node name="ShieldHigh" parent="StateMachine" index="67"]
-sprite_animation = ""
-anim_length = 1
-title = ""
-type = 0
-button_texture = null
-reversible = true
-interrupt_into_string = ""
-allowed_stances_string = "Normal"
-can_parry = true
-
-[node name="ShieldLow" parent="StateMachine" index="68"]
-sprite_animation = ""
-anim_length = 1
-title = ""
-type = 0
-button_texture = null
-reversible = true
-interrupt_into_string = ""
-allowed_stances_string = "Normal"
-particle_location = Vector2( 14, -31 )
-can_parry = true
-parry_type = 0
-
-[node name="ShieldAir" parent="StateMachine" index="69"]
-sprite_animation = ""
-anim_length = 1
-title = ""
-type = 0
-button_texture = null
-air_type = 0
-reversible = true
-interrupt_into_string = ""
-allowed_stances_string = "Normal"
-particle_location = Vector2( 14, -31 )
-can_parry = true
-parry_type = 0
 
 [node name="DashForward1k" type="Node2D" parent="StateMachine" index="82"]
 script = ExtResource( 311 )

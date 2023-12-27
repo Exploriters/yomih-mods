@@ -1,6 +1,6 @@
 GDRE Tools v0.5.3
 Windows 6.1.7601, AMD Radeon R5 M330, opengl3
-Extracted 4240 files, no errors detected!
+Extracted 4267 files, no errors detected!
 USER WARNING: Converting lossy imports, you may lose fidelity for indicated assets when re-importing upon loading the project
    at: ImportExporter::_export_imports (modules\gdsdecomp\utility\import_exporter.cpp:55)
 Script version 3.5.x (rev 0xa7aad78) detected
@@ -73,10 +73,10 @@ Saved project config to F:/!yomiH-MOD/!!!yomiH-Assets-NEW!!!/project.godot
 ********************************EXPORT REPORT********************************
 
 Totals:                                 
-Decompiled scripts:                     368
+Decompiled scripts:                     373
 Failed scripts:                         0
-Imported resources for export session:  4240
-Successfully converted:                 1591
+Imported resources for export session:  4267
+Successfully converted:                 1599
 Lossy:                                  2
 Rewrote metadata:                       0
 Non-importable conversions:             2

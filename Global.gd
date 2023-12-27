@@ -2,7 +2,7 @@ extends Node
 
 signal nag_window()
 
-var VERSION = "1.8.0-steam"
+var VERSION = "1.8.23-steam"
 const RESOLUTION = Vector2(640, 360)
 
 var audio_player
@@ -12,6 +12,7 @@ var freeze_ghost_sound = true
 var ghost_afterimages = true
 var fullscreen = false
 var show_hitboxes = false
+var show_extra_info = false
 var light_mode = false
 var frame_advance = false
 var show_playback_controls = false
@@ -38,11 +39,12 @@ var name_paths = {
 	"Cowboy":"res://characters/swordandgun/SwordGuy.tscn", 
 	"Wizard":"res://characters/wizard/Wizard.tscn", 
 	"Robot":"res://characters/robo/Robot.tscn", 
-	"Mutant":"res://characters/beast/Mutant.tscn", 
-	#MODDED CHARACTERS
-	"Tem":"res://!Just-someModdingCharacters/Characters/tem/Tem.tscn",
-	"BloodyPotato":"res://!Just-someModdingCharacters/Characters/bloodypotato/BloodyPotato.tscn",
-	"Skin the Artillerist":"res://!Just-someModdingCharacters/Characters/skin_the_artillerist/skin.tscn"
+	"Mutant":"res://characters/mutant/Mutant.tscn", 
+	
+	#MODDING CHARACTERS
+	"Tem" : "res://!Just-someModdingCharacters/Characters/tem/Tem.tscn",
+	"BloodyPotato" : "res://!Just-someModdingCharacters/Characters/bloodypotato/BloodyPotato.tscn",
+	"Skin the Artillerist" : "res://!Just-someModdingCharacters/Characters/skin_the_artillerist/skin.tscn"
 }
 
 var songs = {
@@ -192,6 +194,7 @@ func save_options():
 			"show_playback_controls":show_playback_controls, 
 			"show_projectile_owners":show_projectile_owners, 
 			"default_dojo":0, 
+			"show_extra_info":show_extra_info, 
 
 			"enable_emotes":enable_emotes, 
 			"enable_custom_colors":enable_custom_colors, 
@@ -223,6 +226,7 @@ func get_default_player_data():
 			"show_projectile_owners":true, 
 			"speed_lines_enabled":true, 
 			"auto_fc":true, 
+			"show_extra_info":false
 		}
 	}
 

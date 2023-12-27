@@ -855,6 +855,14 @@ default_dash_speed
 boulder_projectile"
 damages_own_team = true
 throw_positions = {
+ExtResource( 322 ): {
+"x": 40,
+"y": -28
+},
+ExtResource( 326 ): {
+"x": 40,
+"y": -10
+},
 ExtResource( 320 ): {
 "x": 62,
 "y": -126
@@ -863,21 +871,13 @@ ExtResource( 321 ): {
 "x": 60,
 "y": -124
 },
-ExtResource( 322 ): {
-"x": 40,
-"y": -28
-},
-ExtResource( 323 ): {
-"x": 62,
-"y": -128
-},
 ExtResource( 325 ): {
 "x": 58,
 "y": -78
 },
-ExtResource( 326 ): {
-"x": 40,
-"y": -10
+ExtResource( 323 ): {
+"x": 62,
+"y": -128
 }
 }
 character_portrait = ExtResource( 63 )
@@ -1363,7 +1363,6 @@ damage = 90
 hitstun_ticks = 23
 hitlag_ticks = 11
 victim_hitlag = 11
-plus_frames = 1
 hit_height = 2
 screenshake_amount = 5
 hit_sound = ExtResource( 144 )
@@ -1454,6 +1453,7 @@ hitstun_ticks = 25
 hitlag_ticks = 6
 victim_hitlag = 6
 damage_proration = -1
+plus_frames = 1
 hit_height = 2
 screenshake_amount = 5
 hit_sound = ExtResource( 145 )
@@ -1467,7 +1467,7 @@ start_tick = 7
 active_ticks = 13
 
 [node name="HurtboxState" type="Node2D" parent="StateMachine/Kick" index="1"]
-z_index = 1000
+z_index = 999
 script = ExtResource( 228 )
 y = -8
 height = 8
@@ -1570,6 +1570,8 @@ Grounded"
 hit_cancel_into_string = "Grounded
 Aerial"
 velocity_forward_meter_gain_multiplier = "0.5"
+trigger_orb_type = "OrbDart"
+trigger_orb_delay = 18
 
 [node name="Hitbox" type="Node2D" parent="StateMachine/Liftoff" index="0"]
 z_index = 1000
@@ -1617,7 +1619,7 @@ script = ExtResource( 122 )
 apply_forces = true
 apply_fric = true
 apply_grav = true
-anim_length = 14
+anim_length = 16
 sfx = ExtResource( 152 )
 sfx_tick = 6
 title = "Magic Dart"
@@ -1772,7 +1774,7 @@ type = 2
 data_ui_scene = ExtResource( 282 )
 button_texture = ExtResource( 281 )
 air_type = 2
-iasa_at = 15
+iasa_at = 17
 self_hit_cancellable = false
 self_interruptable = false
 force_feintable = true
@@ -1886,6 +1888,14 @@ anim_length = 70
 sfx = ExtResource( 217 )
 sfx_tick = 10
 throw_positions = {
+ExtResource( 322 ): {
+"x": 40,
+"y": -28
+},
+ExtResource( 326 ): {
+"x": 40,
+"y": -10
+},
 ExtResource( 320 ): {
 "x": 62,
 "y": -126
@@ -1894,21 +1904,13 @@ ExtResource( 321 ): {
 "x": 60,
 "y": -124
 },
-ExtResource( 322 ): {
-"x": 40,
-"y": -28
-},
-ExtResource( 323 ): {
-"x": 62,
-"y": -128
-},
 ExtResource( 325 ): {
 "x": 58,
 "y": -78
 },
-ExtResource( 326 ): {
-"x": 40,
-"y": -10
+ExtResource( 323 ): {
+"x": 62,
+"y": -128
 }
 }
 type = 1
@@ -1935,6 +1937,7 @@ width = 15
 height = 16
 damage = 140
 hitbox_type = 2
+hitlag_ticks = 0
 cancellable = false
 screenshake_amount = 8
 screenshake_frames = 10
@@ -2026,7 +2029,7 @@ start_tick = 11
 active_ticks = 3
 
 [node name="HurtboxState" type="Node2D" parent="StateMachine/ConjureWeapon" index="1"]
-z_index = 1000
+z_index = 999
 script = ExtResource( 228 )
 y = -12
 width = 15
@@ -2035,7 +2038,7 @@ start_tick = 10
 active_ticks = 3
 
 [node name="HurtboxState2" type="Node2D" parent="StateMachine/ConjureWeapon" index="2"]
-z_index = 1000
+z_index = 999
 script = ExtResource( 228 )
 y = -14
 width = 15
@@ -2209,6 +2212,7 @@ damage = 20
 hitbox_type = 1
 cancellable = false
 can_clash = false
+plus_frames = -1
 screenshake_amount = 0
 replace_hit_particle = true
 whiff_particle = ExtResource( 231 )
@@ -2229,6 +2233,7 @@ damage = 20
 hitbox_type = 1
 cancellable = false
 can_clash = false
+plus_frames = -1
 priority = 1
 screenshake_amount = 0
 replace_hit_particle = true
@@ -2446,6 +2451,7 @@ damage = 100
 hitstun_ticks = 40
 hitlag_ticks = 10
 hits_vs_grounded = false
+block_cancel_allowed = false
 plus_frames = 1
 priority = 1
 whiff_sound = ExtResource( 142 )
@@ -2464,6 +2470,7 @@ damage = 60
 hitstun_ticks = 25
 hitlag_ticks = 6
 hits_vs_grounded = false
+block_cancel_allowed = false
 plus_frames = 1
 hit_sound = ExtResource( 224 )
 knockback = "4.0"
@@ -2481,6 +2488,7 @@ damage = 60
 hitstun_ticks = 25
 hitlag_ticks = 6
 hits_vs_grounded = false
+block_cancel_allowed = false
 plus_frames = 1
 hit_sound = ExtResource( 224 )
 knockback = "4.0"
@@ -2498,6 +2506,7 @@ damage = 60
 hitstun_ticks = 25
 hitlag_ticks = 6
 hits_vs_grounded = false
+block_cancel_allowed = false
 plus_frames = 1
 hit_sound = ExtResource( 224 )
 knockback = "4.0"

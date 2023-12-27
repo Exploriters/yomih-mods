@@ -15,6 +15,7 @@ var custom_texture = false
 var reversible = false
 var flip_icon = true
 var state = null
+var is_guard_break = false
 
 var earliest_hitbox = 0
 
@@ -27,6 +28,10 @@ func setup(name, title, texture = null):
 
 	hint_tooltip = title
 	$"%Button".hint_tooltip = title
+
+func end_setup():
+	$"%GuardBreakTexture".visible = is_guard_break
+	pass
 
 func set_player_id(player_id):
 	if player_id != 1 and custom_texture and flip_icon:
@@ -52,7 +57,6 @@ func get_data():
 	return null
 
 func _ready():
-
 	$"%Button".connect("mouse_entered", self, "emit_signal", ["mouse_entered"])
 	$"%Button".connect("mouse_exited", self, "emit_signal", ["mouse_exited"])
 	$"%Button".connect("toggled", self, "on_toggled")
@@ -65,9 +69,6 @@ func on_visibility_changed():
 func on_toggled(on):
 	emit_signal("toggled", on)
 	emit_signal("was_pressed", action_name)
-
-
-
 
 func set_pressed_no_signal(on):
 	$"%Button".set_pressed_no_signal(on)

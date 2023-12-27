@@ -8,5 +8,5 @@ func is_usable():
 	var has_meter = host.bursts_available > 0 or host.burst_meter >= fixed.round(fixed.mul(str(host.MAX_BURST_METER), "0.75"))
 
 
-	var usable = not host.got_parried and has_meter
+	var usable = not host.got_parried and not host.got_blocked and has_meter
 	return usable

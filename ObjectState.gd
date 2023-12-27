@@ -41,6 +41,7 @@ export  var loop_animation = false
 export  var animation_loop_start = 0
 export  var absolute_loop = false
 export  var endless = false
+export  var disable_at_end = false
 
 export  var _c_Static_Force = 0
 export  var force_dir_x = "0.0"
@@ -95,7 +96,7 @@ export  var host_commands = {
 
 export  var earliest_hitbox = 0
 var earliest_hitbox_node = null
-
+var is_guard_break = false
 
 export  var _c_Auto = 0
 export  var throw_positions:Dictionary = {}
@@ -128,6 +129,8 @@ var hitbox_start_frames = {
 var hurtbox_state_change_frames = {
 	
 }
+
+var limb_hurtboxes = []
 
 var all_hitbox_nodes = []
 var frame_methods = []
@@ -169,6 +172,25 @@ func get_active_hitboxes():
 					hitboxes.append(hitbox)
 	return hitboxes
 
+func get_active_hurtboxes():
+	var hurtboxes = []
+	for child in get_children():
+		if child is LimbHurtbox:
+			if is_hurtbox_active(child):
+				hurtboxes.append(child)
+	return hurtboxes
+
+func is_hurtbox_active(hurtbox:LimbHurtbox):
+	var after_start = hurtbox.start_tick <= 0
+	if not after_start:
+		if current_tick + 1 > hurtbox.start_tick:
+			after_start = true
+	var before_end = hurtbox.endless
+	if not before_end:
+		if current_tick <= hurtbox.start_tick + hurtbox.active_ticks:
+			before_end = true
+	return after_start and before_end
+
 func _tick_before():
 	pass
 
@@ -200,10 +222,10 @@ func _tick_shared():
 		current_tick += 1
 
 		process_hitboxes()
+		process_hurtboxes()
 
 		if host.can_update_sprite:
 			update_sprite_frame()
-		update_hurtbox()
 		if current_tick == sfx_tick and sfx_player and not ReplayManager.resimulating:
 			sfx_player.play()
 		if current_tick == force_tick:
@@ -318,7 +340,7 @@ func process_hitboxes():
 		else :
 			deactivate_hitbox(hitbox)
 
-func update_hurtbox():
+func process_hurtboxes():
 	if current_hurtbox:
 		current_hurtbox.tick(host)
 	if current_tick in hurtbox_state_change_frames:
@@ -326,6 +348,13 @@ func update_hurtbox():
 			current_hurtbox.end(host)
 		current_hurtbox = hurtbox_state_change_frames[current_tick]
 		current_hurtbox.start(host)
+	var pos = host.get_pos()
+	for hurtbox in limb_hurtboxes:
+		if hurtbox is LimbHurtbox:
+			hurtbox.active = is_hurtbox_active(hurtbox)
+			hurtbox.facing = host.get_facing()
+			hurtbox.update_position(pos.x, pos.y)
+
 
 func copy_data():
 	var d = null
@@ -448,6 +477,8 @@ func setup_hitboxes():
 			all_hitbox_nodes.append(child)
 			host.hitboxes.append(child)
 			child.native = native
+			if child.guard_break:
+				is_guard_break = true
 	var earliest = 999999999
 	for hitbox in all_hitbox_nodes:
 		hitbox.host = host
@@ -476,12 +507,14 @@ func setup_hurtboxes():
 	for child in get_children():
 		if child is HurtboxState:
 			hurtbox_state_change_frames[child.start_tick] = child
-
+		if child is LimbHurtbox:
+			limb_hurtboxes.append(child)
 
 func __on_hit_something(obj, hitbox):
 	if active:
 		_on_hit_something(obj, hitbox)
 		host._on_hit_something(obj, hitbox)
+
 
 func __on_got_parried():
 	if active:
@@ -520,6 +553,18 @@ func _exit_shared():
 		current_hurtbox.end(host)
 	last_facing = host.get_facing_int()
 	host.reset_hurtbox()
+	host.end_invulnerability()
+	host.end_projectile_invulnerability()
+	host.end_throw_invulnerability()
+
+	host.end_aerial_attack_invulnerability()
+	host.end_grounded_attack_invulnerability()
+	for child in get_children():
+		if child is LimbHurtbox:
+			child.active = false
+
+	if disable_at_end:
+		host.disable()
 
 func xy_to_dir(x, y, mul = "1.0", div = "100.0"):
 	return host.xy_to_dir(x, y, mul, div)

@@ -61,6 +61,7 @@ var block_punishable = false
 var ignore_projectile_armor = false
 var looping = false
 var block_cancel_allowed = true
+var allowed_to_hit_own_team = true
 
 func get_damage():
 	if combo_count > 0:
@@ -74,6 +75,7 @@ func _init(state):
 		hitstun_ticks = state.hitstun_ticks
 	else :
 		hitstun_ticks = state.get_real_hitstun()
+
 	facing = state.host.get_facing()
 	if not state.has_method("get_real_knockback"):
 		knockback = state.knockback
@@ -182,8 +184,8 @@ func _init(state):
 		ignore_projectile_armor = state.ignore_projectile_armor
 	if state.get("block_cancel_allowed") != null:
 		block_cancel_allowed = state.block_cancel_allowed
-
-
+	if state.get("allowed_to_hit_own_team") != null:
+		allowed_to_hit_own_team = state.allowed_to_hit_own_team
 	if damage_in_combo == - 1:
 		damage_in_combo = damage
 

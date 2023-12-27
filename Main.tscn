@@ -1,4 +1,4 @@
-[gd_scene load_steps=83 format=2]
+[gd_scene load_steps=86 format=2]
 
 [ext_resource path="res://ui/UILayer.gd" type="Script" id=1]
 [ext_resource path="res://main.gd" type="Script" id=2]
@@ -71,6 +71,9 @@
 [ext_resource path="res://ui/PixeloidSans-Bold.ttf" type="DynamicFontData" id=69]
 [ext_resource path="res://ui/super_bar_small2.png" type="Texture" id=70]
 [ext_resource path="res://DebugContainer.gd" type="Script" id=71]
+[ext_resource path="res://ui/VelocityLabel.gd" type="Script" id=72]
+[ext_resource path="res://ui/nombg.png" type="Texture" id=73]
+[ext_resource path="res://ui/nom.png" type="Texture" id=74]
 
 [sub_resource type="ShaderMaterial" id=19]
 shader = ExtResource( 50 )
@@ -1005,6 +1008,40 @@ unique_name_in_owner = true
 anims/RESET = SubResource( 11 )
 anims/game_won = SubResource( 12 )
 
+[node name="ExtraInfoContainer" type="HBoxContainer" parent="HudLayer"]
+unique_name_in_owner = true
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_left = 7.0
+margin_top = 55.0
+margin_right = -7.0
+margin_bottom = -161.0
+mouse_filter = 2
+
+[node name="ExtraInfoLabel1" type="Label" parent="HudLayer/ExtraInfoContainer"]
+unique_name_in_owner = true
+modulate = Color( 0.67451, 0.635294, 1, 0.705882 )
+margin_right = 311.0
+margin_bottom = 144.0
+grow_horizontal = 2
+size_flags_horizontal = 3
+size_flags_vertical = 7
+theme = ExtResource( 4 )
+script = ExtResource( 72 )
+
+[node name="ExtraInfoLabel2" type="Label" parent="HudLayer/ExtraInfoContainer"]
+unique_name_in_owner = true
+modulate = Color( 1, 0.478431, 0.505882, 0.705882 )
+margin_left = 315.0
+margin_right = 626.0
+margin_bottom = 144.0
+grow_horizontal = 2
+size_flags_horizontal = 3
+size_flags_vertical = 7
+theme = ExtResource( 4 )
+align = 2
+script = ExtResource( 72 )
+
 [node name="UILayer" type="CanvasLayer" parent="."]
 unique_name_in_owner = true
 script = ExtResource( 1 )
@@ -1116,7 +1153,7 @@ size_flags_stretch_ratio = 4.79
 
 [node name="ActionButtons" type="HBoxContainer" parent="UILayer/GameUI/BottomBar"]
 unique_name_in_owner = true
-margin_right = 640.0
+margin_right = 641.0
 margin_bottom = 140.0
 rect_min_size = Vector2( 0, 120 )
 mouse_filter = 2
@@ -1125,7 +1162,7 @@ size_flags_vertical = 3
 alignment = 1
 
 [node name="VBoxContainer" type="VBoxContainer" parent="UILayer/GameUI/BottomBar/ActionButtons"]
-margin_right = 319.0
+margin_right = 320.0
 margin_bottom = 140.0
 mouse_filter = 2
 size_flags_horizontal = 3
@@ -1134,20 +1171,20 @@ alignment = 2
 
 [node name="Control" type="Control" parent="UILayer/GameUI/BottomBar/ActionButtons/VBoxContainer"]
 margin_top = 35.0
-margin_right = 319.0
+margin_right = 320.0
 margin_bottom = 35.0
 
 [node name="P1InfoContainer" type="VBoxContainer" parent="UILayer/GameUI/BottomBar/ActionButtons/VBoxContainer"]
 unique_name_in_owner = true
 margin_top = 36.0
-margin_right = 319.0
+margin_right = 320.0
 margin_bottom = 56.0
 mouse_filter = 2
 size_flags_horizontal = 3
 
 [node name="P1SuperContainer" type="HBoxContainer" parent="UILayer/GameUI/BottomBar/ActionButtons/VBoxContainer/P1InfoContainer"]
 unique_name_in_owner = true
-margin_right = 319.0
+margin_right = 320.0
 margin_bottom = 20.0
 mouse_filter = 2
 
@@ -1203,15 +1240,15 @@ unique_name_in_owner = true
 anchor_right = 0.0
 anchor_bottom = 0.0
 margin_top = 57.0
-margin_right = 319.0
+margin_right = 320.0
 margin_bottom = 140.0
 rect_min_size = Vector2( 0, 73 )
 size_flags_horizontal = 3
 opponent_action_buttons_path = NodePath("../../VBoxContainer2/P2ActionButtons")
 
 [node name="VBoxContainer2" type="VBoxContainer" parent="UILayer/GameUI/BottomBar/ActionButtons"]
-margin_left = 320.0
-margin_right = 640.0
+margin_left = 321.0
+margin_right = 641.0
 margin_bottom = 140.0
 mouse_filter = 2
 size_flags_horizontal = 3
@@ -1293,7 +1330,7 @@ opponent_action_buttons_path = NodePath("../../VBoxContainer/P1ActionButtons")
 [node name="OptionsBarContainer" type="MarginContainer" parent="UILayer/GameUI/BottomBar"]
 unique_name_in_owner = true
 margin_top = 140.0
-margin_right = 640.0
+margin_right = 641.0
 margin_bottom = 152.0
 rect_min_size = Vector2( 0, 12 )
 mouse_filter = 2
@@ -1304,7 +1341,7 @@ custom_constants/margin_left = 5
 unique_name_in_owner = true
 visible = false
 margin_left = 5.0
-margin_right = 635.0
+margin_right = 636.0
 margin_bottom = 12.0
 size_flags_horizontal = 3
 size_flags_vertical = 3
@@ -1665,11 +1702,10 @@ unique_name_in_owner = true
 anchor_left = 0.5
 anchor_right = 0.5
 margin_left = -274.0
-margin_top = -282.0
+margin_top = -287.0
 margin_right = 258.0
-margin_bottom = -257.0
+margin_bottom = -262.0
 grow_horizontal = 2
-grow_vertical = 2
 mouse_filter = 2
 alignment = 1
 
@@ -1867,9 +1903,9 @@ anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
 margin_left = -45.0
-margin_top = -66.0
+margin_top = -70.0
 margin_right = 51.0
-margin_bottom = 114.0
+margin_bottom = 110.0
 grow_horizontal = 2
 custom_constants/separation = 0
 alignment = 1
@@ -2048,6 +2084,7 @@ underline = 1
 margin_top = 335.0
 margin_right = 639.0
 margin_bottom = 359.0
+mouse_filter = 2
 custom_constants/separation = 0
 alignment = 2
 
@@ -2151,6 +2188,38 @@ text = "Incomplete:
 - Idk other stuff
 "
 autowrap = true
+
+[node name="VoteButton" type="Button" parent="UILayer/MainMenu"]
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+margin_left = -27.0
+margin_top = 146.5
+margin_right = 49.0
+margin_bottom = 167.5
+hint_tooltip = "pretty please :)"
+mouse_default_cursor_shape = 2
+custom_colors/font_color = Color( 1, 0.476945, 0.88452, 1 )
+text = "VOTE HUSTLE!"
+flat = true
+
+[node name="TextureRect" type="TextureRect" parent="UILayer/MainMenu/VoteButton"]
+show_behind_parent = true
+margin_left = -3.0
+margin_top = -3.0
+margin_right = 77.0
+margin_bottom = 24.0
+mouse_filter = 2
+texture = ExtResource( 73 )
+
+[node name="TextureRect2" type="TextureRect" parent="UILayer/MainMenu/VoteButton"]
+margin_left = -24.0
+margin_top = -18.0
+margin_right = 16.0
+margin_bottom = 22.0
+mouse_filter = 2
+texture = ExtResource( 74 )
 
 [node name="PostGameButtons" type="VBoxContainer" parent="UILayer"]
 unique_name_in_owner = true
@@ -2270,6 +2339,13 @@ margin_top = 27.0
 margin_right = 157.0
 margin_bottom = 39.0
 text = "show hitboxes"
+
+[node name="ExtraInfoButton" type="CheckButton" parent="UILayer/OptionsContainer/VBoxContainer/Contents/VBoxContainer/VBoxContainer"]
+unique_name_in_owner = true
+margin_top = 27.0
+margin_right = 157.0
+margin_bottom = 39.0
+text = "show extra game info"
 
 [node name="AutoFCButton" type="CheckButton" parent="UILayer/OptionsContainer/VBoxContainer/Contents/VBoxContainer/VBoxContainer"]
 unique_name_in_owner = true
@@ -2759,6 +2835,7 @@ script = ExtResource( 56 )
 [connection signal="text_entered" from="UILayer/GameUI/PausePanel/VBoxContainer/ReplayName" to="." method="_on_ReplayName_text_entered"]
 [connection signal="pressed" from="UILayer/MainMenu/ButtonContainer/WorkshopUploader" to="UILayer" method="_on_WorkshopUploader_pressed"]
 [connection signal="toggled" from="UILayer/MainMenu/RoadmapContainer/RoadmapButton" to="UILayer" method="_on_RoadmapButton_toggled"]
+[connection signal="pressed" from="UILayer/MainMenu/VoteButton" to="UILayer" method="_on_VoteButton_pressed"]
 [connection signal="pressed" from="UILayer/ResimRequestScreen/RequestUndoPanel/VBoxContainer/HBoxContainer/ResimYes" to="UILayer/ResimRequestScreen" method="_on_ResimYes_pressed"]
 [connection signal="pressed" from="UILayer/ResimRequestScreen/RequestUndoPanel/VBoxContainer/HBoxContainer/ResimNo" to="UILayer/ResimRequestScreen" method="_on_ResimNo_pressed"]
 [connection signal="pressed" from="UILayer/SoftlockResetButton" to="UILayer" method="_on_SoftlockResetButton_pressed"]

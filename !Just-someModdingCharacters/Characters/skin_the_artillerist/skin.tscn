@@ -7,7 +7,7 @@
 [ext_resource path="res://!Just-someModdingCharacters/Characters/skin_the_artillerist/skin_playerInfo.tscn" type="PackedScene" id=5]
 [ext_resource path="res://!Just-someModdingCharacters/Characters/skin_the_artillerist/states/BaseDndAttack.gd" type="Script" id=6]
 [ext_resource path="res://!Just-someModdingCharacters/Characters/skin_the_artillerist/sprites/skin_attack_daggerchop2.png" type="Texture" id=7]
-[ext_resource path="res://!Just-someModdingCharacters/Characters/skin_the_artillerist/sprites/!skin_wait.png" type="Texture" id=8]
+[ext_resource path="res://!Just-someModdingCharacters/Characters/skin_the_artillerist/sprites/!skin_wait0.png" type="Texture" id=8]
 [ext_resource path="res://mechanics/Hitbox.gd" type="Script" id=9]
 [ext_resource path="res://sound/common/slash4.wav" type="AudioStream" id=10]
 [ext_resource path="res://characters/swordandgun/sounds/swing1.wav" type="AudioStream" id=11]
@@ -44,28 +44,56 @@ extra_color_2 = Color( 0, 1, 0.160784, 1 )
 [node name="Sprite" parent="Flip" index="0"]
 material = SubResource( 1 )
 frames = ExtResource( 3 )
-animation = "Attack_DaggerChop"
-frame = 3
+animation = "Wait"
+
+[node name="CollisionBox" parent="." index="2"]
+x = -3
+y = -21
+width = 6
+height = 21
+
+[node name="Hurtbox" parent="." index="3"]
+x = -3
+y = -21
+width = 6
+height = 21
+
+[node name="Start" parent="StateMachine" index="0"]
+sprite_anim_length = 8
+ticks_per_frame = 4
+loop_animation = true
+absolute_loop = true
+
+[node name="Wait" parent="StateMachine" index="10"]
+sprite_animation = "Wait"
+sprite_anim_length = 8
+ticks_per_frame = 4
+loop_animation = true
+absolute_loop = true
 
 [node name="DashForward" parent="StateMachine" index="24"]
-anim_length = 20
-ticks_per_frame = 2
+sprite_anim_length = 10
+ticks_per_frame = 3
 loop_animation = true
+absolute_loop = true
 
 [node name="ChargeDashForward" parent="StateMachine" index="25"]
-anim_length = 20
-ticks_per_frame = 2
+sprite_anim_length = 10
+ticks_per_frame = 3
 loop_animation = true
+absolute_loop = true
 
 [node name="DashBackward" parent="StateMachine" index="26"]
-anim_length = 20
-ticks_per_frame = 2
+sprite_anim_length = 10
+ticks_per_frame = 3
 loop_animation = true
+absolute_loop = true
 
 [node name="DashBackwardHold" parent="StateMachine" index="27"]
-anim_length = 20
-ticks_per_frame = 2
+sprite_anim_length = 10
+ticks_per_frame = 3
 loop_animation = true
+absolute_loop = true
 
 [node name="DaggerChop" type="Node2D" parent="StateMachine" index="54"]
 script = ExtResource( 6 )

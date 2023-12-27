@@ -43,6 +43,8 @@ var spread_amount = 0.0
 var spread_tween:SceneTreeTween = null
 var nudge_button
 
+var buffered_ui_actions = []
+
 export  var opponent_action_buttons_path:NodePath
 onready var opponent_action_buttons:ActionButtons = get_node(opponent_action_buttons_path)
 
@@ -148,6 +150,9 @@ func _process(delta):
 		continue_button.set_pressed(true)
 		continue_button.on_pressed()
 	unpress_extra_on_lock_in()
+	if buffered_ui_actions:
+		_send_ui_action(buffered_ui_actions[ - 1])
+		buffered_ui_actions = []
 	
 func unpress_extra_on_lock_in():
 	var select_button:Button = $"%SelectButton"
@@ -287,6 +292,9 @@ func create_button(name, title, category, data_scene = null, button_scene = BUTT
 	if button.get("earliest_hitbox") != null and state != null:
 		button.earliest_hitbox = state.earliest_hitbox
 	
+	if button.get("is_guard_break") != null and state != null:
+		button.is_guard_break = state.is_guard_break
+	
 	button.set_player_id(player_id)
 	if data_scene:
 		data_node = data_scene.instance()
@@ -298,6 +306,7 @@ func create_button(name, title, category, data_scene = null, button_scene = BUTT
 	button.connect("data_changed", self, "send_ui_action")
 	button.container = container
 	button.connect("was_pressed", self, "on_action_selected", [button])
+	button.end_setup()
 	$"%ButtonSoundPlayer".add_container(button)
 	return button
 
@@ -330,6 +339,9 @@ func _on_prediction_selected(selected_category):
 	_get_opposite_buttons().send_ui_action()
 
 func send_ui_action(action = null):
+	buffered_ui_actions.append(action)
+
+func _send_ui_action(action = null):
 	current_extra = get_extra()
 	if not is_instance_valid(game):
 		return 

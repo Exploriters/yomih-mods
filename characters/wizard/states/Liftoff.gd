@@ -15,7 +15,7 @@ func _frame_0():
 	if host.fast_falling:
 		host.hover_left -= FAST_FALL_REDUCTION
 	hitbox2.plus_frames = 1
-
+	landing_recovery = 6
 	
 func _frame_6():
 	host.reset_momentum()
@@ -41,6 +41,8 @@ func _frame_6():
 	host.liftoff_sprite.rotation = float(fixed.vec_to_angle(fixed.mul(dir.x, str(host.get_facing_int())), dir.y)) + TAU / 4
 
 	land_cancel = true
+	host.play_sound("HitBass")
+	host.screen_bump(Vector2(), 3, 0.15)
 	host.colliding_with_opponent = false
 	
 func _tick():

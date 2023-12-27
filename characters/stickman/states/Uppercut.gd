@@ -4,6 +4,7 @@ func _frame_0():
 
 	if host.initiative and host.is_grounded():
 		host.start_invulnerability()
+		host.start_aerial_attack_invulnerability()
 	if not host.is_grounded():
 		host.start_throw_invulnerability()
 
@@ -28,3 +29,6 @@ func _frame_4():
 
 func _frame_8():
 	host.end_throw_invulnerability()
+
+func _frame_9():
+	host.end_aerial_attack_invulnerability()

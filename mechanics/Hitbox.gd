@@ -70,6 +70,7 @@ export  var hits_vs_dizzy = true
 export  var beats_grab = true
 export  var hits_projectiles = true
 export  var ignore_projectile_armor = false
+export  var allowed_to_hit_own_team = true
 
 export  var _c_Block_Properties = 0
 export  var guard_break = false
@@ -264,6 +265,8 @@ func update_property_list():
 func get_real_knockback():
 	var creator = host.get_fighter()
 	if creator:
+		if not host.is_in_group("Fighter"):
+			return knockback
 		if not (creator.current_state().state_name in creator.combo_moves_used):
 			return knockback
 		var knockback_modifier = creator.fixed.powu(COMBO_SAME_MOVE_KNOCKBACK_INCREASE_AMOUNT_GROUNDED if creator.opponent.is_grounded() else COMBO_SAME_MOVE_KNOCKBACK_INCREASE_AMOUNT_AERIAL, creator.combo_moves_used[creator.current_state().state_name])
@@ -294,6 +297,8 @@ func get_real_hitstun():
 	var creator = host.get_fighter()
 	if creator:
 		var ticks = hitstun_ticks if not creator.combo_count > 0 else combo_hitstun_ticks
+		if not host.is_in_group("Fighter"):
+			return ticks
 		if not (creator.current_state().state_name in creator.combo_moves_used):
 			return ticks
 		var final_hitstun = Utils.int_max(ticks - (COMBO_SAME_MOVE_HITSTUN_DECREASE_AMOUNT * (creator.combo_moves_used[creator.current_state().state_name] + 1)), ticks / 2)
