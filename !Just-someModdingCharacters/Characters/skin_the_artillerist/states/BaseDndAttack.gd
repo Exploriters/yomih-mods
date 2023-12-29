@@ -1,7 +1,4 @@
 extends CharacterState
-
-class_name baseDndAttack
-
 onready var hitbox = $Hitbox
 
 var initGuardBreak = false

@@ -1,0 +1,11 @@
+{
+  "name": "ex_characters",
+  "friendly_name": "Just some Characters",
+  "description": "Why my computer is win7(from Abrel)\n",
+  "author": "Please just send some update here please please please(from Abrel)\n",
+  "version": "3.0.2",
+  "link": "",
+  "requires": [""],
+  "overwrites": false,
+  "priority": -10000
+}

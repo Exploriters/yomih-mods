@@ -1,4 +1,4 @@
-[gd_scene load_steps=13 format=2]
+[gd_scene load_steps=23 format=2]
 
 [ext_resource path="res://characters/BaseChar.tscn" type="PackedScene" id=1]
 [ext_resource path="res://!Just-someModdingCharacters/Characters/skin_the_artillerist/skin.gd" type="Script" id=2]
@@ -11,8 +11,32 @@
 [ext_resource path="res://mechanics/Hitbox.gd" type="Script" id=9]
 [ext_resource path="res://sound/common/slash4.wav" type="AudioStream" id=10]
 [ext_resource path="res://characters/swordandgun/sounds/swing1.wav" type="AudioStream" id=11]
+[ext_resource path="res://!Just-someModdingCharacters/Characters/skin_the_artillerist/sprites/action_buttons/daggerchop.png" type="Texture" id=12]
+[ext_resource path="res://!Just-someModdingCharacters/Characters/skin_the_artillerist/states/ShockingGrasp.gd" type="Script" id=13]
+[ext_resource path="res://characters/ThrowBox.gd" type="Script" id=14]
+[ext_resource path="res://characters/robo/sound/hustle.wav" type="AudioStream" id=15]
+[ext_resource path="res://characters/robo/HustleEffect.tscn" type="PackedScene" id=16]
+[ext_resource path="res://!Just-someModdingCharacters/Characters/skin_the_artillerist/sprites/action_buttons/shockinggrasp.png" type="Texture" id=17]
+[ext_resource path="res://!Just-someModdingCharacters/Characters/skin_the_artillerist/sprites/action_buttons/scytheslashing.png" type="Texture" id=18]
+[ext_resource path="res://sound/common/catch.wav" type="AudioStream" id=19]
+[ext_resource path="res://!Just-someModdingCharacters/Characters/skin_the_artillerist/states/ShockingGraspGrab.gd" type="Script" id=20]
 
 [sub_resource type="ShaderMaterial" id=1]
+resource_local_to_scene = true
+shader = ExtResource( 4 )
+shader_param/use_extra_color_1 = false
+shader_param/use_extra_color_2 = false
+shader_param/extra_replace_color_1 = Color( 1, 0, 1, 1 )
+shader_param/extra_replace_color_2 = Color( 1, 0, 1, 1 )
+shader_param/color = Color( 1, 1, 1, 1 )
+shader_param/extra_color_1 = Color( 1, 1, 1, 1 )
+shader_param/extra_color_2 = Color( 1, 1, 1, 1 )
+shader_param/max_color_distance = 0.01
+shader_param/super_dim = false
+shader_param/use_outline = false
+shader_param/outline_color = Color( 0, 0, 0, 1 )
+
+[sub_resource type="ShaderMaterial" id=2]
 resource_local_to_scene = true
 shader = ExtResource( 4 )
 shader_param/use_extra_color_1 = false
@@ -44,7 +68,28 @@ extra_color_2 = Color( 0, 1, 0.160784, 1 )
 [node name="Sprite" parent="Flip" index="0"]
 material = SubResource( 1 )
 frames = ExtResource( 3 )
-animation = "Wait"
+animation = "Attack_ScytheSlashing"
+frame = 7
+
+[node name="ShockingEffect" parent="Flip/Particles" index="0" instance=ExtResource( 16 )]
+unique_name_in_owner = true
+visible = false
+modulate = Color( 0, 1, 0.227451, 1 )
+material = SubResource( 2 )
+position = Vector2( 0, -16 )
+free = false
+one_shot = false
+start_enabled = false
+
+[node name="ShockingEffectFail" parent="Flip/Particles" index="1" instance=ExtResource( 16 )]
+unique_name_in_owner = true
+visible = false
+modulate = Color( 1, 0, 0, 1 )
+material = SubResource( 2 )
+position = Vector2( 0, -16 )
+free = false
+one_shot = false
+start_enabled = false
 
 [node name="CollisionBox" parent="." index="2"]
 x = -3
@@ -95,22 +140,45 @@ ticks_per_frame = 3
 loop_animation = true
 absolute_loop = true
 
+[node name="ThrowBox" parent="StateMachine/Grab" index="0"]
+x = 25
+
+[node name="ThrowBox" parent="StateMachine/AirGrab" index="0"]
+x = 25
+
+[node name="ThrowBox" parent="StateMachine/JumpGrab" index="0"]
+x = 25
+
 [node name="DaggerChop" type="Node2D" parent="StateMachine" index="54"]
 script = ExtResource( 6 )
 apply_forces = true
+apply_fric = true
 sprite_animation = "Attack_DaggerChop"
 anim_length = 11
 enter_force_dir_x = "2.0"
 enter_force_speed = "1.0"
 title = "Dagger Chop"
 type = 1
+button_texture = ExtResource( 12 )
 air_type = 2
 interrupt_from_string = "Grounded
 GroundedMovement
-GroundedAttack"
+GroundedAttack
+Aerial
+AerialMovement
+AerialAttack"
+interrupt_into_string = "Grounded
+GroundedMovement
+GroundedAttack
+Aerial
+AerialMovement
+AerialAttack"
 hit_cancel_into_string = "Grounded
 GroundedMovement
-GroundedAttack"
+GroundedAttack
+Aerial
+AerialMovement
+AerialAttack"
 
 [node name="Hitbox" type="Node2D" parent="StateMachine/DaggerChop" index="0"]
 z_index = 1000
@@ -119,7 +187,7 @@ x = 1
 y = -17
 width = 28
 height = 21
-damage = 100
+damage = 70
 hitstun_ticks = 13
 victim_hitlag = 4
 damage_proration = 2
@@ -127,4 +195,134 @@ hit_height = 0
 whiff_sound = ExtResource( 11 )
 hit_sound = ExtResource( 10 )
 start_tick = 4
+active_ticks = 2
+
+[node name="ShockingGraspGrab" type="Node2D" parent="StateMachine" index="55"]
+script = ExtResource( 20 )
+sprite_animation = "Grab"
+anim_length = 15
+title = "ShockingGrasp"
+type = 1
+button_texture = ExtResource( 17 )
+flip_with_facing = true
+interrupt_from_string = "Grounded
+GroundedAttack
+GroundedGrab"
+interrupt_into_string = "Grounded"
+
+[node name="ThrowBox" type="Node2D" parent="StateMachine/ShockingGraspGrab" index="0"]
+z_index = 1000
+script = ExtResource( 14 )
+x = 25
+y = -18
+width = 15
+height = 12
+increment_combo = false
+hits_vs_aerial = false
+block_cancel_allowed = null
+hit_sound = ExtResource( 19 )
+start_tick = 3
+active_ticks = 3
+throw_state = "ShockingGrasp"
+
+[node name="AirShockingGraspGrab" type="Node2D" parent="StateMachine" index="56"]
+script = ExtResource( 20 )
+sprite_animation = "Grab"
+anim_length = 15
+title = "ShockingGrasp"
+type = 1
+button_texture = ExtResource( 17 )
+flip_with_facing = true
+air_type = 1
+interrupt_from_string = "Aerial
+AerialAttack
+AerialGrab"
+interrupt_into_string = "Aerial
+Grounded"
+
+[node name="ThrowBox" type="Node2D" parent="StateMachine/AirShockingGraspGrab" index="0"]
+z_index = 1000
+script = ExtResource( 14 )
+x = 25
+y = -18
+width = 15
+height = 12
+increment_combo = false
+hits_vs_grounded = false
+block_cancel_allowed = null
+hit_sound = ExtResource( 19 )
+start_tick = 3
+active_ticks = 3
+throw_state = "ShockingGrasp"
+
+[node name="ShockingGrasp" type="Node2D" parent="StateMachine" index="57"]
+script = ExtResource( 13 )
+apply_forces = true
+reset_x_momentum = true
+sprite_animation = "Attack_ShockingGrasp"
+anim_length = 20
+sprite_anim_length = 20
+force_dir_x = "-5.0"
+force_speed = "2.0"
+force_tick = 9
+show_in_menu = false
+type = 1
+air_type = 2
+interrupt_into_string = "Grounded
+Aerial"
+release = true
+release_frame = 9
+start_throw_pos_y = 5
+hitstun_ticks = 30
+damage = 80
+screenshake_amount = 24
+screenshake_frames = 10
+hard_knockdown = true
+release_sfx = ExtResource( 15 )
+
+[node name="ScytheSlashing" type="Node2D" parent="StateMachine" index="58"]
+script = ExtResource( 6 )
+apply_forces = true
+apply_fric = true
+sprite_animation = "Attack_ScytheSlashing"
+anim_length = 17
+enter_force_dir_x = "5.0"
+enter_force_speed = "1.5"
+title = "Scythe Slashing"
+type = 1
+button_texture = ExtResource( 18 )
+air_type = 2
+interrupt_from_string = "Grounded
+GroundedMovement
+GroundedAttack
+Aerial
+AerialMovement
+AerialAttack"
+interrupt_into_string = "Grounded
+GroundedMovement
+GroundedAttack
+Aerial
+AerialMovement
+AerialAttack"
+hit_cancel_into_string = "Grounded
+GroundedMovement
+GroundedAttack
+Aerial
+AerialMovement
+AerialAttack"
+
+[node name="Hitbox" type="Node2D" parent="StateMachine/ScytheSlashing" index="0"]
+z_index = 1000
+script = ExtResource( 9 )
+x = 33
+y = -24
+width = 52
+height = 16
+damage = 70
+hitstun_ticks = 13
+victim_hitlag = 4
+damage_proration = 2
+whiff_sound = ExtResource( 11 )
+hit_sound = ExtResource( 10 )
+start_tick = 8
 active_ticks = 2

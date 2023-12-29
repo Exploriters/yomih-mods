@@ -1,4 +1,4 @@
-[gd_resource type="SpriteFrames" load_steps=62 format=2]
+[gd_resource type="SpriteFrames" load_steps=79 format=2]
 
 [ext_resource path="res://characters/stickman/sprites/stickman30.png" type="Texture" id=1]
 [ext_resource path="res://!Just-someModdingCharacters/Characters/skin_the_artillerist/sprites/skin_dashbackward0.png" type="Texture" id=2]
@@ -27,21 +27,38 @@
 [ext_resource path="res://characters/stickman/sprites/stickman24.png" type="Texture" id=25]
 [ext_resource path="res://!Just-someModdingCharacters/Characters/skin_the_artillerist/sprites/!skin_wait6.png" type="Texture" id=26]
 [ext_resource path="res://!Just-someModdingCharacters/Characters/skin_the_artillerist/sprites/!skin_wait7.png" type="Texture" id=27]
-[ext_resource path="res://characters/stickman/sprites/stickman57.png" type="Texture" id=28]
+[ext_resource path="res://!Just-someModdingCharacters/Characters/skin_the_artillerist/sprites/skin_grab0.png" type="Texture" id=28]
 [ext_resource path="res://characters/stickman/sprites/stickman29.png" type="Texture" id=29]
 [ext_resource path="res://!Just-someModdingCharacters/Characters/skin_the_artillerist/sprites/skin_parry_high.png" type="Texture" id=30]
 [ext_resource path="res://!Just-someModdingCharacters/Characters/skin_the_artillerist/sprites/skin_parry_low.png" type="Texture" id=31]
+[ext_resource path="res://!Just-someModdingCharacters/Characters/skin_the_artillerist/sprites/skin_grab1.png" type="Texture" id=32]
 [ext_resource path="res://characters/stickman/sprites/stickman37.png" type="Texture" id=33]
 [ext_resource path="res://characters/stickman/sprites/stickman38.png" type="Texture" id=34]
+[ext_resource path="res://!Just-someModdingCharacters/Characters/skin_the_artillerist/sprites/skin_grab2.png" type="Texture" id=35]
+[ext_resource path="res://!Just-someModdingCharacters/Characters/skin_the_artillerist/sprites/skin_grab3.png" type="Texture" id=36]
+[ext_resource path="res://!Just-someModdingCharacters/Characters/skin_the_artillerist/sprites/skin_grab4.png" type="Texture" id=37]
+[ext_resource path="res://!Just-someModdingCharacters/Characters/skin_the_artillerist/sprites/skin_grab5.png" type="Texture" id=38]
+[ext_resource path="res://!Just-someModdingCharacters/Characters/skin_the_artillerist/sprites/skin_attack_shockinggrasp0.png" type="Texture" id=39]
+[ext_resource path="res://!Just-someModdingCharacters/Characters/skin_the_artillerist/sprites/skin_attack_shockinggrasp2.png" type="Texture" id=40]
+[ext_resource path="res://!Just-someModdingCharacters/Characters/skin_the_artillerist/sprites/skin_attack_shockinggrasp1.png" type="Texture" id=41]
+[ext_resource path="res://!Just-someModdingCharacters/Characters/skin_the_artillerist/sprites/skin_attack_shockinggrasp3.png" type="Texture" id=42]
+[ext_resource path="res://!Just-someModdingCharacters/Characters/skin_the_artillerist/sprites/skin_attack_shockinggrasp4.png" type="Texture" id=43]
+[ext_resource path="res://!Just-someModdingCharacters/Characters/skin_the_artillerist/sprites/skin_attack_shockinggrasp5.png" type="Texture" id=44]
+[ext_resource path="res://!Just-someModdingCharacters/Characters/skin_the_artillerist/sprites/skin_attack_scytheslashing0.png" type="Texture" id=45]
+[ext_resource path="res://!Just-someModdingCharacters/Characters/skin_the_artillerist/sprites/skin_attack_scytheslashing1.png" type="Texture" id=46]
+[ext_resource path="res://!Just-someModdingCharacters/Characters/skin_the_artillerist/sprites/skin_attack_scytheslashing2.png" type="Texture" id=47]
+[ext_resource path="res://!Just-someModdingCharacters/Characters/skin_the_artillerist/sprites/skin_attack_scytheslashing3.png" type="Texture" id=48]
 [ext_resource path="res://characters/stickman/sprites/stickman55.png" type="Texture" id=49]
 [ext_resource path="res://characters/stickman/sprites/stickman53.png" type="Texture" id=50]
 [ext_resource path="res://characters/stickman/sprites/stickman54.png" type="Texture" id=51]
 [ext_resource path="res://characters/stickman/sprites/stickman52.png" type="Texture" id=52]
 [ext_resource path="res://characters/stickman/sprites/stickman56.png" type="Texture" id=53]
-[ext_resource path="res://characters/stickman/sprites/stickman58.png" type="Texture" id=55]
+[ext_resource path="res://!Just-someModdingCharacters/Characters/skin_the_artillerist/sprites/skin_attack_scytheslashing4.png" type="Texture" id=54]
+[ext_resource path="res://!Just-someModdingCharacters/Characters/skin_the_artillerist/sprites/skin_attack_scytheslashing5.png" type="Texture" id=55]
 [ext_resource path="res://characters/stickman/sprites/stickman59.png" type="Texture" id=56]
 [ext_resource path="res://characters/stickman/sprites/stickman60.png" type="Texture" id=57]
-[ext_resource path="res://characters/stickman/sprites/stickman61.png" type="Texture" id=58]
+[ext_resource path="res://!Just-someModdingCharacters/Characters/skin_the_artillerist/sprites/skin_throwtech.png" type="Texture" id=58]
+[ext_resource path="res://!Just-someModdingCharacters/Characters/skin_the_artillerist/sprites/skin_attack_scytheslashing6.png" type="Texture" id=59]
 [ext_resource path="res://characters/stickman/sprites/wall_slam.png" type="Texture" id=79]
 [ext_resource path="res://!Just-someModdingCharacters/Characters/skin_the_artillerist/sprites/skin_dashbackward2.png" type="Texture" id=80]
 [ext_resource path="res://!Just-someModdingCharacters/Characters/skin_the_artillerist/sprites/skin_dashbackward3.png" type="Texture" id=81]
@@ -67,6 +84,16 @@ animations = [ {
 "frames": [ ExtResource( 9 ), ExtResource( 9 ), ExtResource( 10 ), ExtResource( 11 ), ExtResource( 12 ), ExtResource( 12 ), ExtResource( 13 ), ExtResource( 13 ), ExtResource( 14 ), ExtResource( 14 ), ExtResource( 14 ) ],
 "loop": true,
 "name": "Attack_DaggerChop",
+"speed": 5.0
+}, {
+"frames": [ ExtResource( 45 ), ExtResource( 45 ), ExtResource( 45 ), ExtResource( 46 ), ExtResource( 46 ), ExtResource( 47 ), ExtResource( 47 ), ExtResource( 48 ), ExtResource( 54 ), ExtResource( 54 ), ExtResource( 55 ), ExtResource( 55 ), ExtResource( 55 ), ExtResource( 59 ), ExtResource( 59 ), ExtResource( 59 ), ExtResource( 59 ) ],
+"loop": true,
+"name": "Attack_ScytheSlashing",
+"speed": 5.0
+}, {
+"frames": [ ExtResource( 39 ), ExtResource( 39 ), ExtResource( 39 ), ExtResource( 39 ), ExtResource( 41 ), ExtResource( 41 ), ExtResource( 41 ), ExtResource( 41 ), ExtResource( 40 ), ExtResource( 42 ), ExtResource( 42 ), ExtResource( 43 ), ExtResource( 43 ), ExtResource( 43 ), ExtResource( 44 ), ExtResource( 44 ), ExtResource( 44 ) ],
+"loop": true,
+"name": "Attack_ShockingGrasp",
 "speed": 5.0
 }, {
 "frames": [ ExtResource( 29 ) ],
@@ -99,7 +126,7 @@ animations = [ {
 "name": "Getup",
 "speed": 5.0
 }, {
-"frames": [ ExtResource( 28 ), ExtResource( 28 ), ExtResource( 28 ), ExtResource( 28 ), ExtResource( 55 ), ExtResource( 55 ), ExtResource( 55 ), ExtResource( 55 ), ExtResource( 55 ), ExtResource( 55 ), ExtResource( 55 ), ExtResource( 55 ), ExtResource( 55 ) ],
+"frames": [ ExtResource( 28 ), ExtResource( 28 ), ExtResource( 32 ), ExtResource( 32 ), ExtResource( 35 ), ExtResource( 36 ), ExtResource( 36 ), ExtResource( 37 ), ExtResource( 37 ), ExtResource( 37 ), ExtResource( 38 ), ExtResource( 38 ), ExtResource( 38 ) ],
 "loop": true,
 "name": "Grab",
 "speed": 60.0
