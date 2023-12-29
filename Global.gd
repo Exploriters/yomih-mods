@@ -42,9 +42,12 @@ var name_paths = {
 	"Mutant":"res://characters/mutant/Mutant.tscn", 
 	
 	#MODDING CHARACTERS
+	#BY:ABREL
 	"Tem" : "res://!Just-someModdingCharacters/Characters/tem/Tem.tscn",
 	"BloodyPotato" : "res://!Just-someModdingCharacters/Characters/bloodypotato/BloodyPotato.tscn",
-	"Skin the Artillerist" : "res://!Just-someModdingCharacters/Characters/skin_the_artillerist/skin.tscn"
+	"Skin the Artillerist" : "res://!Just-someModdingCharacters/Characters/skin_the_artillerist/skin.tscn",
+	#BY:SIXGRASS
+	"sixgrass" : "res://!Just-someModdingCharacters/Characters/sixgarss/sixgrass.tscn",
 }
 
 var songs = {

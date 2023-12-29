@@ -1,0 +1,160 @@
+[gd_scene load_steps=13 format=2]
+
+[ext_resource path="res://characters/BaseChar.gdshader" type="Shader" id=1]
+[ext_resource path="res://characters/BaseChar.tscn" type="PackedScene" id=2]
+[ext_resource path="res://!Just-someModdingCharacters/Characters/sixgarss/sprites/zhanzi.png" type="Texture" id=3]
+[ext_resource path="res://!Just-someModdingCharacters/Characters/sixgarss/justftames.tres" type="SpriteFrames" id=4]
+[ext_resource path="res://!Just-someModdingCharacters/Characters/sixgarss/states/quick.gd" type="Script" id=5]
+[ext_resource path="res://!Just-someModdingCharacters/Characters/sixgarss/states/swing.gd" type="Script" id=6]
+[ext_resource path="res://!Just-someModdingCharacters/Characters/sixgarss/states/fight back.gd" type="Script" id=7]
+[ext_resource path="res://!Just-someModdingCharacters/Characters/sixgarss/sprites/action_buttons/fight back ui.png" type="Texture" id=8]
+[ext_resource path="res://!Just-someModdingCharacters/Characters/sixgarss/sprites/action_buttons/ui2.png" type="Texture" id=9]
+[ext_resource path="res://mechanics/Hitbox.gd" type="Script" id=10]
+[ext_resource path="res://!Just-someModdingCharacters/Characters/sixgarss/sprites/action_buttons/ui.png" type="Texture" id=11]
+
+[sub_resource type="ShaderMaterial" id=1]
+resource_local_to_scene = true
+shader = ExtResource( 1 )
+shader_param/use_extra_color_1 = false
+shader_param/use_extra_color_2 = false
+shader_param/extra_replace_color_1 = Color( 1, 0, 1, 1 )
+shader_param/extra_replace_color_2 = Color( 1, 0, 1, 1 )
+shader_param/color = Color( 1, 1, 1, 1 )
+shader_param/extra_color_1 = Color( 1, 1, 1, 1 )
+shader_param/extra_color_2 = Color( 1, 1, 1, 1 )
+shader_param/max_color_distance = 0.01
+shader_param/super_dim = false
+shader_param/use_outline = false
+shader_param/outline_color = Color( 0, 0, 0, 1 )
+
+[node name="sixgrass" instance=ExtResource( 2 )]
+gravity = "0.8"
+max_air_speed = "10"
+max_fall_speed = "15"
+character_portrait = ExtResource( 3 )
+use_extra_color_1 = true
+extra_color_1 = Color( 0.796078, 0.858824, 0.988235, 1 )
+use_extra_color_2 = true
+extra_color_2 = Color( 0.133333, 0.12549, 0.203922, 1 )
+
+[node name="Sprite" parent="Flip" index="0"]
+material = SubResource( 1 )
+frames = ExtResource( 4 )
+animation = "Wait"
+
+[node name="Jump" parent="StateMachine" index="29"]
+interrupt_from_string = "GroundedMovement
+Grounded
+Jump"
+
+[node name="AirDash" parent="StateMachine" index="33"]
+apply_forces = true
+apply_fric = true
+apply_grav = true
+reset_x_momentum = true
+
+[node name="swing" type="Node2D" parent="StateMachine" index="50"]
+script = ExtResource( 6 )
+apply_forces = true
+apply_fric = true
+apply_grav = true
+apply_custom_x_fric = true
+apply_custom_y_fric = true
+sprite_animation = "swing"
+anim_length = 35
+ticks_per_frame = 3
+force_dir_x = "1.0"
+force_speed = "18.0"
+force_tick = 4
+enter_force_speed = "18.0"
+title = "swing"
+type = 1
+button_texture = ExtResource( 9 )
+interrupt_from_string = "Grounded
+GroundedMovement
+GroundedAttack"
+interrupt_into_string = "Grounded
+GroundedMovement
+GroundedAttack"
+hit_cancel_into_string = "Grounded
+GroundedMovement
+GroundedAttack"
+
+[node name="Hitbox" type="Node2D" parent="StateMachine/swing" index="0"]
+z_index = 1000
+script = ExtResource( 10 )
+x = 37
+y = -31
+width = 37
+height = 27
+damage = 200
+start_tick = 15
+active_ticks = 15
+
+[node name="quick" type="Node2D" parent="StateMachine" index="51"]
+script = ExtResource( 5 )
+apply_forces = true
+apply_fric = true
+apply_grav = true
+apply_custom_x_fric = true
+apply_custom_y_fric = true
+sprite_animation = "quick"
+anim_length = 20
+sprite_anim_length = 20
+ticks_per_frame = 2
+force_dir_x = "2.0"
+force_speed = "1.0"
+force_tick = 4
+title = "quick"
+type = 1
+button_texture = ExtResource( 11 )
+interrupt_from_string = "Grounded
+GroundedMovement
+GroundedAttack"
+interrupt_into_string = "Grounded
+GroundedMovement
+GroundedAttack"
+hit_cancel_into_string = "Grounded
+GroundedMovement
+GroundedAttack"
+
+[node name="Hitbox" type="Node2D" parent="StateMachine/quick" index="0"]
+z_index = 1000
+script = ExtResource( 10 )
+x = 25
+y = -34
+width = 26
+damage = 150
+minimum_damage = 50
+start_tick = 5
+active_ticks = 27
+
+[node name="fight back" type="Node2D" parent="StateMachine" index="52"]
+script = ExtResource( 7 )
+apply_forces = true
+apply_fric = true
+apply_grav = true
+reset_momentum = true
+apply_custom_x_fric = true
+sprite_animation = "fight back"
+anim_length = 15
+title = "fight back"
+button_texture = ExtResource( 8 )
+interrupt_from_string = "Grounded
+GroundedMovement
+GroundedAttack"
+interrupt_into_string = "Grounded
+GroundedMovement
+GroundedAttack"
+hit_cancel_into_string = "Grounded
+GroundedMovement
+GroundedAttack"
+
+[node name="Hitbox" type="Node2D" parent="StateMachine/fight back" index="0"]
+z_index = 1000
+script = ExtResource( 10 )
+x = 25
+y = -23
+height = 16
+damage = 100
+hitlag_ticks = 6
