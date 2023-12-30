@@ -2,15 +2,15 @@
 
 [ext_resource path="res://characters/BaseChar.gdshader" type="Shader" id=1]
 [ext_resource path="res://characters/BaseChar.tscn" type="PackedScene" id=2]
-[ext_resource path="res://!Just-someModdingCharacters/Characters/sixgarss/sprites/zhanzi.png" type="Texture" id=3]
+[ext_resource path="res://!Just-someModdingCharacters/Characters/sixgarss/贴图/站姿.png" type="Texture" id=3]
 [ext_resource path="res://!Just-someModdingCharacters/Characters/sixgarss/justftames.tres" type="SpriteFrames" id=4]
 [ext_resource path="res://!Just-someModdingCharacters/Characters/sixgarss/states/quick.gd" type="Script" id=5]
 [ext_resource path="res://!Just-someModdingCharacters/Characters/sixgarss/states/swing.gd" type="Script" id=6]
 [ext_resource path="res://!Just-someModdingCharacters/Characters/sixgarss/states/fight back.gd" type="Script" id=7]
-[ext_resource path="res://!Just-someModdingCharacters/Characters/sixgarss/sprites/action_buttons/fight back ui.png" type="Texture" id=8]
-[ext_resource path="res://!Just-someModdingCharacters/Characters/sixgarss/sprites/action_buttons/ui2.png" type="Texture" id=9]
+[ext_resource path="res://!Just-someModdingCharacters/Characters/sixgarss/贴图/图标/后撤步.png" type="Texture" id=8]
+[ext_resource path="res://!Just-someModdingCharacters/Characters/sixgarss/贴图/图标/挥击.png" type="Texture" id=9]
 [ext_resource path="res://mechanics/Hitbox.gd" type="Script" id=10]
-[ext_resource path="res://!Just-someModdingCharacters/Characters/sixgarss/sprites/action_buttons/ui.png" type="Texture" id=11]
+[ext_resource path="res://!Just-someModdingCharacters/Characters/sixgarss/贴图/图标/后手摆拳.png" type="Texture" id=11]
 
 [sub_resource type="ShaderMaterial" id=1]
 resource_local_to_scene = true
@@ -40,12 +40,8 @@ extra_color_2 = Color( 0.133333, 0.12549, 0.203922, 1 )
 [node name="Sprite" parent="Flip" index="0"]
 material = SubResource( 1 )
 frames = ExtResource( 4 )
-animation = "Wait"
-
-[node name="Jump" parent="StateMachine" index="29"]
-interrupt_from_string = "GroundedMovement
-Grounded
-Jump"
+animation = "fight back"
+frame = 11
 
 [node name="AirDash" parent="StateMachine" index="33"]
 apply_forces = true
@@ -61,12 +57,11 @@ apply_grav = true
 apply_custom_x_fric = true
 apply_custom_y_fric = true
 sprite_animation = "swing"
-anim_length = 35
-ticks_per_frame = 3
-force_dir_x = "1.0"
-force_speed = "18.0"
+anim_length = 18
+force_dir_x = "2.0"
+force_speed = "7.0"
 force_tick = 4
-enter_force_speed = "18.0"
+enter_force_speed = "0"
 title = "swing"
 type = 1
 button_texture = ExtResource( 9 )
@@ -83,13 +78,14 @@ GroundedAttack"
 [node name="Hitbox" type="Node2D" parent="StateMachine/swing" index="0"]
 z_index = 1000
 script = ExtResource( 10 )
-x = 37
-y = -31
-width = 37
-height = 27
+x = 41
+y = -28
+width = 23
+height = 9
 damage = 200
-start_tick = 15
-active_ticks = 15
+cancellable = false
+start_tick = 6
+active_ticks = 2
 
 [node name="quick" type="Node2D" parent="StateMachine" index="51"]
 script = ExtResource( 5 )
@@ -126,8 +122,8 @@ y = -34
 width = 26
 damage = 150
 minimum_damage = 50
-start_tick = 5
-active_ticks = 27
+start_tick = 4
+active_ticks = 20
 
 [node name="fight back" type="Node2D" parent="StateMachine" index="52"]
 script = ExtResource( 7 )
@@ -137,7 +133,7 @@ apply_grav = true
 reset_momentum = true
 apply_custom_x_fric = true
 sprite_animation = "fight back"
-anim_length = 15
+anim_length = 25
 title = "fight back"
 button_texture = ExtResource( 8 )
 interrupt_from_string = "Grounded
@@ -153,8 +149,14 @@ GroundedAttack"
 [node name="Hitbox" type="Node2D" parent="StateMachine/fight back" index="0"]
 z_index = 1000
 script = ExtResource( 10 )
-x = 25
+x = 30
 y = -23
+width = 19
 height = 16
-damage = 100
-hitlag_ticks = 6
+damage = 200
+hitlag_ticks = 30
+victim_hitlag = 30
+cancellable = false
+guard_break = true
+start_tick = 11
+active_ticks = 2

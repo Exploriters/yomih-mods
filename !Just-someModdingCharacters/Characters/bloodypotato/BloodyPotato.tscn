@@ -1,4 +1,4 @@
-[gd_scene load_steps=35 format=2]
+[gd_scene load_steps=33 format=2]
 
 [ext_resource path="res://characters/BaseChar.tscn" type="PackedScene" id=1]
 [ext_resource path="res://!Just-someModdingCharacters/Characters/bloodypotato/bloodypotato.tres" type="SpriteFrames" id=2]
@@ -20,8 +20,6 @@
 [ext_resource path="res://!Just-someModdingCharacters/Characters/bloodypotato/states/RotaryChopping.gd" type="Script" id=18]
 [ext_resource path="res://!Just-someModdingCharacters/Characters/bloodypotato/sprites/action_buttons/rotarychopping.png" type="Texture" id=19]
 [ext_resource path="res://HurtboxState.gd" type="Script" id=20]
-[ext_resource path="res://ui/ActionSelector/StateIcons/parry_high.png" type="Texture" id=21]
-[ext_resource path="res://ui/ActionSelector/StateIcons/parry_low.png" type="Texture" id=22]
 [ext_resource path="res://!Just-someModdingCharacters/Characters/bloodypotato/states/UpwardPicking.gd" type="Script" id=23]
 [ext_resource path="res://!Just-someModdingCharacters/Characters/bloodypotato/sprites/action_buttons/upwardpicking.png" type="Texture" id=24]
 [ext_resource path="res://!Just-someModdingCharacters/Characters/bloodypotato/sprites/bloodypotato_attack_transversplitting2.png" type="Texture" id=25]
@@ -72,18 +70,8 @@ height = 22
 title = ""
 show_in_menu = true
 
-[node name="ParryHigh" parent="StateMachine" index="2"]
-title = "Block"
-type = 4
-button_texture = ExtResource( 21 )
-
-[node name="ParryAuto" parent="StateMachine" index="3"]
-type = 4
-
 [node name="ParryLow" parent="StateMachine" index="4"]
 title = "Block"
-type = 4
-button_texture = ExtResource( 22 )
 
 [node name="DashForward" parent="StateMachine" index="24"]
 anim_length = 10
@@ -305,7 +293,7 @@ start_tick = 12
 active_ticks = 3
 
 [node name="HurtboxState" type="Node2D" parent="StateMachine/RotaryChopping" index="1"]
-z_index = 1000
+z_index = 999
 script = ExtResource( 20 )
 y = -17
 width = 19
