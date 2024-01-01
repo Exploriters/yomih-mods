@@ -140,6 +140,11 @@ ticks_per_frame = 3
 loop_animation = true
 absolute_loop = true
 
+[node name="HurtGrounded" parent="StateMachine" index="39"]
+anim_length = 15
+ticks_per_frame = 3
+loop_animation = false
+
 [node name="ThrowBox" parent="StateMachine/Grab" index="0"]
 x = 25
 

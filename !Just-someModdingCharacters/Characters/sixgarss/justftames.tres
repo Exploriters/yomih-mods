@@ -180,7 +180,7 @@ animations = [ {
 "name": "WallSlam",
 "speed": 5.0
 }, {
-"frames": [ ExtResource( 87 ), ExtResource( 87 ), ExtResource( 102 ), ExtResource( 102 ), ExtResource( 102 ), ExtResource( 102 ), ExtResource( 102 ), ExtResource( 102 ), ExtResource( 102 ), ExtResource( 91 ), ExtResource( 103 ), ExtResource( 93 ), ExtResource( 93 ), ExtResource( 93 ), ExtResource( 74 ) ],
+"frames": [ ExtResource( 87 ), ExtResource( 87 ), ExtResource( 102 ), ExtResource( 102 ), ExtResource( 102 ), ExtResource( 102 ), ExtResource( 102 ), ExtResource( 102 ), ExtResource( 102 ), ExtResource( 102 ), ExtResource( 91 ), ExtResource( 103 ), ExtResource( 93 ), ExtResource( 93 ), ExtResource( 93 ), ExtResource( 74 ) ],
 "loop": true,
 "name": "fight back",
 "speed": 5.0

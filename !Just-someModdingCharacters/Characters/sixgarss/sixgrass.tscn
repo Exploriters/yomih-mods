@@ -40,8 +40,19 @@ extra_color_2 = Color( 0.133333, 0.12549, 0.203922, 1 )
 [node name="Sprite" parent="Flip" index="0"]
 material = SubResource( 1 )
 frames = ExtResource( 4 )
-animation = "fight back"
-frame = 11
+animation = "Wait"
+
+[node name="CollisionBox" parent="." index="2"]
+x = -7
+y = -26
+width = 10
+height = 24
+
+[node name="Hurtbox" parent="." index="3"]
+x = -7
+y = -26
+width = 10
+height = 24
 
 [node name="AirDash" parent="StateMachine" index="33"]
 apply_forces = true
@@ -135,6 +146,7 @@ apply_custom_x_fric = true
 sprite_animation = "fight back"
 anim_length = 25
 title = "fight back"
+type = 2
 button_texture = ExtResource( 8 )
 interrupt_from_string = "Grounded
 GroundedMovement
@@ -145,6 +157,7 @@ GroundedAttack"
 hit_cancel_into_string = "Grounded
 GroundedMovement
 GroundedAttack"
+hit_cancel_exceptions_string = "fight back"
 
 [node name="Hitbox" type="Node2D" parent="StateMachine/fight back" index="0"]
 z_index = 1000
