@@ -135,6 +135,7 @@ apply_custom_x_fric = true
 sprite_animation = "fight back"
 anim_length = 25
 title = "fight back"
+type = 1
 button_texture = ExtResource( 8 )
 interrupt_from_string = "Grounded
 GroundedMovement
