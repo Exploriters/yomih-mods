@@ -1056,6 +1056,7 @@ unique_name_in_owner = true
 visible = false
 position = Vector2( 0, -24 )
 frames = SubResource( 7 )
+frame = 1
 playing = true
 offset = Vector2( 0, 10 )
 
@@ -1064,7 +1065,6 @@ unique_name_in_owner = true
 visible = false
 position = Vector2( 0, -16 )
 frames = SubResource( 9 )
-frame = 1
 playing = true
 
 [node name="HustleEffect" parent="Flip/Particles" index="0" instance=ExtResource( 391 )]
@@ -5018,10 +5018,6 @@ sfx = ExtResource( 312 )
 sfx_tick = 18
 sfx_volume = -8.0
 throw_positions = {
-ExtResource( 62 ): {
-"x": 26,
-"y": -16
-},
 ExtResource( 304 ): {
 "x": 29,
 "y": 11
@@ -5037,6 +5033,10 @@ ExtResource( 309 ): {
 ExtResource( 310 ): {
 "x": -21,
 "y": -15
+},
+ExtResource( 62 ): {
+"x": 26,
+"y": -16
 }
 }
 release_frame = 18
@@ -5100,10 +5100,6 @@ sfx = ExtResource( 312 )
 sfx_tick = 18
 sfx_volume = -8.0
 throw_positions = {
-ExtResource( 62 ): {
-"x": 27,
-"y": -19
-},
 ExtResource( 304 ): {
 "x": 34,
 "y": 7
@@ -5119,6 +5115,10 @@ ExtResource( 309 ): {
 ExtResource( 310 ): {
 "x": -20,
 "y": -16
+},
+ExtResource( 62 ): {
+"x": 27,
+"y": -19
 }
 }
 release_frame = 18
