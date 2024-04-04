@@ -1,10 +1,19 @@
-[gd_scene load_steps=7 format=2]
+[gd_scene load_steps=16 format=2]
 
 [ext_resource path="res://characters/BaseChar.gdshader" type="Shader" id=1]
 [ext_resource path="res://characters/BaseChar.tscn" type="PackedScene" id=2]
 [ext_resource path="res://!Just-someModdingCharacters/Characters/nightdemon/nightdemon.gd" type="Script" id=3]
 [ext_resource path="res://!Just-someModdingCharacters/Characters/nightdemon/nightdemon_spriteframes.tres" type="SpriteFrames" id=4]
 [ext_resource path="res://!Just-someModdingCharacters/Characters/nightdemon/sprites/!nightdemon_human_temp.png" type="Texture" id=5]
+[ext_resource path="res://!Just-someModdingCharacters/Characters/nightdemon/states/Idle_Demon.gd" type="Script" id=6]
+[ext_resource path="res://ui/ActionSelector/StateIcons/wait.png" type="Texture" id=7]
+[ext_resource path="res://!Just-someModdingCharacters/Characters/nightdemon/states/Jump_Demon.gd" type="Script" id=8]
+[ext_resource path="res://!Just-someModdingCharacters/Characters/nightdemon/states/TurnToDemon.gd" type="Script" id=9]
+[ext_resource path="res://!Just-someModdingCharacters/Characters/nightdemon/states/Fall_Demon.gd" type="Script" id=10]
+[ext_resource path="res://!Just-someModdingCharacters/Characters/nightdemon/particles/DemonLanding.tscn" type="PackedScene" id=11]
+[ext_resource path="res://!Just-someModdingCharacters/Characters/nightdemon/states/HurtAerial_Demon.gd" type="Script" id=12]
+[ext_resource path="res://!Just-someModdingCharacters/Characters/nightdemon/states/HurtGrounded_Demon.gd" type="Script" id=13]
+[ext_resource path="res://!Just-someModdingCharacters/Characters/nightdemon/states/AirDash_Demon.gd" type="Script" id=14]
 
 [sub_resource type="ShaderMaterial" id=1]
 resource_local_to_scene = true
@@ -26,6 +35,7 @@ script = ExtResource( 3 )
 gravity = "0.8"
 max_air_speed = "10"
 max_fall_speed = "15"
+num_air_movements = 0
 character_portrait = ExtResource( 5 )
 use_extra_color_1 = true
 extra_color_1 = Color( 0.25098, 0.25098, 0.25098, 1 )
@@ -35,7 +45,7 @@ extra_color_2 = Color( 0.0784314, 1, 0.447059, 1 )
 [node name="Sprite" parent="Flip" index="0"]
 material = SubResource( 1 )
 frames = ExtResource( 4 )
-animation = "Wait"
+animation = "Fall2"
 
 [node name="CollisionBox" parent="." index="2"]
 y = -21
@@ -47,7 +57,68 @@ y = -21
 width = 7
 height = 21
 
-[node name="Wait" parent="StateMachine" index="10"]
+[node name="Wait_Demon" type="Node2D" parent="StateMachine" index="10"]
+script = ExtResource( 6 )
+fallback_state = "Wait_Demon"
+sprite_animation = "Wait2"
+anim_length = 10
+ticks_per_frame = 5
+loop_animation = true
+absolute_loop = true
+title = "Wait"
+button_texture = ExtResource( 7 )
+interrupt_from_string = "GroundedIdle
+Grounded
+Wait"
+interrupt_into_string = "Grounded
+Aerial"
+allowed_stances_string = "Demon"
+
+[node name="Wait" parent="StateMachine" index="11"]
 ticks_per_frame = 8
 loop_animation = true
 absolute_loop = true
+
+[node name="Fall_Demon" type="Node2D" parent="StateMachine" index="18"]
+script = ExtResource( 10 )
+fallback_state = "Wait_Demon"
+sprite_animation = "Fall2"
+anim_length = 16
+button_texture = ExtResource( 7 )
+allowed_stances_string = "Demon"
+change_stance_to = "Demon"
+
+[node name="Landing" parent="StateMachine" index="20"]
+particle_scene = ExtResource( 11 )
+
+[node name="Jump" parent="StateMachine" index="31"]
+script = ExtResource( 8 )
+apply_forces = true
+fallback_state = "TurnToDemon"
+sprite_anim_length = -1
+ticks_per_frame = 2
+iasa_at = 32
+interrupt_into_string = "Aerial
+Grounded"
+
+[node name="SuperJump" parent="StateMachine" index="33"]
+show_in_menu = false
+
+[node name="AirDash" parent="StateMachine" index="35"]
+script = ExtResource( 14 )
+fallback_state = "Wait_Demon"
+uses_air_movement = false
+allowed_stances_string = "Demon"
+
+[node name="HurtAerial" parent="StateMachine" index="40"]
+script = ExtResource( 12 )
+fallback_state = "Wait_Demon"
+change_stance_to = ""
+
+[node name="HurtGrounded" parent="StateMachine" index="41"]
+script = ExtResource( 13 )
+
+[node name="TurnToDemon" type="Node2D" parent="StateMachine" index="56"]
+script = ExtResource( 9 )
+fallback_state = "Fall_Demon"
+change_stance_to = "Demon"
