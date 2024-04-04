@@ -1,4 +1,4 @@
-[gd_scene load_steps=104 format=2]
+[gd_scene load_steps=107 format=2]
 
 [ext_resource path="res://characters/BaseChar.gdshader" type="Shader" id=1]
 [ext_resource path="res://mechanics/Hitbox.gd" type="Script" id=2]
@@ -84,6 +84,8 @@
 [ext_resource path="res://sound/common/block.wav" type="AudioStream" id=82]
 [ext_resource path="res://sound/common/quitter_alarm.wav" type="AudioStream" id=83]
 [ext_resource path="res://ui/ActionSelector/StateIcons/taunt.png" type="Texture" id=84]
+[ext_resource path="res://characters/Grounded.gd" type="Script" id=85]
+[ext_resource path="res://characters/VelocityLabel.gd" type="Script" id=86]
 [ext_resource path="res://sound/common/catch.wav" type="AudioStream" id=87]
 [ext_resource path="res://sound/common/explosion5.wav" type="AudioStream" id=88]
 [ext_resource path="res://sound/common/predict1.wav" type="AudioStream" id=89]
@@ -102,6 +104,7 @@
 [ext_resource path="res://!Just-someModdingCharacters/Characters/tem/states/LowWhip.gd" type="Script" id=102]
 [ext_resource path="res://!Just-someModdingCharacters/Characters/tem/sprites/action_buttons/lowwhip.png" type="Texture" id=103]
 [ext_resource path="res://!Just-someModdingCharacters/Characters/tem/sprites/tem_attack_downwardhit6.png" type="Texture" id=104]
+[ext_resource path="res://characters/grounded.png" type="Texture" id=105]
 
 [sub_resource type="ShaderMaterial" id=2]
 resource_local_to_scene = true
@@ -412,7 +415,7 @@ interrupt_into_string = "OTG"
 change_stance_to = "Normal"
 
 [node name="HurtboxState" type="Node2D" parent="StateMachine/Knockdown" index="0"]
-z_index = 1000
+z_index = 999
 script = ExtResource( 4 )
 y = -4
 width = 25
@@ -434,7 +437,7 @@ busy_interrupt_type = 1
 change_stance_to = "Normal"
 
 [node name="HurtboxState" type="Node2D" parent="StateMachine/HardKnockdown" index="0"]
-z_index = 1000
+z_index = 999
 script = ExtResource( 4 )
 y = -4
 width = 25
@@ -1409,3 +1412,34 @@ theme = ExtResource( 11 )
 align = 1
 autowrap = true
 clip_text = true
+
+[node name="VelocityLabelContainer" type="Node2D" parent="." index="11"]
+z_index = 1024
+
+[node name="VelocityLabel" type="RichTextLabel" parent="VelocityLabelContainer" index="0"]
+margin_left = -49.0
+margin_right = 49.0
+margin_bottom = 81.0
+theme = ExtResource( 11 )
+scroll_active = false
+script = ExtResource( 86 )
+
+[node name="GroundedIndicator" type="Sprite" parent="." index="12"]
+visible = false
+position = Vector2( 0, 8 )
+z_index = 1000
+texture = ExtResource( 105 )
+script = ExtResource( 85 )
+
+[node name="Label" type="Label" parent="GroundedIndicator" index="0"]
+visible = false
+modulate = Color( 0.92549, 1, 0.643137, 1 )
+margin_left = -32.0
+margin_top = -1.0
+margin_right = 31.0
+margin_bottom = 13.0
+theme = ExtResource( 11 )
+text = "Grounded"
+align = 1
+
+[connection signal="mouse_entered" from="VelocityLabelContainer/VelocityLabel" to="VelocityLabelContainer/VelocityLabel" method="_on_VelocityLabel_mouse_entered"]

@@ -1,5 +1,4 @@
 extends CharacterState
-
 class_name VampireState
 
 onready var hitbox = $Hitbox

@@ -116,7 +116,6 @@ script = SubResource( 1 )
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0.752557 )
 material_override = SubResource( 3 )
 mesh = ExtResource( 1 )
-material/0 = null
 
 [node name="glow" type="Sprite3D" parent="."]
 material_override = SubResource( 4 )

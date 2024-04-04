@@ -1,4 +1,4 @@
-[gd_scene load_steps=191 format=2]
+[gd_scene load_steps=197 format=2]
 
 [ext_resource path="res://characters/BaseChar.gd" type="Script" id=1]
 [ext_resource path="res://characters/stickman/sprites/idle.png" type="Texture" id=2]
@@ -148,7 +148,7 @@
 [ext_resource path="res://ui/ActionSelector/ActionUIData/DoubleJumpActionUIData.tscn" type="PackedScene" id=146]
 [ext_resource path="res://ui/ActionSelector/StateIcons/super_jump.png" type="Texture" id=147]
 [ext_resource path="res://sound/common/block.wav" type="AudioStream" id=148]
-[ext_resource path="res://characters/stickman/sprites/stickman1.png" type="Texture" id=149]
+[ext_resource path="res://!Just-someModdingCharacters/Characters/Ayatonis/sprites/!ayatonis_wait0.png" type="Texture" id=149]
 [ext_resource path="res://fx/DashFloorParticle.tscn" type="PackedScene" id=150]
 [ext_resource path="res://fx/DashBackFloorParticle.tscn" type="PackedScene" id=151]
 [ext_resource path="res://HurtboxState.gd" type="Script" id=152]
@@ -189,6 +189,12 @@
 [ext_resource path="res://characters/VelocityLabel.gd" type="Script" id=187]
 [ext_resource path="res://characters/grounded.png" type="Texture" id=188]
 [ext_resource path="res://characters/Grounded.gd" type="Script" id=189]
+[ext_resource path="res://!Just-someModdingCharacters/Characters/Ayatonis/sprites/!ayatonis_wait1.png" type="Texture" id=190]
+[ext_resource path="res://!Just-someModdingCharacters/Characters/Ayatonis/sprites/!ayatonis_wait2.png" type="Texture" id=191]
+[ext_resource path="res://!Just-someModdingCharacters/Characters/Ayatonis/sprites/!ayatonis_wait3.png" type="Texture" id=192]
+[ext_resource path="res://!Just-someModdingCharacters/Characters/Ayatonis/sprites/!ayatonis_wait4.png" type="Texture" id=193]
+[ext_resource path="res://!Just-someModdingCharacters/Characters/Ayatonis/sprites/!ayatonis_wait5.png" type="Texture" id=194]
+[ext_resource path="res://!Just-someModdingCharacters/Characters/Ayatonis/sprites/!ayatonis_wait6.png" type="Texture" id=195]
 
 [sub_resource type="SpriteFrames" id=3]
 animations = [ {
@@ -387,7 +393,7 @@ animations = [ {
 "name": "Uppercut",
 "speed": 5.0
 }, {
-"frames": [ ExtResource( 149 ) ],
+"frames": [ ExtResource( 149 ), ExtResource( 190 ), ExtResource( 191 ), ExtResource( 192 ), ExtResource( 193 ), ExtResource( 194 ), ExtResource( 195 ) ],
 "loop": true,
 "name": "Wait",
 "speed": 30.0

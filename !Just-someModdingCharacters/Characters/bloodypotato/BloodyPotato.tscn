@@ -1,4 +1,4 @@
-[gd_scene load_steps=33 format=2]
+[gd_scene load_steps=35 format=2]
 
 [ext_resource path="res://characters/BaseChar.tscn" type="PackedScene" id=1]
 [ext_resource path="res://!Just-someModdingCharacters/Characters/bloodypotato/bloodypotato.tres" type="SpriteFrames" id=2]
@@ -20,6 +20,8 @@
 [ext_resource path="res://!Just-someModdingCharacters/Characters/bloodypotato/states/RotaryChopping.gd" type="Script" id=18]
 [ext_resource path="res://!Just-someModdingCharacters/Characters/bloodypotato/sprites/action_buttons/rotarychopping.png" type="Texture" id=19]
 [ext_resource path="res://HurtboxState.gd" type="Script" id=20]
+[ext_resource path="res://!Just-someModdingCharacters/Characters/bloodypotato/states/DownwardThrust.gd" type="Script" id=21]
+[ext_resource path="res://!Just-someModdingCharacters/Characters/bloodypotato/sprites/action_buttons/downwardthrust.png" type="Texture" id=22]
 [ext_resource path="res://!Just-someModdingCharacters/Characters/bloodypotato/states/UpwardPicking.gd" type="Script" id=23]
 [ext_resource path="res://!Just-someModdingCharacters/Characters/bloodypotato/sprites/action_buttons/upwardpicking.png" type="Texture" id=24]
 [ext_resource path="res://!Just-someModdingCharacters/Characters/bloodypotato/sprites/bloodypotato_attack_transversplitting2.png" type="Texture" id=25]
@@ -48,6 +50,7 @@ shader_param/use_outline = false
 shader_param/outline_color = Color( 0, 0, 0, 1 )
 
 [node name="BloodyPotato" instance=ExtResource( 1 )]
+num_air_movements = 4
 character_portrait = ExtResource( 3 )
 character_portrait2 = ExtResource( 25 )
 use_extra_color_1 = true
@@ -58,7 +61,7 @@ extra_color_2 = Color( 0.447059, 0, 0.619608, 1 )
 [node name="Sprite" parent="Flip" index="0"]
 material = SubResource( 1 )
 frames = ExtResource( 2 )
-animation = "Wait"
+animation = "Taunt"
 
 [node name="Hurtbox" parent="." index="3"]
 x = -1
@@ -116,6 +119,7 @@ title = "Transver Splitting"
 type = 1
 button_texture = ExtResource( 6 )
 air_type = 2
+self_hit_cancellable = false
 interrupt_from_string = "Grounded
 GroundedMovement
 GroundedAttack"
@@ -136,7 +140,6 @@ damage = 100
 hitstun_ticks = 13
 victim_hitlag = 4
 damage_proration = 2
-hit_height = 0
 whiff_sound = ExtResource( 9 )
 hit_sound = ExtResource( 8 )
 start_tick = 7
@@ -175,6 +178,7 @@ projectile_match_facing = true
 title = "Blood Spatter"
 type = 2
 button_texture = ExtResource( 14 )
+can_feint_if_possible = false
 interrupt_from_string = "Grounded
 GroundedMovement
 GroundedAttack"
@@ -255,6 +259,7 @@ active_ticks = 2
 script = ExtResource( 18 )
 apply_forces = true
 apply_grav = true
+reset_momentum = true
 sprite_animation = "Attack_RotaryChopping"
 anim_length = 24
 force_dir_x = "3"
@@ -317,14 +322,6 @@ type = 1
 button_texture = ExtResource( 24 )
 flip_with_facing = true
 air_type = 2
-interrupt_from_string = "Grounded
-GroundedMovement
-GroundedAttack"
-interrupt_into_string = "Grounded
-GroundedMovement"
-hit_cancel_into_string = "Grounded
-GroundedMovement
-GroundedAttack"
 
 [node name="Hitbox" type="Node2D" parent="StateMachine/UpwardPicking" index="0"]
 z_index = 1000
@@ -415,9 +412,18 @@ apply_grav = true
 anim_length = 20
 timed_particle_scene = ExtResource( 28 )
 timed_spawn_particle_tick = 14
-title = "Fall4Die"
+title = "Fall4Die(Think before clicking)"
 type = 3
 button_texture = ExtResource( 32 )
+iasa_on_hit_on_block = false
+dynamic_iasa = false
+next_state_on_hold = false
+burst_cancellable = false
+burstable = false
+self_hit_cancellable = false
+self_interruptable = false
+instant_cancellable = false
+can_feint_if_possible = false
 interrupt_from_string = "Grounded
 GroundedMovement
 GroundedAttack"
@@ -443,8 +449,11 @@ script = ExtResource( 7 )
 width = 9999999
 height = 9999999
 cancellable = false
+hits_otg = true
 ignore_armor = true
 can_clash = false
+guard_break = true
+block_cancel_allowed = false
 whiff_sound = ExtResource( 29 )
 hit_sound = ExtResource( 30 )
 dir_x = "0"
@@ -453,6 +462,7 @@ knockback = "0"
 block_pushback_modifier = "0"
 pushback_x = "0"
 grounded_hit_state = "HurtAerial"
+disable_collision = false
 start_tick = 14
 active_ticks = 1
 
@@ -469,6 +479,46 @@ align = 1
 
 [node name="BloodSlash" type="Node2D" parent="StateMachine" index="62"]
 script = ExtResource( 31 )
+self_hit_cancellable = false
+self_interruptable = false
+
+[node name="DownwardThrust" type="Node2D" parent="StateMachine" index="63"]
+script = ExtResource( 21 )
+apply_forces = true
+reset_y_momentum = true
+sprite_animation = "Attack_DownwardThrust"
+anim_length = 11
+force_dir_x = "2.0"
+force_dir_y = "5.0"
+force_speed = "15.0"
+force_tick = 4
+enter_force_dir_x = "1.0"
+enter_force_dir_y = "-1.0"
+enter_force_speed = "2.0"
+title = "Downward Thrust"
+type = 1
+button_texture = ExtResource( 22 )
+air_type = 1
+self_hit_cancellable = false
+self_interruptable = false
+interrupt_from_string = "AerialAttack
+Aerial"
+interrupt_into_string = "AerialAttack
+Aerial"
+
+[node name="Hitbox" type="Node2D" parent="StateMachine/DownwardThrust" index="0"]
+z_index = 1000
+script = ExtResource( 7 )
+x = 15
+y = -12
+width = 11
+height = 10
+damage = 100
+hitstun_ticks = 13
+victim_hitlag = 4
+damage_proration = 2
+hit_height = 0
+start_tick = 5
 
 [node name="Node2D" parent="." index="7"]
 visible = false

@@ -41,9 +41,6 @@ colors = PoolColorArray( 0.980469, 0.0306396, 0.0306396, 1, 0.735413, 1, 0.00390
 anchor_right = 1.0
 anchor_bottom = 1.0
 script = SubResource( 1 )
-__meta__ = {
-"_edit_use_anchors_": false
-}
 
 [node name="ui" type="Control" parent="."]
 anchor_right = 1.0

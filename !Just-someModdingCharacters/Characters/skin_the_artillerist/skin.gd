@@ -28,7 +28,7 @@ func tick():
 	.tick()
 	
 	if OnShielding == true:
-		var shieldingDTM = String(float(initDTM) / 2)
+		var shieldingDTM = String(float(initDTM) / (ceil(randi_range(1,4)+1)))
 		self.damage_taken_modifier = shieldingDTM
 		if is_in_hurt_state():
 			var pos = self.position
