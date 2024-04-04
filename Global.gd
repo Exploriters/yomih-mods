@@ -47,6 +47,7 @@ var name_paths = {
 	"BloodyPotato" : "res://!Just-someModdingCharacters/Characters/bloodypotato/BloodyPotato.tscn",#Character by:POTATO
 	"Skin the Artillerist" : "res://!Just-someModdingCharacters/Characters/skin_the_artillerist/skin.tscn",#Character by:ABREL
 	"Ayatonis": "res://!Just-someModdingCharacters/Characters/Ayatonis/Ayatonis.tscn",#Character by:NOT-ONLINE
+	"nightdemon": "res://!Just-someModdingCharacters/Characters/nightdemon/nightdemon.tscn",#Character by:ABREL&AWN/CODE by:ABREL&AWN
 	#CODE BY:SIXGRASS
 	"sixgrass" : "res://!Just-someModdingCharacters/Characters/sixgarss/sixgrass.tscn",#Character by:SIXGRASS
 }

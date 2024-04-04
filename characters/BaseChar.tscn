@@ -1,4 +1,4 @@
-[gd_scene load_steps=197 format=2]
+[gd_scene load_steps=112 format=2]
 
 [ext_resource path="res://characters/BaseChar.gd" type="Script" id=1]
 [ext_resource path="res://characters/stickman/sprites/idle.png" type="Texture" id=2]
@@ -13,112 +13,36 @@
 [ext_resource path="res://fx/LandingParticle.tscn" type="PackedScene" id=11]
 [ext_resource path="res://fx/JumpParticle.tscn" type="PackedScene" id=12]
 [ext_resource path="res://ui/ActionSelector/ActionUIData/AirdashActionUIData.tscn" type="PackedScene" id=13]
-[ext_resource path="res://characters/stickman/sprites/stickman2.png" type="Texture" id=14]
-[ext_resource path="res://characters/stickman/sprites/stickman3.png" type="Texture" id=15]
-[ext_resource path="res://characters/stickman/sprites/stickman6.png" type="Texture" id=16]
-[ext_resource path="res://characters/stickman/sprites/stickman8.png" type="Texture" id=17]
-[ext_resource path="res://characters/stickman/sprites/stickman7.png" type="Texture" id=18]
-[ext_resource path="res://characters/stickman/sprites/stickman5.png" type="Texture" id=19]
-[ext_resource path="res://characters/stickman/sprites/stickman4.png" type="Texture" id=20]
-[ext_resource path="res://characters/stickman/sprites/stickman11.png" type="Texture" id=21]
-[ext_resource path="res://characters/stickman/sprites/stickman12.png" type="Texture" id=22]
-[ext_resource path="res://characters/stickman/sprites/stickman13.png" type="Texture" id=23]
-[ext_resource path="res://characters/stickman/sprites/stickman14.png" type="Texture" id=24]
-[ext_resource path="res://characters/stickman/sprites/stickman15.png" type="Texture" id=25]
-[ext_resource path="res://characters/stickman/sprites/stickman16.png" type="Texture" id=26]
+[ext_resource path="res://characters/heres_a_backup_for_some_stupid_damn_mess_all_damn_no.tres" type="SpriteFrames" id=14]
 [ext_resource path="res://characters/states/HurtAerial.gd" type="Script" id=27]
 [ext_resource path="res://characters/states/HurtGrounded.gd" type="Script" id=28]
-[ext_resource path="res://characters/stickman/sprites/stickman9.png" type="Texture" id=29]
-[ext_resource path="res://characters/stickman/sprites/stickman10.png" type="Texture" id=30]
-[ext_resource path="res://characters/stickman/sprites/stickman26.png" type="Texture" id=31]
-[ext_resource path="res://characters/stickman/sprites/stickman17.png" type="Texture" id=32]
-[ext_resource path="res://characters/stickman/sprites/stickman18.png" type="Texture" id=33]
-[ext_resource path="res://characters/stickman/sprites/stickman19.png" type="Texture" id=34]
-[ext_resource path="res://characters/stickman/sprites/stickman20.png" type="Texture" id=35]
-[ext_resource path="res://characters/stickman/sprites/stickman21.png" type="Texture" id=36]
-[ext_resource path="res://characters/stickman/sprites/stickman22.png" type="Texture" id=37]
-[ext_resource path="res://characters/stickman/sprites/stickman23.png" type="Texture" id=38]
 [ext_resource path="res://characters/PlayerInfo.tscn" type="PackedScene" id=39]
-[ext_resource path="res://characters/stickman/sprites/stickman24.png" type="Texture" id=40]
-[ext_resource path="res://characters/stickman/sprites/stickman27.png" type="Texture" id=41]
-[ext_resource path="res://characters/stickman/sprites/stickman28.png" type="Texture" id=42]
-[ext_resource path="res://characters/stickman/sprites/stickman57.png" type="Texture" id=43]
-[ext_resource path="res://characters/stickman/sprites/stickman29.png" type="Texture" id=44]
-[ext_resource path="res://characters/stickman/sprites/stickman34.png" type="Texture" id=45]
-[ext_resource path="res://characters/stickman/sprites/stickman36.png" type="Texture" id=46]
 [ext_resource path="res://theme.tres" type="Theme" id=47]
 [ext_resource path="res://characters/states/Burst.gd" type="Script" id=48]
 [ext_resource path="res://characters/states/OffensiveBurst.gd" type="Script" id=49]
 [ext_resource path="res://characters/states/DashStartup.gd" type="Script" id=50]
 [ext_resource path="res://ui/ActionSelector/ActionUIData/DashActionUIData.tscn" type="PackedScene" id=51]
-[ext_resource path="res://characters/stickman/sprites/stickman35.png" type="Texture" id=52]
 [ext_resource path="res://characters/states/Knockdown.gd" type="Script" id=53]
 [ext_resource path="res://characters/states/RollStartup.gd" type="Script" id=54]
 [ext_resource path="res://ui/ActionSelector/StateIcons/wait.png" type="Texture" id=55]
-[ext_resource path="res://characters/stickman/sprites/stickman30.png" type="Texture" id=56]
-[ext_resource path="res://characters/stickman/sprites/stickman37.png" type="Texture" id=57]
 [ext_resource path="res://characters/states/Getup.gd" type="Script" id=58]
 [ext_resource path="res://characters/states/InstantCancel.gd" type="Script" id=59]
-[ext_resource path="res://characters/stickman/sprites/stickman38.png" type="Texture" id=60]
-[ext_resource path="res://characters/stickman/sprites/stickman39.png" type="Texture" id=61]
-[ext_resource path="res://characters/stickman/sprites/stickman41.png" type="Texture" id=62]
-[ext_resource path="res://characters/stickman/sprites/stickman40.png" type="Texture" id=63]
-[ext_resource path="res://characters/stickman/sprites/stickman42.png" type="Texture" id=64]
-[ext_resource path="res://characters/stickman/sprites/stickman51.png" type="Texture" id=65]
 [ext_resource path="res://ui/ActionSelector/StateIcons/dash.png" type="Texture" id=66]
 [ext_resource path="res://ui/ActionSelector/StateIcons/jump.png" type="Texture" id=67]
 [ext_resource path="res://characters/states/Parry.gd" type="Script" id=68]
 [ext_resource path="res://characters/states/Landing.gd" type="Script" id=69]
-[ext_resource path="res://characters/stickman/sprites/stickman32.png" type="Texture" id=70]
-[ext_resource path="res://characters/stickman/sprites/stickman33.png" type="Texture" id=71]
-[ext_resource path="res://characters/stickman/sprites/stickman47.png" type="Texture" id=72]
-[ext_resource path="res://characters/stickman/sprites/stickman50.png" type="Texture" id=73]
-[ext_resource path="res://characters/stickman/sprites/stickman46.png" type="Texture" id=74]
-[ext_resource path="res://characters/stickman/sprites/stickman49.png" type="Texture" id=75]
-[ext_resource path="res://characters/stickman/sprites/stickman48.png" type="Texture" id=76]
-[ext_resource path="res://characters/stickman/sprites/stickman45.png" type="Texture" id=77]
-[ext_resource path="res://characters/stickman/sprites/stickman44.png" type="Texture" id=78]
 [ext_resource path="res://characters/states/Grabbed.gd" type="Script" id=79]
-[ext_resource path="res://characters/stickman/sprites/stickman55.png" type="Texture" id=80]
-[ext_resource path="res://characters/stickman/sprites/stickman53.png" type="Texture" id=81]
-[ext_resource path="res://characters/stickman/sprites/stickman54.png" type="Texture" id=82]
-[ext_resource path="res://characters/stickman/sprites/stickman52.png" type="Texture" id=83]
-[ext_resource path="res://characters/stickman/sprites/stickman56.png" type="Texture" id=84]
 [ext_resource path="res://ui/ActionSelector/StateIcons/burst.png" type="Texture" id=85]
 [ext_resource path="res://characters/states/Grab.gd" type="Script" id=86]
 [ext_resource path="res://characters/ThrowBox.gd" type="Script" id=87]
-[ext_resource path="res://characters/stickman/sprites/phantomdash2.png" type="Texture" id=88]
-[ext_resource path="res://characters/stickman/sprites/stickman58.png" type="Texture" id=89]
 [ext_resource path="res://characters/states/ThrowState.gd" type="Script" id=90]
-[ext_resource path="res://characters/stickman/sprites/stickman59.png" type="Texture" id=91]
-[ext_resource path="res://characters/stickman/sprites/stickman60.png" type="Texture" id=92]
-[ext_resource path="res://characters/stickman/sprites/stickman61.png" type="Texture" id=93]
 [ext_resource path="res://characters/states/ThrowTech.gd" type="Script" id=94]
-[ext_resource path="res://characters/stickman/sprites/phantomdash1.png" type="Texture" id=95]
 [ext_resource path="res://ui/ActionSelector/StateIcons/offensive_burst.png" type="Texture" id=96]
-[ext_resource path="res://characters/stickman/sprites/phantomdash3.png" type="Texture" id=97]
 [ext_resource path="res://ui/ActionSelector/StateIcons/parry_low.png" type="Texture" id=98]
 [ext_resource path="res://ui/ActionSelector/StateIcons/parry_high.png" type="Texture" id=99]
 [ext_resource path="res://ui/ActionSelector/StateIcons/roll.png" type="Texture" id=100]
-[ext_resource path="res://characters/stickman/sprites/nunchuk_light3.png" type="Texture" id=101]
-[ext_resource path="res://characters/stickman/sprites/nunchuk_light2.png" type="Texture" id=102]
-[ext_resource path="res://characters/stickman/sprites/nunchuk_light1.png" type="Texture" id=103]
-[ext_resource path="res://characters/stickman/sprites/chuk_jump1.png" type="Texture" id=104]
-[ext_resource path="res://characters/stickman/sprites/chuk_jump2.png" type="Texture" id=105]
-[ext_resource path="res://characters/stickman/sprites/chuk_jump3.png" type="Texture" id=106]
 [ext_resource path="res://ui/ActionSelector/StateIcons/instant_cancel.png" type="Texture" id=107]
-[ext_resource path="res://characters/stickman/sprites/nunchuk_heavy4.png" type="Texture" id=108]
-[ext_resource path="res://characters/stickman/sprites/nunchuk_heavy1.png" type="Texture" id=109]
-[ext_resource path="res://characters/stickman/sprites/nunchuk_heavy3.png" type="Texture" id=110]
-[ext_resource path="res://characters/stickman/sprites/nunchuk_heavy2.png" type="Texture" id=111]
 [ext_resource path="res://ui/ActionSelector/StateIcons/grab.png" type="Texture" id=112]
-[ext_resource path="res://characters/stickman/sprites/chuk_spin7.png" type="Texture" id=113]
-[ext_resource path="res://characters/stickman/sprites/chuk_spin6.png" type="Texture" id=114]
-[ext_resource path="res://characters/stickman/sprites/chuk_spin1.png" type="Texture" id=115]
-[ext_resource path="res://characters/stickman/sprites/chuk_spin3.png" type="Texture" id=116]
-[ext_resource path="res://characters/stickman/sprites/chuk_spin5.png" type="Texture" id=117]
-[ext_resource path="res://characters/stickman/sprites/chuk_spin4.png" type="Texture" id=118]
-[ext_resource path="res://characters/stickman/sprites/chuk_spin2.png" type="Texture" id=119]
 [ext_resource path="res://fx/BurstEffect.tscn" type="PackedScene" id=120]
 [ext_resource path="res://ui/ActionSelector/StateIcons/getup.png" type="Texture" id=121]
 [ext_resource path="res://ui/ActionSelector/PlayerExtra.tscn" type="PackedScene" id=122]
@@ -148,7 +72,6 @@
 [ext_resource path="res://ui/ActionSelector/ActionUIData/DoubleJumpActionUIData.tscn" type="PackedScene" id=146]
 [ext_resource path="res://ui/ActionSelector/StateIcons/super_jump.png" type="Texture" id=147]
 [ext_resource path="res://sound/common/block.wav" type="AudioStream" id=148]
-[ext_resource path="res://!Just-someModdingCharacters/Characters/Ayatonis/sprites/!ayatonis_wait0.png" type="Texture" id=149]
 [ext_resource path="res://fx/DashFloorParticle.tscn" type="PackedScene" id=150]
 [ext_resource path="res://fx/DashBackFloorParticle.tscn" type="PackedScene" id=151]
 [ext_resource path="res://HurtboxState.gd" type="Script" id=152]
@@ -162,7 +85,6 @@
 [ext_resource path="res://sound/common/catch.wav" type="AudioStream" id=160]
 [ext_resource path="res://sound/common/hit_bass.wav" type="AudioStream" id=161]
 [ext_resource path="res://characters/states/WallSlam.gd" type="Script" id=162]
-[ext_resource path="res://characters/stickman/sprites/wall_slam.png" type="Texture" id=163]
 [ext_resource path="res://sound/common/explosion5.wav" type="AudioStream" id=164]
 [ext_resource path="res://fx/WallSlamEffect.tscn" type="PackedScene" id=165]
 [ext_resource path="res://sound/common/predict1.wav" type="AudioStream" id=166]
@@ -189,220 +111,6 @@
 [ext_resource path="res://characters/VelocityLabel.gd" type="Script" id=187]
 [ext_resource path="res://characters/grounded.png" type="Texture" id=188]
 [ext_resource path="res://characters/Grounded.gd" type="Script" id=189]
-[ext_resource path="res://!Just-someModdingCharacters/Characters/Ayatonis/sprites/!ayatonis_wait1.png" type="Texture" id=190]
-[ext_resource path="res://!Just-someModdingCharacters/Characters/Ayatonis/sprites/!ayatonis_wait2.png" type="Texture" id=191]
-[ext_resource path="res://!Just-someModdingCharacters/Characters/Ayatonis/sprites/!ayatonis_wait3.png" type="Texture" id=192]
-[ext_resource path="res://!Just-someModdingCharacters/Characters/Ayatonis/sprites/!ayatonis_wait4.png" type="Texture" id=193]
-[ext_resource path="res://!Just-someModdingCharacters/Characters/Ayatonis/sprites/!ayatonis_wait5.png" type="Texture" id=194]
-[ext_resource path="res://!Just-someModdingCharacters/Characters/Ayatonis/sprites/!ayatonis_wait6.png" type="Texture" id=195]
-
-[sub_resource type="SpriteFrames" id=3]
-animations = [ {
-"frames": [ ExtResource( 24 ), ExtResource( 24 ), ExtResource( 24 ), ExtResource( 24 ), ExtResource( 25 ), ExtResource( 25 ), ExtResource( 25 ), ExtResource( 25 ), ExtResource( 25 ), ExtResource( 25 ), ExtResource( 25 ), ExtResource( 26 ) ],
-"loop": true,
-"name": "AirAttack",
-"speed": 5.0
-}, {
-"frames": [ ExtResource( 31 ), ExtResource( 31 ), ExtResource( 31 ), ExtResource( 31 ), ExtResource( 31 ), ExtResource( 31 ), ExtResource( 31 ), ExtResource( 31 ), ExtResource( 31 ), ExtResource( 31 ), ExtResource( 31 ), ExtResource( 31 ), ExtResource( 42 ) ],
-"loop": true,
-"name": "AirFireball",
-"speed": 5.0
-}, {
-"frames": [ ExtResource( 61 ), ExtResource( 61 ), ExtResource( 61 ), ExtResource( 61 ), ExtResource( 63 ), ExtResource( 63 ), ExtResource( 62 ) ],
-"loop": true,
-"name": "AirUpwardPunch",
-"speed": 60.0
-}, {
-"frames": [ ExtResource( 44 ) ],
-"loop": true,
-"name": "Burst",
-"speed": 5.0
-}, {
-"frames": [ ExtResource( 15 ) ],
-"loop": true,
-"name": "DashBackward",
-"speed": 5.0
-}, {
-"frames": [ ExtResource( 14 ) ],
-"loop": true,
-"name": "DashForward",
-"speed": 5.0
-}, {
-"frames": [ ExtResource( 65 ), ExtResource( 65 ), ExtResource( 65 ), ExtResource( 65 ), ExtResource( 65 ), ExtResource( 65 ), ExtResource( 65 ), ExtResource( 65 ), ExtResource( 65 ), ExtResource( 65 ), ExtResource( 65 ), ExtResource( 64 ) ],
-"loop": true,
-"name": "DiveKick",
-"speed": 60.0
-}, {
-"frames": [ ExtResource( 19 ), ExtResource( 16 ), ExtResource( 18 ), ExtResource( 17 ) ],
-"loop": true,
-"name": "DoubleJump",
-"speed": 5.0
-}, {
-"frames": [ ExtResource( 78 ), ExtResource( 78 ), ExtResource( 78 ), ExtResource( 78 ), ExtResource( 78 ), ExtResource( 78 ), ExtResource( 78 ), ExtResource( 78 ), ExtResource( 78 ), ExtResource( 78 ), ExtResource( 78 ), ExtResource( 78 ), ExtResource( 78 ), ExtResource( 77 ) ],
-"loop": true,
-"name": "DropKick",
-"speed": 5.0
-}, {
-"frames": [ ExtResource( 31 ), ExtResource( 31 ), ExtResource( 31 ), ExtResource( 31 ), ExtResource( 31 ), ExtResource( 31 ), ExtResource( 31 ), ExtResource( 31 ), ExtResource( 31 ), ExtResource( 31 ), ExtResource( 31 ), ExtResource( 31 ), ExtResource( 41 ) ],
-"loop": true,
-"name": "Fireball",
-"speed": 5.0
-}, {
-"frames": [ ExtResource( 91 ), ExtResource( 91 ), ExtResource( 91 ), ExtResource( 91 ), ExtResource( 91 ), ExtResource( 91 ), ExtResource( 91 ), ExtResource( 91 ), ExtResource( 91 ), ExtResource( 92 ) ],
-"loop": true,
-"name": "ForwardThrow",
-"speed": 5.0
-}, {
-"frames": [ ExtResource( 57 ) ],
-"loop": true,
-"name": "Getup",
-"speed": 5.0
-}, {
-"frames": [ ExtResource( 43 ), ExtResource( 43 ), ExtResource( 43 ), ExtResource( 43 ), ExtResource( 89 ), ExtResource( 89 ), ExtResource( 89 ), ExtResource( 89 ), ExtResource( 89 ), ExtResource( 89 ), ExtResource( 89 ), ExtResource( 89 ), ExtResource( 89 ) ],
-"loop": true,
-"name": "Grab",
-"speed": 60.0
-}, {
-"frames": [ ExtResource( 19 ) ],
-"loop": true,
-"name": "Grabbed",
-"speed": 5.0
-}, {
-"frames": [ ExtResource( 45 ), ExtResource( 45 ), ExtResource( 45 ), ExtResource( 45 ), ExtResource( 52 ), ExtResource( 52 ), ExtResource( 52 ), ExtResource( 46 ) ],
-"loop": true,
-"name": "GroundedKick",
-"speed": 5.0
-}, {
-"frames": [ ExtResource( 21 ), ExtResource( 21 ), ExtResource( 22 ), ExtResource( 22 ), ExtResource( 23 ) ],
-"loop": true,
-"name": "GroundedPunch",
-"speed": 5.0
-}, {
-"frames": [ ExtResource( 74 ), ExtResource( 74 ), ExtResource( 74 ), ExtResource( 74 ), ExtResource( 72 ), ExtResource( 72 ), ExtResource( 72 ), ExtResource( 76 ), ExtResource( 76 ), ExtResource( 75 ), ExtResource( 75 ), ExtResource( 75 ), ExtResource( 75 ), ExtResource( 75 ), ExtResource( 75 ), ExtResource( 73 ) ],
-"loop": true,
-"name": "GroundedSweep",
-"speed": 5.0
-}, {
-"frames": [ ExtResource( 32 ) ],
-"loop": true,
-"name": "HurtAerial",
-"speed": 5.0
-}, {
-"frames": [ ExtResource( 30 ) ],
-"loop": true,
-"name": "HurtGroundedHigh",
-"speed": 5.0
-}, {
-"frames": [ ExtResource( 33 ) ],
-"loop": true,
-"name": "HurtGroundedLow",
-"speed": 5.0
-}, {
-"frames": [ ExtResource( 29 ) ],
-"loop": true,
-"name": "HurtGroundedMid",
-"speed": 5.0
-}, {
-"frames": [ ExtResource( 60 ) ],
-"loop": true,
-"name": "InstantCancel",
-"speed": 5.0
-}, {
-"frames": [ ExtResource( 20 ) ],
-"loop": true,
-"name": "Jump",
-"speed": 5.0
-}, {
-"frames": [ ExtResource( 19 ), ExtResource( 17 ), ExtResource( 18 ), ExtResource( 16 ) ],
-"loop": true,
-"name": "JumpBack",
-"speed": 5.0
-}, {
-"frames": [ ExtResource( 83 ), ExtResource( 83 ), ExtResource( 81 ), ExtResource( 81 ), ExtResource( 81 ), ExtResource( 81 ), ExtResource( 81 ), ExtResource( 81 ), ExtResource( 82 ), ExtResource( 82 ), ExtResource( 80 ), ExtResource( 80 ), ExtResource( 80 ), ExtResource( 80 ), ExtResource( 80 ), ExtResource( 80 ), ExtResource( 80 ), ExtResource( 80 ), ExtResource( 84 ) ],
-"loop": true,
-"name": "JumpKick",
-"speed": 5.0
-}, {
-"frames": [ ExtResource( 56 ) ],
-"loop": true,
-"name": "Knockdown",
-"speed": 5.0
-}, {
-"frames": [ ExtResource( 40 ) ],
-"loop": true,
-"name": "Landing",
-"speed": 5.0
-}, {
-"frames": [  ],
-"loop": true,
-"name": "New Anim",
-"speed": 5.0
-}, {
-"frames": [ ExtResource( 109 ), ExtResource( 109 ), ExtResource( 109 ), ExtResource( 109 ), ExtResource( 109 ), ExtResource( 109 ), ExtResource( 109 ), ExtResource( 109 ), ExtResource( 111 ), ExtResource( 111 ), ExtResource( 111 ), ExtResource( 110 ), ExtResource( 110 ), ExtResource( 110 ), ExtResource( 111 ), ExtResource( 111 ), ExtResource( 111 ), ExtResource( 108 ) ],
-"loop": true,
-"name": "NunChukHeavy",
-"speed": 60.0
-}, {
-"frames": [ ExtResource( 104 ), ExtResource( 104 ), ExtResource( 104 ), ExtResource( 104 ), ExtResource( 104 ), ExtResource( 104 ), ExtResource( 104 ), ExtResource( 104 ), ExtResource( 104 ), ExtResource( 104 ), ExtResource( 104 ), ExtResource( 104 ), ExtResource( 104 ), ExtResource( 104 ), ExtResource( 104 ), ExtResource( 105 ), ExtResource( 105 ), ExtResource( 105 ), ExtResource( 105 ), ExtResource( 106 ) ],
-"loop": true,
-"name": "NunChukJump",
-"speed": 5.0
-}, {
-"frames": [ ExtResource( 103 ), ExtResource( 103 ), ExtResource( 103 ), ExtResource( 103 ), ExtResource( 103 ), ExtResource( 102 ), ExtResource( 102 ), ExtResource( 102 ), ExtResource( 101 ) ],
-"loop": true,
-"name": "NunChukLight",
-"speed": 5.0
-}, {
-"frames": [ ExtResource( 115 ), ExtResource( 115 ), ExtResource( 115 ), ExtResource( 119 ), ExtResource( 119 ), ExtResource( 116 ), ExtResource( 116 ), ExtResource( 116 ), ExtResource( 116 ), ExtResource( 118 ), ExtResource( 118 ), ExtResource( 118 ), ExtResource( 117 ), ExtResource( 117 ), ExtResource( 117 ), ExtResource( 117 ), ExtResource( 114 ), ExtResource( 114 ), ExtResource( 114 ), ExtResource( 116 ), ExtResource( 116 ), ExtResource( 116 ), ExtResource( 116 ), ExtResource( 118 ), ExtResource( 118 ), ExtResource( 118 ), ExtResource( 113 ), ExtResource( 113 ), ExtResource( 113 ), ExtResource( 113 ) ],
-"loop": true,
-"name": "NunChukSpin",
-"speed": 60.0
-}, {
-"frames": [ ExtResource( 70 ) ],
-"loop": true,
-"name": "ParryHigh",
-"speed": 5.0
-}, {
-"frames": [ ExtResource( 71 ) ],
-"loop": true,
-"name": "ParryLow",
-"speed": 5.0
-}, {
-"frames": [ ExtResource( 95 ), ExtResource( 95 ), ExtResource( 95 ), ExtResource( 95 ), ExtResource( 88 ), ExtResource( 97 ) ],
-"loop": true,
-"name": "QuickSlash",
-"speed": 60.0
-}, {
-"frames": [ ExtResource( 17 ), ExtResource( 18 ), ExtResource( 16 ), ExtResource( 19 ) ],
-"loop": true,
-"name": "RollBackward",
-"speed": 5.0
-}, {
-"frames": [ ExtResource( 19 ), ExtResource( 16 ), ExtResource( 18 ), ExtResource( 17 ) ],
-"loop": true,
-"name": "RollForward",
-"speed": 5.0
-}, {
-"frames": [ ExtResource( 93 ) ],
-"loop": true,
-"name": "ThrowTech",
-"speed": 5.0
-}, {
-"frames": [ ExtResource( 34 ), ExtResource( 34 ), ExtResource( 35 ), ExtResource( 35 ), ExtResource( 36 ), ExtResource( 36 ), ExtResource( 36 ), ExtResource( 36 ), ExtResource( 37 ), ExtResource( 38 ) ],
-"loop": true,
-"name": "Uppercut",
-"speed": 5.0
-}, {
-"frames": [ ExtResource( 149 ), ExtResource( 190 ), ExtResource( 191 ), ExtResource( 192 ), ExtResource( 193 ), ExtResource( 194 ), ExtResource( 195 ) ],
-"loop": true,
-"name": "Wait",
-"speed": 30.0
-}, {
-"frames": [ ExtResource( 163 ) ],
-"loop": true,
-"name": "WallSlam",
-"speed": 5.0
-} ]
 
 [node name="BaseChar" groups=["Fighter"] instance=ExtResource( 3 )]
 script = ExtResource( 1 )
@@ -423,7 +131,7 @@ extra_color_2 = Color( 1, 0, 1, 1 )
 
 [node name="Sprite" parent="Flip" index="0"]
 material = ExtResource( 134 )
-frames = SubResource( 3 )
+frames = ExtResource( 14 )
 animation = "WallSlam"
 offset = Vector2( 0, -18 )
 __meta__ = {
