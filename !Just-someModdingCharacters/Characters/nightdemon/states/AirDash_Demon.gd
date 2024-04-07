@@ -14,11 +14,19 @@ export  var dir_y = "-5.0"
 export  var speed = "4.0"
 export  var fric = "0.05"
 
+var p
+var p_color
+
 var starting_y = 0
 var startup_lag_frames = 0
 
+func _enter():
+	p = null
+	p_color = host.style_extra_color_2 if (host.style_extra_color_2 and host.applied_style) else host.extra_color_2
+
 func _frame_1():
-	spawn_particle_relative(preload("res://fx/DashParticle.tscn"), host.hurtbox_pos_relative_float(), Vector2(data.x, data.y))
+	#p = host._spawn_particle_effect(preload("res://!Just-someModdingCharacters/Characters/nightdemon/particles/DemonDashParticle.tscn"), host.hurtbox_pos_relative_float(), Vector2(data.x, data.y))
+	p = host._spawn_particle_effect(preload("res://!Just-someModdingCharacters/Characters/nightdemon/particles/DemonDashParticle.tscn"), Vector2(host.get_pos().x, host.get_pos().y), Vector2(data.x, data.y))
 
 func _frame_0():
 	var force = xy_to_dir(data.x, data.y, speed)
@@ -32,16 +40,16 @@ func _frame_0():
 	iasa_at = starting_iasa_at
 	if "-" in force.x:
 		if host.get_facing() == "Right" and data.x != 0:
-			anim_name = "DashBackward"
+			anim_name = "AirDashBackward"
 			back = true
 		else :
-			anim_name = "DashForward"
+			anim_name = "AirDashForward"
 	else :
 		if host.get_facing() == "Left" and data.x != 0:
-			anim_name = "DashBackward"
+			anim_name = "AirDashBackward"
 			back = true
 		else :
-			anim_name = "DashForward"
+			anim_name = "AirDashForward"
 	if back and host.combo_count <= 0:
 		backdash_iasa = true
 		beats_backdash = false
@@ -65,15 +73,15 @@ func _tick():
 	if host.is_grounded():
 		host.isDemon = false
 		if host.combo_count > 0:
-
 			pass
 		else :
-
-
-
 			var vel = host.get_vel()
 			if host.get_opponent_dir() != fixed.sign(vel.x):
 				host.set_vel(fixed.mul(vel.x, "0.6"), vel.y)
+	
+	if p:
+		if is_instance_valid(p):
+			p.modulate = p_color
 
 	var pos = host.get_pos()
 

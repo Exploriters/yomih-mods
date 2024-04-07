@@ -1,4 +1,4 @@
 extends CharacterState
 
-func _enter():
-	print("gogogo!")
+#func _enter():
+#	print("gogogo!")

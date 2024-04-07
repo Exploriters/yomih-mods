@@ -87,7 +87,8 @@ func _tick():
 		host.isDemon = false
 	else :
 		anim_name = "HurtAerial"
-
+	if host.isDemon == false:
+		fallback_state = "Wait"
 	host.apply_x_fric(AIR_FRIC)
 	host.apply_grav_custom(HIT_GRAV, HIT_FALL_SPEED)
 	host.apply_forces_no_limit()
@@ -130,8 +131,8 @@ func _tick():
 			host.set_pos(host.get_pos().x, - 1)
 	else :
 		if host.is_grounded() and fixed.ge(host.get_vel().y, "0"):
-			host.isDemon = false
 			fallback_state = "Wait"
+			host.isDemon = false
 			if hitbox.air_ground_bounce and not ground_bounced:
 
 				begin_ground_bounce()

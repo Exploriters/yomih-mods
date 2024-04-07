@@ -1,0 +1,79 @@
+[gd_scene load_steps=8 format=2]
+
+[ext_resource path="res://fx/ParticleEffect.tscn" type="PackedScene" id=1]
+[ext_resource path="res://characters/BaseChar.gdshader" type="Shader" id=2]
+[ext_resource path="res://fx/particle_round_4x4.png" type="Texture" id=3]
+
+[sub_resource type="ShaderMaterial" id=2]
+resource_local_to_scene = true
+shader = ExtResource( 2 )
+shader_param/use_extra_color_1 = false
+shader_param/use_extra_color_2 = false
+shader_param/extra_replace_color_1 = Color( 1, 0, 1, 1 )
+shader_param/extra_replace_color_2 = Color( 1, 0, 1, 1 )
+shader_param/color = Color( 1, 1, 1, 1 )
+shader_param/extra_color_1 = Color( 1, 1, 1, 1 )
+shader_param/extra_color_2 = Color( 1, 1, 1, 1 )
+shader_param/max_color_distance = 0.01
+shader_param/super_dim = false
+shader_param/use_outline = false
+shader_param/outline_color = Color( 0, 0, 0, 1 )
+
+[sub_resource type="Gradient" id=4]
+offsets = PoolRealArray( 0.213873, 1 )
+colors = PoolColorArray( 0.722656, 0.722656, 0.722656, 1, 0, 0, 0, 0 )
+
+[sub_resource type="Curve" id=1]
+_data = [ Vector2( 0, 0.963636 ), 0.0, 0.0, 0, 0, Vector2( 1, 0 ), -0.963636, 0.0, 1, 0 ]
+
+[sub_resource type="Gradient" id=3]
+colors = PoolColorArray( 1, 1, 1, 1, 0, 0.9375, 0.789185, 1 )
+
+[node name="ParticleEffect" instance=ExtResource( 1 )]
+material = SubResource( 2 )
+z_index = -2
+
+[node name="CPUParticles2D2" type="CPUParticles2D" parent="." index="1"]
+amount = 20
+lifetime = 0.42
+preprocess = 0.02
+speed_scale = 0.5
+explosiveness = 1.0
+randomness = 1.0
+lifetime_randomness = 1.0
+texture = ExtResource( 3 )
+emission_shape = 1
+emission_sphere_radius = 9.38
+direction = Vector2( -0.5, -1 )
+spread = 6.55
+gravity = Vector2( 0, -50 )
+initial_velocity = 222.45
+initial_velocity_random = 0.85
+orbit_velocity = -0.25
+linear_accel = 100.0
+damping = 35.77
+scale_amount = 1.29
+scale_amount_random = 0.55
+color_ramp = SubResource( 4 )
+
+[node name="CPUParticles2D" type="CPUParticles2D" parent="." index="2"]
+amount = 40
+lifetime = 0.42
+preprocess = 0.02
+speed_scale = 0.8
+explosiveness = 1.0
+randomness = 1.0
+lifetime_randomness = 1.0
+texture = ExtResource( 3 )
+emission_shape = 1
+emission_sphere_radius = 9.38
+direction = Vector2( -1, 0 )
+spread = 6.55
+gravity = Vector2( 0, -500 )
+initial_velocity = 361.06
+initial_velocity_random = 0.85
+damping = 35.77
+scale_amount = 2.0
+scale_amount_random = 0.55
+scale_amount_curve = SubResource( 1 )
+color_ramp = SubResource( 3 )
