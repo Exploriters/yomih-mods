@@ -1,4 +1,4 @@
-[gd_scene load_steps=20 format=2]
+[gd_scene load_steps=22 format=2]
 
 [ext_resource path="res://characters/BaseChar.gdshader" type="Shader" id=1]
 [ext_resource path="res://characters/BaseChar.tscn" type="PackedScene" id=2]
@@ -18,6 +18,8 @@
 [ext_resource path="res://!Just-someModdingCharacters/Characters/nightdemon/sprites/action_buttons/turntodemon.png" type="Texture" id=16]
 [ext_resource path="res://!Just-someModdingCharacters/Characters/nightdemon/states/ReturnToHuman.gd" type="Script" id=17]
 [ext_resource path="res://!Just-someModdingCharacters/Characters/nightdemon/states/GhostfireHell.gd" type="Script" id=18]
+[ext_resource path="res://!Just-someModdingCharacters/Characters/nightdemon/nightdemon_PlayerInfo.tscn" type="PackedScene" id=19]
+[ext_resource path="res://!Just-someModdingCharacters/Characters/nightdemon/states/DataUI/GhostfireHell_UI.tscn" type="PackedScene" id=20]
 
 [sub_resource type="ShaderMaterial" id=1]
 resource_local_to_scene = true
@@ -41,6 +43,7 @@ max_air_speed = "15"
 extra_state_variables = "Demon"
 num_air_movements = 0
 character_portrait = ExtResource( 5 )
+player_info_scene = ExtResource( 19 )
 use_extra_color_1 = true
 extra_color_1 = Color( 0.25098, 0.25098, 0.25098, 1 )
 use_extra_color_2 = true
@@ -49,8 +52,8 @@ extra_color_2 = Color( 0.0784314, 1, 0.447059, 1 )
 [node name="Sprite" parent="Flip" index="0"]
 material = SubResource( 1 )
 frames = ExtResource( 4 )
-animation = "AirDashBackward"
-frame = 9
+animation = "Special_GhostfireHell"
+frame = 5
 
 [node name="CollisionBox" parent="." index="2"]
 y = -21
@@ -169,3 +172,27 @@ change_stance_to = "Normal"
 
 [node name="GhostfireHell" type="Node2D" parent="StateMachine" index="58"]
 script = ExtResource( 18 )
+apply_forces = true
+apply_fric = true
+apply_custom_grav = true
+custom_grav = "0.6"
+fallback_state = "Wait_Demon"
+sprite_animation = "Special_GhostfireHell"
+anim_length = 15
+force_dir_x = "-1.0"
+force_speed = "2.0"
+force_tick = 6
+projectile_pos_x = 10
+projectile_pos_y = -21
+projectile_match_facing = true
+title = "Ghostfire Hell"
+type = 2
+data_ui_scene = ExtResource( 20 )
+flip_with_facing = true
+air_type = 1
+interrupt_from_string = "Aerial
+AerialMovement"
+interrupt_into_string = "Aerial
+AerialMovement
+AerialAttack"
+allowed_stances_string = "Demon"
