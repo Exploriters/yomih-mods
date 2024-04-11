@@ -1,4 +1,4 @@
-[gd_resource type="SpriteFrames" load_steps=70 format=2]
+[gd_resource type="SpriteFrames" load_steps=76 format=2]
 
 [ext_resource path="res://characters/stickman/sprites/stickman30.png" type="Texture" id=1]
 [ext_resource path="res://characters/stickman/sprites/stickman2.png" type="Texture" id=2]
@@ -58,12 +58,6 @@
 [ext_resource path="res://characters/stickman/sprites/stickman59.png" type="Texture" id=56]
 [ext_resource path="res://characters/stickman/sprites/stickman60.png" type="Texture" id=57]
 [ext_resource path="res://characters/stickman/sprites/stickman61.png" type="Texture" id=58]
-[ext_resource path="res://!Just-someModdingCharacters/Characters/nightdemon/sprites/!nightdemon_demon_special_ghostfireHell2.png" type="Texture" id=59]
-[ext_resource path="res://!Just-someModdingCharacters/Characters/nightdemon/sprites/!nightdemon_demon_special_ghostfireHell3.png" type="Texture" id=60]
-[ext_resource path="res://!Just-someModdingCharacters/Characters/nightdemon/sprites/!nightdemon_demon_special_ghostfireHell0.png" type="Texture" id=61]
-[ext_resource path="res://!Just-someModdingCharacters/Characters/nightdemon/sprites/!nightdemon_demon_special_ghostfireHell5.png" type="Texture" id=62]
-[ext_resource path="res://!Just-someModdingCharacters/Characters/nightdemon/sprites/!nightdemon_demon_special_ghostfireHell1.png" type="Texture" id=63]
-[ext_resource path="res://!Just-someModdingCharacters/Characters/nightdemon/sprites/!nightdemon_demon_special_ghostfireHell4.png" type="Texture" id=64]
 [ext_resource path="res://!Just-someModdingCharacters/Characters/nightdemon/sprites/!nightdemon_both_attack_fall9.png" type="Texture" id=59]
 [ext_resource path="res://!Just-someModdingCharacters/Characters/nightdemon/sprites/!nightdemon_both_attack_fall8.png" type="Texture" id=60]
 [ext_resource path="res://!Just-someModdingCharacters/Characters/nightdemon/sprites/!nightdemon_both_attack_fall10.png" type="Texture" id=61]
@@ -74,6 +68,12 @@
 [ext_resource path="res://!Just-someModdingCharacters/Characters/nightdemon/sprites/!nightdemon_both_attack_fall5.png" type="Texture" id=66]
 [ext_resource path="res://!Just-someModdingCharacters/Characters/nightdemon/sprites/!nightdemon_both_attack_fall1.png" type="Texture" id=67]
 [ext_resource path="res://!Just-someModdingCharacters/Characters/nightdemon/sprites/!nightdemon_both_attack_fall6.png" type="Texture" id=68]
+[ext_resource path="res://!Just-someModdingCharacters/Characters/nightdemon/sprites/!nightdemon_demon_special_ghostfireHell0.png" type="Texture" id=69]
+[ext_resource path="res://!Just-someModdingCharacters/Characters/nightdemon/sprites/!nightdemon_demon_special_ghostfireHell1.png" type="Texture" id=70]
+[ext_resource path="res://!Just-someModdingCharacters/Characters/nightdemon/sprites/!nightdemon_demon_special_ghostfireHell2.png" type="Texture" id=71]
+[ext_resource path="res://!Just-someModdingCharacters/Characters/nightdemon/sprites/!nightdemon_demon_special_ghostfireHell3.png" type="Texture" id=72]
+[ext_resource path="res://!Just-someModdingCharacters/Characters/nightdemon/sprites/!nightdemon_demon_special_ghostfireHell4.png" type="Texture" id=73]
+[ext_resource path="res://!Just-someModdingCharacters/Characters/nightdemon/sprites/!nightdemon_demon_special_ghostfireHell5.png" type="Texture" id=74]
 [ext_resource path="res://characters/stickman/sprites/wall_slam.png" type="Texture" id=79]
 
 [resource]
@@ -213,7 +213,7 @@ animations = [ {
 "name": "RollForward",
 "speed": 5.0
 }, {
-"frames": [ ExtResource( 61 ), ExtResource( 61 ), ExtResource( 61 ), ExtResource( 63 ), ExtResource( 63 ), ExtResource( 59 ), ExtResource( 59 ), ExtResource( 60 ), ExtResource( 60 ), ExtResource( 60 ), ExtResource( 64 ), ExtResource( 64 ), ExtResource( 64 ), ExtResource( 62 ), ExtResource( 62 ) ],
+"frames": [ ExtResource( 69 ), ExtResource( 69 ), ExtResource( 69 ), ExtResource( 70 ), ExtResource( 70 ), ExtResource( 71 ), ExtResource( 71 ), ExtResource( 72 ), ExtResource( 72 ), ExtResource( 72 ), ExtResource( 73 ), ExtResource( 73 ), ExtResource( 73 ), ExtResource( 74 ), ExtResource( 74 ), ExtResource( 74 ) ],
 "loop": true,
 "name": "Special_GhostfireHell",
 "speed": 5.0

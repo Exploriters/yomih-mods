@@ -1,4 +1,4 @@
-[gd_scene load_steps=23 format=2]
+[gd_scene load_steps=25 format=2]
 
 [ext_resource path="res://characters/BaseChar.gdshader" type="Shader" id=1]
 [ext_resource path="res://characters/BaseChar.tscn" type="PackedScene" id=2]
@@ -21,6 +21,8 @@
 [ext_resource path="res://mechanics/Hitbox.gd" type="Script" id=19]
 [ext_resource path="res://sound/common/explosion2.wav" type="AudioStream" id=20]
 [ext_resource path="res://sound/common/burst.wav" type="AudioStream" id=21]
+[ext_resource path="res://!Just-someModdingCharacters/Characters/nightdemon/nightdemon_PlayerInfo.tscn" type="PackedScene" id=22]
+[ext_resource path="res://!Just-someModdingCharacters/Characters/nightdemon/states/DataUI/GhostfireHell_UI.tscn" type="PackedScene" id=23]
 
 [sub_resource type="ShaderMaterial" id=1]
 resource_local_to_scene = true
@@ -44,7 +46,7 @@ max_air_speed = "15"
 extra_state_variables = "Demon"
 num_air_movements = 0
 character_portrait = ExtResource( 5 )
-player_info_scene = ExtResource( 19 )
+player_info_scene = ExtResource( 22 )
 use_extra_color_1 = true
 extra_color_1 = Color( 0.25098, 0.25098, 0.25098, 1 )
 use_extra_color_2 = true
@@ -54,7 +56,6 @@ extra_color_2 = Color( 0.0784314, 1, 0.447059, 1 )
 material = SubResource( 1 )
 frames = ExtResource( 4 )
 animation = "Special_GhostfireHell"
-frame = 5
 
 [node name="CollisionBox" parent="." index="2"]
 y = -21
@@ -214,7 +215,7 @@ projectile_pos_y = -21
 projectile_match_facing = true
 title = "Ghostfire Hell"
 type = 2
-data_ui_scene = ExtResource( 20 )
+data_ui_scene = ExtResource( 23 )
 flip_with_facing = true
 air_type = 1
 interrupt_from_string = "Aerial
