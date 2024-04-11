@@ -1,4 +1,4 @@
-[gd_scene load_steps=22 format=2]
+[gd_scene load_steps=23 format=2]
 
 [ext_resource path="res://characters/BaseChar.gdshader" type="Shader" id=1]
 [ext_resource path="res://characters/BaseChar.tscn" type="PackedScene" id=2]
@@ -18,8 +18,9 @@
 [ext_resource path="res://!Just-someModdingCharacters/Characters/nightdemon/sprites/action_buttons/turntodemon.png" type="Texture" id=16]
 [ext_resource path="res://!Just-someModdingCharacters/Characters/nightdemon/states/ReturnToHuman.gd" type="Script" id=17]
 [ext_resource path="res://!Just-someModdingCharacters/Characters/nightdemon/states/GhostfireHell.gd" type="Script" id=18]
-[ext_resource path="res://!Just-someModdingCharacters/Characters/nightdemon/nightdemon_PlayerInfo.tscn" type="PackedScene" id=19]
-[ext_resource path="res://!Just-someModdingCharacters/Characters/nightdemon/states/DataUI/GhostfireHell_UI.tscn" type="PackedScene" id=20]
+[ext_resource path="res://mechanics/Hitbox.gd" type="Script" id=19]
+[ext_resource path="res://sound/common/explosion2.wav" type="AudioStream" id=20]
+[ext_resource path="res://sound/common/burst.wav" type="AudioStream" id=21]
 
 [sub_resource type="ShaderMaterial" id=1]
 resource_local_to_scene = true
@@ -91,6 +92,8 @@ absolute_loop = true
 
 [node name="Fall_Demon" type="Node2D" parent="StateMachine" index="18"]
 script = ExtResource( 10 )
+apply_custom_grav = true
+custom_grav = "-0.48"
 fallback_state = "Wait_Demon"
 sprite_animation = "Fall2"
 anim_length = 16
@@ -113,8 +116,6 @@ ticks_per_frame = 2
 particle_scene = null
 title = "Turn to Demon"
 button_texture = ExtResource( 16 )
-interrupt_into_string = "Aerial
-Grounded"
 
 [node name="SuperJump" parent="StateMachine" index="33"]
 show_in_menu = false
@@ -161,7 +162,9 @@ change_stance_to = "Demon"
 
 [node name="ReturnToHuman" type="Node2D" parent="StateMachine" index="57"]
 script = ExtResource( 17 )
-anim_length = 10
+sprite_animation = "Attack_Fall"
+anim_length = 26
+ticks_per_frame = 2
 title = "Return To Human"
 air_type = 1
 interrupt_from_string = "Aerial
@@ -169,6 +172,30 @@ AerialMovement"
 interrupt_into_string = "Aerial"
 allowed_stances_string = "Demon"
 change_stance_to = "Normal"
+
+[node name="Hitbox" type="Node2D" parent="StateMachine/ReturnToHuman" index="0"]
+z_index = 1000
+script = ExtResource( 19 )
+y = -19
+width = 38
+height = 38
+hitbox_type = 4
+hitstun_ticks = 23
+victim_hitlag = 4
+cancellable = false
+hits_otg = true
+can_counter_hit = false
+sdi_modifier = "0.0"
+ignore_armor = true
+can_clash = false
+screenshake_amount = 2
+whiff_sound = ExtResource( 21 )
+hit_sound = ExtResource( 20 )
+dir_y = "-0.25"
+knockback = "14.0"
+launch_reversible = true
+start_tick = 2
+active_ticks = 1
 
 [node name="GhostfireHell" type="Node2D" parent="StateMachine" index="58"]
 script = ExtResource( 18 )
